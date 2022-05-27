@@ -1,0 +1,85 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+}
+.profile-row {
+    background-image: url("../../assets/img/nathan-dumlao-XOhI_kW_TaM-unsplash\ 1.png");
+    width: 1265px !important;
+    height: 1080px;
+    padding-left: 10%;
+  }
+  
+  .user-profile {
+    padding-top: 7%;
+    font-family: 'Rubik';
+    font-size: 30px;
+    color: white;
+  }
+  .card-content {
+    padding-top: 3%;
+  }
+  .username{
+    font-family: 'Rubik';
+    font-size: 20px;
+    padding-top: 10%;
+    padding-left: 20%;
+  }
+  .email{
+    font-family: 'Rubik';
+    font-size: 16px;
+    padding-left: 5%;
+  }
+  .img-container{
+    padding-top: 15%;
+  }
+  .img-profile {
+    border-radius: 100%;
+  }
+  .card-main-content{
+    padding-left: 30%;
+  }
+  .choose-photo{
+    padding-top: 8%;
+    padding-left: 3%;
+  }
+  .remove-photo{
+    padding-top: 8%;
+    padding-left: 3%;
+  }
+  .edit-pw{
+    padding-top: 8%;
+    padding-left: 3%;
+  }
+  .title-submit{
+    margin-left: -45px;
+    padding-top: 8%;
+    font-size: 20px;
+    line-height: 30px;
+    font-style: 'Rubik';
+    color: #6a4029;
+    text-align: center;
+  }
+  .card-form{
+    padding-top: 7%;
+    padding-right: 10%;
+  }
+  .form-title{
+    padding-left: 10%;
+    padding-top: 5%;
+    font-family: 'Rubik';
+  }
+  .label-input {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px
+  }
+  label {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+  
+    color: #9F9F9F;
+  }

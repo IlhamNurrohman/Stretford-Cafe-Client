@@ -1,0 +1,310 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Responsive */
+@font-face {
+  font-family: "Rubik";
+  src: url("../../../assets/font/Rubik/Rubik-VariableFont_wght.ttf");
+}
+
+@media (max-width: 790px) {
+  .column-image {
+    display: none;
+  }
+
+  .column-main {
+    background-color: aliceblue;
+  }
+}
+
+@media (max-width: 840px) {
+  .side-title {
+    padding: 0 0% !important;
+  }
+
+  .page-title {
+    float: none !important;
+    font-size: 28px !important;
+    margin-top: 20px !important;
+    text-align: center;
+  }
+
+  .register {
+    padding: 8% 10% 0 !important;
+    margin: 0px 10px 26px !important;
+  }
+
+  .google-button {
+    font-size: 13px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .already-account-text {
+    font-size: 12px !important;
+  }
+
+  .already-account {
+    margin-bottom: 20px !important;
+  }
+
+  .login-here-button {
+    margin-bottom: 20px !important;
+  }
+
+  .link {
+    display: none !important;
+  }
+
+  .describe {
+    width: 100% !important;
+    padding-top: 0 !important;
+  }
+
+  .body-card {
+    width: 80%;
+    height: 10%;
+    font-size: 16px;
+    text-align: left;
+  }
+}
+
+/* Main container */
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.column-image,
+.side-image {
+  width: 100%;
+  height: 1284px;
+}
+
+.column-main {
+  width: 100%;
+  padding: 55px;
+}
+
+.side-title {
+  padding: 0 10%;
+}
+
+.header-title {
+  display: inline;
+  position: absolute;
+  top: 45px;
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0b132a;
+}
+
+.page-title {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+  margin: 0;
+  float: right;
+  line-height: 41px;
+  color: #6a4029;
+}
+
+.register-form {
+  display: grid;
+}
+
+.register {
+  display: grid;
+  padding: 10% 10% 0;
+  margin: 10px 10px 26px;
+}
+
+label {
+  margin-bottom: 13px;
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0b132a;
+}
+
+input,
+.register-button,
+.google-button,
+.login-here-button {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(79, 86, 101);
+  border-radius: 10px;
+  height: 40px;
+  margin-bottom: 19px;
+}
+
+::placeholder {
+  padding-left: 1%;
+}
+
+input[type="text"],
+input[type="password"] {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 27px;
+}
+
+.register-button {
+  margin: 40px 0px;
+  box-shadow: 0px 6px 20px 0px rgb(236, 190, 99);
+  border: none;
+  background: rgba(255, 186, 51, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 25px;
+  color: rgba(106, 64, 41, 1);
+}
+
+.google-button {
+  box-shadow: 0px 6px 20px 0px rgb(158, 156, 156);
+  border: none;
+  background: rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 25px;
+  color: rgb(4, 4, 4);
+}
+
+.login-here-button {
+  display: flex;
+  background: rgba(106, 64, 41, 1);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 25px;
+  color: #fffefe;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 6px 20px 0px rgb(105, 73, 56)
+}
+
+.login-here-button:hover {
+  background-color: #7c523c;
+}
+
+.register-button:hover {
+  background-color: #fdc75b;
+}
+
+.google-button:hover {
+  background-color: #f1f1f1;
+}
+
+.google-button,
+.register-button,
+.login-here-button {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.google-icon {
+  padding-right: 2%;
+  top: 6px;
+}
+
+.already-account {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+  margin-bottom: 42px;
+}
+
+.already-account-text {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 30px;
+  color: #9f9f9f;
+}
+
+.underline {
+  flex: 1;
+  border-bottom: solid 2px #c4c4c4;
+}
+
+
+footer {
+  display: flex;
+}
+
+.link-title {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: #0b132a;
+}
+
+.link-item {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.footer-title {
+  display: inline;
+  position: relative;
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  bottom: 5px;
+  color: #0b132a;
+}
+
+.describe {
+  width: 50%;
+  padding: 10% 10% 0;
+}
+
+.link {
+  width: 50%;
+}
+
+a,
+footer-text {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  color: #4f5665;
+}
+
+.forgot-pass {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 51px;
+
+  color: #6a4029;
+}
