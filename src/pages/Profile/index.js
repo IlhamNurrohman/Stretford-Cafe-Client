@@ -4,7 +4,8 @@ import { Modal } from "react-bootstrap";
 
 import Header from "../../component/Header/Header";
 import Footer from "../../component/Footer/Footer";
-import profileImg from "../../assets/img/image 39.png";
+import EditIcon from "../../assets/icon/edit-icon.png";
+import Default from "../../assets/img/dummy-image.jpg";
 
 import "./Profile.css";
 import axios from "axios";
@@ -23,11 +24,62 @@ export default class Profile extends Component {
             gender: "",
             firstname: "",
             lastname: "",
+            pictures: "",
             isUpdated: false,
+            image_src: null,
+            use_src: false,
             isShow: false,
-        }
+            isEdit: false,
+        };
+        this.inputFile = React.createRef();
     }
-
+    // _setData = () => {
+    //     const forms = new FormData();
+    //     if (this.state.email === "") {
+    //       forms.append("email", this.props.users.email);
+    //     } else {
+    //       forms.append("email", this.state.email);
+    //     }
+    //     if (this.state.pictures !== "") {
+    //       forms.append("pictures", this.state.pictures);
+    //     }
+    //     if (this.state.address !== "") {
+    //       forms.append("address", this.state.address);
+    //     }
+    //     if (this.state.username !== "") {
+    //       forms.append("username", this.state.username);
+    //     }
+    //     if (this.state.firstname !== "") {
+    //       forms.append("firstname", this.state.firstname);
+    //     }
+    //     if (this.state.lastname !== "") {
+    //       forms.append("lastname", this.state.lastname);
+    //     }
+    //     if (this.state.phone !== "") {
+    //       forms.append("phone", this.state.phone);
+    //     }
+    //     if (this.state.date !== "") {
+    //       forms.append("date", this.state.date);
+    //     }
+    //     forms.append("gender", this.state.gender);
+    //     return forms;
+    //   };
+    fileChange = (event) => {
+        event.preventDefault();
+        const file = event.target.files[0];
+        const data = { ...this.state };
+        if (file) {
+          data.pictures = file;
+          this.setState(data);
+          const reader = new FileReader();
+          reader.onload = () => {
+            this.setState({ image_src: reader.result, use_src: true }, () => {
+              // console.log(this.state.image_src);
+            });
+          };
+          reader.readAsDataURL(file);
+        }
+      };
     componentDidMount() {
         const userInfo = JSON.parse(localStorage.getItem("userinfo"));
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
@@ -67,13 +119,18 @@ export default class Profile extends Component {
         }
 
     }
+    handleFile = (event) => {
+        this.inputFile.current.click();
+        event.preventDefault();
+      };
     modalTrigger = () => {
         this.setState({ isShow: !this.state.isShow });
     };
     render() {
         if (this.state.isLoggedIn === false) {
-            return <Navigate to="/Login" />
+            return <Navigate to="/login" />
         }
+        const profilepic = this.state.users.pictures !== null ? this.state.users.pictures : Default;
         return (
             <div>
                 <Header />
@@ -84,13 +141,14 @@ export default class Profile extends Component {
                             <div className="row">
                                 <div className="col-md-4">
                                     <div className="container-fluid img-container">
-                                        <img src={`http://localhost:8000${this.state.users.pictures}`} className="img-profile" alt="img-profile" />
+                                        <img src={!this.state.use_src ? profilepic : this.state.image_src} className="img-profile" alt="img-profile" />
                                     </div>
-                                    <h4 className="username" style={{ marginLeft: "10px" }}>{this.state.users.username ? this.state.users.username : "Display Name"}</h4>
+                                    <h4 className="username" style={{ marginLeft: "-33px" }}>{this.state.users.username ? this.state.users.username : "Display Name"}</h4>
                                     <p className="email" style={{ paddingLeft: "30px" }}>{this.state.users.email ? this.state.users.email : "Email"}</p>
                                     {this.state.isError ? <p>{this.state.errorMsg}</p> : <></>}
                                     <div className="choose-photo">
-                                        <button type="button" className="btn btn-warning" style={{ width: "65%" }}>Choose Photo</button>
+                                        <input type="file" hidden name="image" ref={this.inputFile} onChange={this.fileChange} />
+                                        <button type="button" className="btn btn-warning" style={{ width: "65%" }} onClick={this.handleFile}>Choose Photo</button>
                                     </div>
                                     <div className="remove-photo">
                                         <button type="button" className="btn"
@@ -108,10 +166,11 @@ export default class Profile extends Component {
                                     <div className="remove-photo">
                                         <button type="button" className="btn"
                                             style={{ background: "rgba(106, 64, 41, 1)", color: "#fffefe", width: "65%", borderRadius: "30px" }} onClick={() => {
-                                                const { email, phone, username, firstname, lastname, address, date, gender } = this.state;
-                                                const body = { username, email, phone, address, date, gender, firstname, lastname };
+                                                const { email, phone, username, firstname, lastname, address, date, gender, pictures } = this.state;
+                                                const body = { username, email, phone, address, date, gender, firstname, lastname, pictures };
                                                 const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-                                                const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+                                                const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+                                                //const forms = this._setData();
                                                 axios
                                                     .patch('http://localhost:8000/users', body, config)
                                                     .then(result => {
@@ -129,8 +188,7 @@ export default class Profile extends Component {
                                                     .catch(error => {
                                                         console.log(error)
                                                     })
-                                            }}>Save
-                                            Change</button>
+                                            }}>Save Change</button>
                                     </div>
                                     <div className="choose-photo">
                                         <button type="button" className="btn btn-warning"
@@ -146,99 +204,123 @@ export default class Profile extends Component {
                                 </div>
                                 <div className="col-md-8 card-form">
                                     <div className="card" style={{ width: "600px", height: "100%", borderRadius: "10px", boxShadow: "0px 6px 20px rgba(0, 0, 0, 0.22)", borderBottom: "10px solid #6A4029", marginRight: "-20px", marginBottom: "30px" }}>
-                                        <h4 className="form-title">Contact</h4>
+                                        <div className="form-top">
+                                            <h4 className="form-title">Contacts</h4>
+                                            <div className="edit-bullet"
+                                                onClick={() => {
+                                                    this.state.isEdit ?
+                                                        this.setState({
+                                                            isEdit: false
+                                                        })
+                                                        :
+                                                        this.setState({
+                                                            isEdit: true
+                                                        })
+                                                }}
+                                            ><img src={EditIcon} alt="edit" className="edit-bullet-img" /></div>
+                                        </div>
                                         <form className="row g-3">
                                             <div className="col-md-5">
                                                 <label htmlFor="label-input" className="form-label">Email</label>
-                                                <input type="email" className="input-form" id="inputEmail4" 
-                                                placeholder={this.state.users.email ? this.state.users.email : "Enter email address"} 
-                                                value={this.state.users.email}
-                                                onChange={(e) => {
-                                                    this.setState({
-                                                        email: e.target.value
-                                                    })
-                                                }} style={{ marginTop: "-11px" }} />
+                                                <input type="email" className="input-form" id="inputEmail4"
+                                                    placeholder="Enter email address"
+                                                    value={this.state.isEdit ? null : this.state.users.email}
+                                                    disabled={this.state.isEdit ? false : true}
+                                                    onChange={(e) => {
+                                                        this.setState({
+                                                            email: e.target.value
+                                                        })
+                                                    }} style={{ marginTop: "-11px" }} />
                                             </div>
                                             <div className="col-md-5">
                                                 <label htmlFor="label-input" className="form-label">Mobile Number</label>
                                                 <input type="text" className="input-form" id="mobile-number"
-                                                placeholder={this.state.users.phone ? this.state.users.phone : "Enter phone number"} 
-                                                value={this.state.users.phone}
-                                                onChange={(e) => {
-                                                    this.setState({
-                                                        phone: e.target.value
-                                                    })
-                                                }} />
+                                                    placeholder="Enter phone number"
+                                                    value={this.state.isEdit ? null : this.state.users.phone}
+                                                    disabled={this.state.isEdit ? false : true}
+                                                    onChange={(e) => {
+                                                        this.setState({
+                                                            phone: e.target.value
+                                                        })
+                                                    }} />
                                             </div>
                                             <div className="col-5">
                                                 <label htmlFor="label-input" className="form-label">Delivery adress :</label>
-                                                <input type="text" className="input-form" id="inputAddress" 
-                                                placeholder={this.state.users.address ? this.state.users.address : "Enter delivery addres"} value={this.state.users.address}
-                                                onChange={(e) => {
-                                                    this.setState({
-                                                        address: e.target.value
-                                                    })
-                                                }} />
+                                                <input type="text" className="input-form" id="inputAddress"
+                                                    placeholder="Enter delivery addres"
+                                                    value={this.state.isEdit ? null : this.state.users.address}
+                                                    disabled={this.state.isEdit ? false : true}
+                                                    onChange={(e) => {
+                                                        this.setState({
+                                                            address: e.target.value
+                                                        })
+                                                    }} />
                                             </div>
                                             <h4 className="form-title-details">Details</h4>
                                             <div className="col-md-5">
                                                 <label htmlFor="label-input" className="form-label">Display name :</label>
-                                                <input type="text" className="input-form" id="display-name" 
-                                                placeholder={"Enter display name"} value={this.state.users.username}
-                                                onChange={(e) => {
-                                                    this.setState({
-                                                        username: e.target.value
-                                                    })
-                                                }} />
+                                                <input type="text" className="input-form" id="display-name"
+                                                    placeholder="Enter display name"
+                                                    value={this.state.isEdit ? null : this.state.users.username}
+                                                    disabled={this.state.isEdit ? false : true}
+                                                    onChange={(e) => {
+                                                        this.setState({
+                                                            username: e.target.value
+                                                        })
+                                                    }} />
                                             </div>
                                             <div className="col-md-5">
                                                 <label htmlFor="label-input" className="form-label">Birthday</label>
-                                                <input type="date" className="input-form" id="date" 
-                                                placeholder={this.state.users.date ? this.state.users.date : "Enter birthday"} 
-                                                value={this.state.users.date}
-                                                onChange={(e) => {
-                                                    this.setState({
-                                                        date: e.target.value
-                                                    })
-                                                }} style={{ marginTop: "-11px" }} />
+                                                <input type="date" className="input-form" id="date"
+                                                    placeholder="Enter birthday"
+                                                    value={this.state.isEdit ? null : this.state.users.date}
+                                                    disabled={this.state.isEdit ? false : true}
+                                                    onChange={(e) => {
+                                                        this.setState({
+                                                            date: e.target.value
+                                                        })
+                                                    }} style={{ marginTop: "-11px" }} />
                                             </div>
                                             <div className="col-5">
                                                 <label htmlFor="label-input" className="form-label">First name :</label>
-                                                <input type="text" className="input-form" id="first-name" 
-                                                placeholder={this.state.users.firstname ? this.state.users.firstname : "Enter first name"} value={this.state.users.firstname}
-                                                onChange={(e) => {
-                                                    this.setState({
-                                                        firstname: e.target.value
-                                                    })
-                                                }} />
+                                                <input type="text" className="input-form" id="first-name"
+                                                    placeholder="Enter first name"
+                                                    value={this.state.isEdit ? null : this.state.users.firstname}
+                                                    disabled={this.state.isEdit ? false : true}
+                                                    onChange={(e) => {
+                                                        this.setState({
+                                                            firstname: e.target.value
+                                                        })
+                                                    }} />
                                             </div>
                                             <div className="col-5">
                                                 <label htmlFor="label-input" className="form-label">Last name :</label>
-                                                <input type="text" className="input-form" id="inputAddress" 
-                                                placeholder={this.state.users.lastname ? this.state.users.lastname : "Enter last name"} 
-                                                value={this.state.users.lastname}
-                                                onChange={(e) => {
-                                                    this.setState({
-                                                        lastname: e.target.value
-                                                    })
-                                                }} />
+                                                <input type="text" className="input-form" id="inputAddress"
+                                                    placeholder="Enter last name"
+                                                    value={this.state.isEdit ? null : this.state.users.lastname}
+                                                    disabled={this.state.isEdit ? false : true}
+                                                    onChange={(e) => {
+                                                        this.setState({
+                                                            lastname: e.target.value
+                                                        })
+                                                    }} />
                                             </div>
                                             <div className="col-md-5">
-                                                <input className="form-check-input" type="radio" name="flexRadioDefault" 
-                                                checked={this.state.gender === "male"} id="flexRadioDefault1" value="male" onChange={() => {
-                                                    this.setState({
-                                                        gender: "male"
-                                                    })
-                                                }} />
+                                                <input className="form-check-input" type="radio" name="flexRadioDefault"
+                                                    checked={this.state.gender === "male"} id="flexRadioDefault1" value="male" onChange={() => {
+                                                        this.setState({
+                                                            gender: "male"
+                                                        })
+                                                    }} />
                                                 <label forName="label-input" className="form-label">Male</label>
                                             </div>
                                             <div className="col-md-5">
-                                                <input className="form-check-input" type="radio" name="flexRadioDefault" 
-                                                checked={this.state.gender === "female"} id="flexRadioDefault1" value="female" onChange={() => {
-                                                    this.setState({
-                                                        gender: "female"
-                                                    })
-                                                }} />
+                                                <input className="form-check-input" type="radio" name="flexRadioDefault"
+                                                    checked={this.state.gender === "female"} id="flexRadioDefault1" value="female" onChange={() => {
+                                                        this.setState({
+                                                            gender: "female"
+                                                        })
+                                                    }} />
                                                 <label forName="label-input" className="form-label">Female</label>
                                             </div>
                                         </form>
