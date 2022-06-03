@@ -24,21 +24,21 @@ export default class Footer extends Component {
                                 <div class="col-md-2">
                                     <h2 class="link-title">Product</h2>
                                     <div class="footer-home-link">
-                                        <a href="">Download</a>
-                                        <a href="">Pricing</a>
-                                        <a href="">Locations</a>
-                                        <a href="">Countries</a>
-                                        <a href="">Blog</a>
+                                        <a href="" style={{textDecoration: "none"}}>Download</a>
+                                        <a href="" style={{textDecoration: "none"}}>Pricing</a>
+                                        <a href="" style={{textDecoration: "none"}}>Locations</a>
+                                        <a href="" style={{textDecoration: "none"}}>Countries</a>
+                                        <a href="" style={{textDecoration: "none"}}>Blog</a>
                                     </div>
                                 </div>
                                 <div class="col-md-2 ">
                                     <h2 class="link-title">Engage</h2>
                                     <div class="footer-home-link">
-                                        <a href="">Coffe Shop ?</a>
-                                        <a href="">About Us</a>
-                                        <a href="">FAQ</a>
-                                        <a href="">Privacy Policy</a>
-                                        <a href="">Terms of Service</a>
+                                        <a href="" style={{textDecoration: "none"}}>Coffe Shop ?</a>
+                                        <a href="" style={{textDecoration: "none"}}>About Us</a>
+                                        <a href="" style={{textDecoration: "none"}}>FAQ</a>
+                                        <a href="" style={{textDecoration: "none"}}>Privacy Policy</a>
+                                        <a href="" style={{textDecoration: "none"}}>Terms of Service</a>
                                     </div>
                                 </div>
                         </div>

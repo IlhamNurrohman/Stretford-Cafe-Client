@@ -1,0 +1,121 @@
+.h-main-container {
+    background-image: url(https://s3-alpha-sig.figma.com/img/e28e/5de4/4a9e22aa898e67b55b5a3d7685117d1d?Expires=1654473600&Signature=Wey-nl8PTHBYW8nJLpJc2H61j-i4AfBMWvPQl6Q1~8hc3eRKvpfNkQcPiPYEGO2PTOfMGF8U9Z0B4S5SRsdUABchimTIKJN~2QWlwgZwkte133R08WlZ6WkXVMCr-yTp2i0CiCJDTwRomx4VOkYYbuRwCa62rmjyqpNk1eB9nY0-cBNRpwfy147iYlcIpCT4-pfaMnG75LeKBI6msQn23W11LS8vnUhwJmslauVO~ZQkosQGzD5HCbWaApVrD2shejObSd7zcnVciukc0SS-zssUt~EPvIx~gkd4Nurtz6ePbzvbpXY56RCvQNIDs3u50L08z-X-JharbKdxeoG3fw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
+    background-size: cover;
+    background-position: 50% 40%;
+    min-height: 1000px;
+    padding: 50px 7.5%;
+}
+
+.h-title {
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 20px;
+
+}
+
+
+.h-title h1 {
+    font-family: Rubik;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 47px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+.h-title p {
+    font-family: Rubik;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.h-select-all {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: right;
+    text-decoration-line: underline;
+
+}
+
+.h-product-card {
+    /* width: 30%; */
+    min-height: 120px;
+    padding: 10px 1%;
+    margin: 10px 1%;
+
+    background: #FFFFFF;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
+    border-radius: 20px;
+    display: flex;
+}
+
+.h-product-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2%;
+}
+
+.h-product-img {
+    width: 80px;
+}
+
+.h-product-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.h-product-name {
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000000;
+
+}
+
+.h-product-price-status-container {
+    display: flex;
+}
+
+.h-product-price-status {
+    flex: 3;
+}
+
+.h-product-price {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #895537;
+
+
+}
+
+.h-product-status {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.h-product-checklist {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

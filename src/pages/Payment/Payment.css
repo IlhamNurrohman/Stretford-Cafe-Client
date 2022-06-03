@@ -1,0 +1,455 @@
+.pm-main-container {
+    background-image: url(https://s3-alpha-sig.figma.com/img/0c77/3b4e/13c3507aae6dd22ab12f949706660279?Expires=1654473600&Signature=I6QMKKWdZnoBcveGk4Jw5p16~1skUYdQa3bYmyQaScQmofpraJy9-cfCrDQLsOOA76W6TpIQXj9x1ScIbrR21oOg8qRiXa4sDMrruwo6XQxJDbd7gwS-hbbaow5f5mHAFtWoFYyal3pxREjKL9ernhOcTP954JK4EDptizpcUzd2qRGieGFiTDU4CsTEc4gLp3qAX0XbUpvpBKx5zeR0tU~S7w66Q1FQsZQ-Om-IoYtk7sTUbzNmO5KhExSfY~MzJQqSip5TvHRAHNdJqpVAav10LtstLwizwGLL-sf9-IxS0fiFU9zmx5OHYOMsl4~H6QVRrfIbfftcUUsoWWVLGw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
+    background-size: cover;
+    background-position: 100% 60%;
+    /* height: 1200px; */
+    padding: 50px 5%;
+    margin-bottom: 50px;
+}
+
+.pm-title {
+    font-family: Rubik;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 47px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #FFFFFF;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 30px;
+}
+
+.pm-main-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pm-left-content {
+    background-color: #ffffff;
+    padding: 20px 4%;
+    width: 45%;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+}
+
+.pm-order-summary {
+    font-family: Poppins;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 53px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin: 50px 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.pm-all-order {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.pm-order-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pm-item-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pm-product-img {
+    width: 90px;
+}
+
+.pm-item-detail {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+
+
+}
+
+.pm-item-detail p {
+    margin: 0px 5px;
+}
+
+.pm-item-price {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0px 5px;
+
+}
+
+.pm-border {
+    width: 100%;
+    border-bottom: 0.5px solid #000000;
+    opacity: 0.3;
+    margin: 5px 0px;
+}
+
+.pm-all-order-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.pm-subtotal,
+.pm-tax,
+.pm-shipping {
+    display: flex;
+    justify-content: space-between;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.pm-info {
+    width: 30%;
+}
+
+.pm-price {
+    width: 30%;
+}
+
+.pm-total-order-price {
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 45px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.pm-right-content {
+    width: 50%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.pm-address-detail-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pm-address-detail-title {
+    font-family: Poppins;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #FFFFFF;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.8);
+}
+
+.pm-address-detail-edit {
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #FFFFFF;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.pm-address-detail-edit:hover {
+    color: #e9e6e6;
+}
+
+.pm-address-detail-edit:active {
+    color: #FFFFFF;
+}
+
+.address-detail-card {
+    background-color: #FFFFFF;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 20px 7.5% 20px 7.5%;
+    margin-top: 10px;
+}
+
+.pm-address-detail {
+
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.pm-address-detail span {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.pm-payment-method {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.pm-payment-method-title {
+    font-family: Poppins;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #FFFFFF;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.8);
+}
+
+.pm-payment-method-card {
+    background: #FFFFFF;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 10px 5%;
+    margin-top: 10px;
+}
+
+.pm-radio-method-container {
+
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin: 10px;
+
+    display: flex;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.pm-radio-method-container p {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+
+    margin: 0px;
+
+
+}
+
+/* Hide the browser's default radio button */
+.pm-radio-method-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0px;
+    margin-top: 2px;
+    height: 20px;
+    width: 20px;
+    background-color: #FFFFFF;
+    border: 4px solid #9F9F9F;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.pm-radio-method-container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a yellow background */
+.pm-radio-method-container input:checked~.checkmark {
+    background-color: #FFBA33;
+    border: 5px solid #6A4029;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.pm-radio-method-container input:checked~.checkmark:after {
+    display: block;
+}
+
+.pm-card-vector-container {
+    width: 30px;
+    height: 30px;
+
+    background: #F47B0A;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.pm-bank-vector-container {
+    width: 30px;
+    height: 30px;
+
+    background: #895537;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.pm-cod-vector-container {
+    width: 30px;
+    height: 30px;
+
+    background: #FFBA33;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.pm-card-vector {
+    width: 15px;
+}
+
+.pm-bank-vector {
+    width: 20px;
+}
+
+.pm-cod-vector {
+    width: 20px;
+}
+
+.pm-confirm-button {
+    height: 60px;
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+
+    background: #6A4029;
+    box-shadow: 0px 10px 20px rgba(137, 85, 55, 0.4);
+    border-radius: 20px;
+
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.pm-confirm-button:hover {
+    background-color: #552d17;
+}
+
+.pm-confirm-button:active {
+    background-color: #6A4029;
+}
+
+@media (max-width: 840px) {
+    .pm-title {
+        text-align: center;
+    }
+
+    .pm-main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pm-left-content {
+        width: 80%;
+    }
+
+    .pm-right-content {
+        width: 80%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .pm-right-content-card {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    .pm-address-detail-section {
+        margin-top: 30px;
+        
+        width: 50%;
+    }
+    .pm-payment-method{
+        margin-top: 30px;
+        margin-right: 5%;
+        width: 45%;
+    }
+
+    .pm-payment-method-title{
+        text-align: center;
+    }
+}

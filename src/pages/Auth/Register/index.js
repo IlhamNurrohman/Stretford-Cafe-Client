@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+import { Link, Navigate } from 'react-router-dom';
 
 import asaidImg from "../../../assets/img/robert-bye-95vx5QVl9x4-unsplash 2.png";
 import logo from "../../../assets/icon/coffee 1.png";
@@ -10,7 +12,21 @@ import igIcon from "../../../assets/icon/Intagram.png";
 import "./Register.css";
 
 export default class Register extends Component {
+    state = {
+        email: "",
+        password: "",
+        phone: "",
+        //roles_id: "",
+        isPasswordShown: false,
+        isError: false,
+        errorMsg: "",
+        isSuccess: false,
+    };
     render() {
+        // if (this.state.isSuccess === true) {
+        //     return <Navigate to="/Login" />
+        // }
+        <></>
         return (
             <div className="container">
                 <div className="column-image">
@@ -19,18 +35,84 @@ export default class Register extends Component {
                 <div className="column-main">
                     <header className="side-title">
                         <img src={logo} alt="logo-icon" />
-                        <h2 className="header-title">Stretford Coffee</h2>
+                        <h2 className="header-title">Stretford Cafe</h2>
                         <h1 className="page-title">Sign Up</h1>
                     </header>
                     <section className="register">
                         <form className="register-form">
-                            <label for="email">Email Address :</label>
-                            <input type="text" name="email" placeholder="Enter your email address" />
-                            <label for="password">Password :</label>
-                            <input type="password" name="password" placeholder="Enter your password" />
-                            <label for="phone">Phone Number :</label>
-                            <input type="text" name="phone" placeholder="Enter your phone number" />
-                            <div className="register-button">Sign Up</div>
+                            <label htmlFOR="email">Email Address :</label>
+                            <input type="text" name="email" placeholder="Enter your email address" onChange={(e) => {
+                                this.setState({
+                                    email: e.target.value,
+                                });
+                            }} />
+                            <label htmlFOR="password">Password :</label>
+                            <input type={`${this.state.isPasswordShown ? "text" : "password"}`} name="password" placeholder="Enter your password" onChange={(e) => {
+                                this.setState({
+                                    password: e.target.value,
+                                });
+                            }} />
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    value={this.state.isPasswordShown}
+                                    onChange={() => {
+                                        this.setState({
+                                            isPasswordShown: !this.state.isPasswordShown,
+                                        });
+                                    }}
+                                />
+                                Show Password
+                            </label>
+                            <label htmlFOR="phone">Phone Number :</label>
+                            <input type="text" name="phone" placeholder="Enter your phone number" onChange={(e) => {
+                                this.setState({
+                                    phone: e.target.value,
+                                });
+                            }} />
+                            <input type="hidden" name="roles_id" value="2" onChange={(e) => {
+                                this.setState({
+                                    phone: e.target.value,
+                                });
+                            }} />
+                            <div className="register-button" onClick={() => {
+                                const { email, password, phone } = this.state;
+                                const body = {
+                                    email,
+                                    password,
+                                    phone,
+                                };
+                                axios
+                                    .post("http://localhost:8000/auth/new", body)
+                                    .then((result) => {
+                                        console.log(result);
+                                        let x = document.getElementById("snackbar");
+                                        x.className = "show";
+                                        setTimeout(function () {
+                                            x.className = x.className.replace("show", "");
+                                        }, 3000);
+                                        setTimeout(() => {
+                                            this.props.history.push("/Login");
+                                        }, 3001);
+                                        this.setState({
+                                            isSuccess: true,
+                                            isError: false,
+                                            errorMsg: "",
+                                        });
+                                    })
+                                    .catch((error) => {
+                                        console.log(error)
+                                        let x = document.getElementById("toast");
+                                        x.className = "show";
+                                        setTimeout(function () {
+                                            x.className = x.className.replace("show", "");
+                                        }, 5000);
+                                        this.setState({
+                                            isError: true,
+                                            errorMsg: error.response.data.err.msg,
+                                        });
+                                    });
+                            }}>Sign Up</div>
                         </form>
                         <div className="google-button">
                             <img className="google-icon"
@@ -42,7 +124,7 @@ export default class Register extends Component {
                             <p className="already-account-text">Already have an account?</p>
                             <div className="underline"></div>
                         </section>
-                        <div className="login-here-button" onclick="window.location.href='login.html'">Login Here</div>
+                        <div className="login-here-button"><Link to="/Login" style={{ textDecoration: "none", color: "#fffefe" }}>Login Here</Link></div>
                     </section>
                     <footer>
                         <aside className="describe" aria-label="">
@@ -73,7 +155,11 @@ export default class Register extends Component {
                                 <a href="">Terms of Service</a>
                             </div>
                         </aside>
+
+                    <div id="snackbar">Sign Up berhasil,Silahkan Login</div>
+                    <div id="toast">Sign Up gagal,silahkan coba kembali</div>;
                     </footer>
+
                 </div>
             </div>
         );

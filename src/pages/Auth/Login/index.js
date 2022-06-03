@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+import { Link, Navigate } from 'react-router-dom';
 
 import asaidImg from "../../../assets/img/robert-bye-95vx5QVl9x4-unsplash 2.png";
 import logo from "../../../assets/icon/coffee 1.png";
@@ -10,7 +12,25 @@ import igIcon from "../../../assets/icon/Intagram.png";
 import "./Login.css";
 
 export default class Login extends Component {
+    constructor() {
+        super();
+        this.state = {
+            email: "",
+            password: "",
+            isSuccess: false,
+            isPasswordShown: false,
+            isError: false,
+            errorMsg: "",
+            isLoggedin: false
+        };
+    };
     render() {
+        // const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+        // console.log(userInfo.token)
+        if (this.state.isSuccess === true) {
+            return <Navigate to="/" />
+        }
+        <></>
         return (
             <div className="container">
                 <div className="column-image">
@@ -24,11 +44,62 @@ export default class Login extends Component {
                     </header>
                     <section className="register">
                         <form className="register-form">
-                            <label for="email">Email Address :</label>
-                            <input type="text" name="email" placeholder="Enter your email address" />
-                            <label for="password">Password :</label>
-                            <input type="text" name="phone" placeholder="Enter your phone password" />
-                            <div className="register-button">Login</div>
+                            <label htmlFOR="email">Email Address :</label>
+                            <input type="text" name="email" placeholder="Enter your email address" onChange={(e) => {
+                                this.setState({
+                                    email: e.target.value,
+                                });
+                            }} />
+                            <label htmlFOR="password">Password :</label>
+                            <input type={`${this.state.isPasswordShown ? "text" : "password"}`} name="password" placeholder="Enter your phone password" onChange={(e) => {
+                                this.setState({
+                                    password: e.target.value,
+                                });
+                            }} />
+                            <Link to={"/ForgotPassword"} style={{ textDecoration: "none", fontFamily: "Rubik" }}><p className="" style={{ textDecoration: "none", fontFamily: "Rubik" }}>Forgot Password?</p></Link>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    value={this.state.isPasswordShown}
+                                    onChange={() => {
+                                        this.setState({
+                                            isPasswordShown: !this.state.isPasswordShown,
+                                        });
+                                    }}
+                                />
+                                Show Password
+                            </label>
+                            <div className="register-button" onClick={() => {
+                                const { email, password } = this.state;
+                                const body = {
+                                    email,
+                                    password,
+                                };
+                                axios
+                                    .post("http://localhost:8000/auth", body)
+                                    .then((result) => {
+                                        console.log(result.data);
+                                        localStorage.setItem(
+                                            "userinfo",
+                                            JSON.stringify(result.data.data)
+                                        );
+                                        this.setState({
+                                            isSuccess: true
+                                        })
+                                    })
+                                    .catch((error) => {
+                                        console.log(error);
+                                        let x = document.getElementById("snackbar");
+                                        x.className = "show";
+                                        setTimeout(function () {
+                                            x.className = x.className.replace("show", "");
+                                        }, 3000);
+                                        this.setState({
+                                            isError: true,
+                                            errorMsg: error.response.data.err.msg,
+                                        });
+                                    });
+                            }}>Login</div>
                         </form>
                         <div className="google-button">
                             <img className="google-icon"
@@ -40,7 +111,7 @@ export default class Login extends Component {
                             <p className="already-account-text">Don't have an account?</p>
                             <div className="underline"></div>
                         </section>
-                        <div className="login-here-button" onclick="window.location.href='login.html'">Login Here</div>
+                        <div className="login-here-button"><Link to="/Register" style={{ textDecoration: "none", color: "#fffefe" }}>Sign Up Here</Link></div>
                     </section>
                     <footer>
                         <aside className="describe" aria-label="">
@@ -71,6 +142,7 @@ export default class Login extends Component {
                                 <a href="">Terms of Service</a>
                             </div>
                         </aside>
+                        <div id="snackbar">Password atau email salah</div>
                     </footer>
                 </div>
             </div>

@@ -1,0 +1,382 @@
+button {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  
+  button:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  
+  .main {
+    width: 100%;
+    height: 150vh;
+  }
+  
+  .jumbotron {
+    width: 100%;
+    height: 125vh;
+    background-image: url("../../assets/img/nathan-dumlao-XOhI_kW_TaM-unsplash\ 1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+  }
+  
+  .title {
+    padding-top: 3%;
+    padding-left: 5.5%;
+    color: white;
+    font-size: 35px;
+    font-family: "Rubik";
+    font-weight: 500;
+    margin-bottom: 3%;
+  }
+  
+  .footer {
+    position: relative;
+  }
+  
+  .wrapper {
+    position: absolute;
+    width: 90%;
+    height: 80%;
+    background-color: rgb(255, 255, 255);
+    left: 5%;
+    display: grid;
+    border-radius: 20px;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "profile forms";
+  }
+  
+  .profile {
+    grid-area: profile;
+    position: relative;
+  }
+  
+  .profile img {
+    width: 35%;
+    border-radius: 50%;
+    position: absolute;
+    left: 32%;
+    top: 3%;
+  }
+  
+  .profile .name {
+    position: absolute;
+    width: 100%;
+    top: 28%;
+    text-align: center;
+    font-size: 1.3020833333333333vw;
+    font-family: "Rubik";
+  }
+  
+  .button {
+    width: 50%;
+    position: absolute;
+    top: 40%;
+    left: 23%;
+  }
+  
+  .button button {
+    width: 100%;
+    height: 5.898123324396783vh;
+    border-radius: 10px;
+  }
+  
+  .button .chose {
+    margin-bottom: 5%;
+  }
+  
+  button {
+    font-family: "Poppins";
+    font-size: 1.171875vw;
+    font-weight: 700;
+    border: none;
+  }
+  
+  .btn-warning {
+    background-color: rgba(255, 186, 51, 1);
+    color: rgba(106, 64, 41, 1);
+  }
+  
+  .btn-primary {
+    background-color: rgba(106, 64, 41, 1);
+    color: white;
+  }
+  
+  .btn-light {
+    margin-top: 5%;
+    background-color: white;
+    color: rgba(106, 64, 41, 1);
+  }
+  
+  .text {
+    position: absolute;
+    top: 65%;
+    text-align: center;
+    left: 26%;
+    font-size: 1.3020833333333333vw;
+    font-family: "Poppins";
+    font-weight: 700;
+    color: rgba(106, 64, 41, 1);
+  }
+  
+  .second-btn {
+    grid-area: profile;
+    width: 50%;
+    position: absolute;
+    bottom: 2%;
+    left: 24%;
+  }
+  
+  .second-btn button {
+    height: 6.04289544235925vh;
+    border-radius: 20px;
+    width: 100%;
+    margin-bottom: 4%;
+  }
+  
+  .forms {
+    grid-area: forms;
+    margin-top: 5%;
+    height: 90%;
+    width: 95%;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 10px solid rgba(106, 64, 41, 1);
+    grid-template-areas: "left right";
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    grid-gap: 5%;
+    border-radius: 20px;
+  }
+  
+  .form-left {
+    grid-area: left;
+  }
+  
+  .form-right {
+    grid-area: right;
+    position: relative;
+  }
+  
+  .contact p {
+    font-family: "Poppins";
+    padding-top: 3%;
+    padding-left: 5%;
+    font-size: 1.6276041666666667vw;
+    font-weight: 700;
+    color: rgba(79, 86, 101, 1);
+  }
+  
+  form {
+    margin-left: 5%;
+  }
+  
+  input {
+    background-color: white;
+    border-bottom: 1.5px solid black;
+    border-radius: 0%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  
+  input:focus {
+    border-bottom: 1.5px solid black;
+  }
+  
+  label {
+    font-family: "Poppins";
+    color: rgba(159, 159, 159, 1);
+    font-weight: 500;
+    font-size: 18px;
+  }
+  
+  .detail p {
+    font-family: "Poppins";
+    padding-top: 3%;
+    padding-left: 5%;
+    font-size: 1.6276041666666667vw;
+    font-weight: 700;
+    color: rgba(79, 86, 101, 1);
+  }
+  
+  .form-right .mobile-number {
+    position: absolute;
+    width: 100%;
+    top: 9.6%;
+  }
+  
+  .form-right .dob {
+    position: absolute;
+    width: 100%;
+    top: 46.5%;
+  }
+  
+  .radio-input {
+    position: absolute;
+    width: 40%;
+    height: 30px;
+    bottom: 10%;
+    right: 10%;
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 3;
+  }
+  
+  .form-check {
+    position: relative;
+    /* background-color: rgb(23, 100, 100); */
+    width: 150px;
+  }
+  
+  .male-label {
+    position: absolute;
+    left: 20%;
+  }
+  
+  .female-label {
+    position: absolute;
+    left: 20%;
+  }
+  
+  .radio-input input {
+    position: absolute;
+    left: 5%;
+    top: 0%;
+    width: 30px;
+    height: 30px;
+    border: 4px solid #9f9f9f;
+  }
+  
+  .form-check-input:checked {
+    background-color: rgba(106, 64, 41, 0);
+    background-image: url("../../assets/icon/check.png");
+    background-size: 25px 25px;
+    background-position: center;
+    border: 4px solid rgba(106, 64, 41, 1);
+  }
+  
+  .radio-input input[type="radio"]:checked + label {
+    color: rgba(106, 64, 41, 1);
+  }
+  
+  .form-check-label:checked {
+    color: rgba(106, 64, 41, 1);
+  }
+  
+  .radio-input label {
+    position: absolute;
+    right: 25%;
+    top: 10%;
+  }
+  
+  /* MODAL */
+  .modal-text {
+    font-family: "Rubik";
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+  }
+  
+  .modal-footer {
+    position: relative;
+  }
+  
+  .modal-btn {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+  }
+  
+  .modal-btn .btn-light {
+    background-color: rgba(106, 64, 41, 1);
+    color: white;
+    height: 50px;
+    width: 150px;
+    border-radius: 50px;
+    position: absolute;
+    bottom: 0%;
+    left: 10%;
+  }
+  
+  .modal-btn .btn-warning {
+    height: 50px;
+    width: 150px;
+    border-radius: 50px;
+    position: absolute;
+    bottom: 0%;
+    right: 10%;
+  }
+  
+  #snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 146, 19);
+    font-family: Rubik;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 999;
+    left: 50%;
+    bottom: 30px;
+  }
+  
+  #snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 30px;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 30px;
+      opacity: 1;
+    }
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {
+      bottom: 30px;
+      opacity: 1;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+  
+  @keyframes fadeout {
+    from {
+      bottom: 30px;
+      opacity: 1;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+  
