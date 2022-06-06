@@ -38,7 +38,7 @@ export default function Header (props) {
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link"><Link style={{ textDecoration: "none" }} to="/History">
+                                    <a className="nav-link"><Link style={{ textDecoration: "none" }} to="/history">
                                         History
                                     </Link></a>
                                 </li>
@@ -66,7 +66,7 @@ export default function Header (props) {
                                     </span>
                                 </button>
                                 <span className="navbar-text">
-                                    <Link to="/Profile">
+                                    <Link to="/profile">
                                     <img src={profile}
                                     style={{borderRadius: "100px", paddingLeft: "10%"}}/></Link></span>
                             </div>
