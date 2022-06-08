@@ -8,36 +8,6 @@
     src: url("../../assets/font/Poppins/Poppins-Regular.ttf");
 }
 
-@media (max-width:860px) {
-    .pd-main-content {
-        flex-direction: column;
-    }
-
-    .pd-left-content {
-        width: 100%;
-    }
-
-    .pd-right-content {
-        width: 100%;
-    }
-
-    .pd-checkout-container {
-        flex-direction: column;
-        width: 100%;
-        margin-bottom: -120px;
-    }
-
-    .pd-product-checkout {
-        width: 100%;
-    }
-
-    .pd-checkout-button {
-        margin-top: 25px;
-        width: 100%;
-        height: 50px;
-    }
-}
-
 .pd-main-container {
     background-color: #EDEDED;
     padding-left: 5%;
@@ -46,21 +16,26 @@
 }
 
 .pd-title-menu {
-    font-family: Rubik;
+    font-family: "Rubik";
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;
     text-align: left;
     margin-bottom: 20px;
-    margin-left: 80px;
-    margin-top: 10px;
+    text-transform: capitalize;
 
     color: #4F5665;
 }
 
+.pd-title-menu a{
+    text-decoration: none;
+    
+    color: #4F5665;
+}
+
 .pd-title-menu span {
-    font-family: Rubik;
+    font-family: "Rubik";
     font-size: 20px;
     font-weight: 700;
     line-height: 24px;
@@ -88,9 +63,7 @@
 }
 
 .pd-main-img {
-    margin-top: -60px;
     width: 400px;
-    border-radius: 100%;
 }
 
 .pd-main-product-name {
@@ -99,13 +72,15 @@
 }
 
 .pd-main-product-name h2 {
-    font-family: Poppins;
+    font-family: "Poppins";
     font-size: 50px;
     font-weight: 900;
     line-height: 60px;
     letter-spacing: 0em;
     text-align: center;
     margin: 0px;
+
+    text-transform: uppercase;
 
 }
 
@@ -117,6 +92,7 @@
     letter-spacing: 0em;
     text-align: center;
     margin: 0px;
+
 
 }
 
@@ -196,13 +172,16 @@
 .pd-right-content {
     flex: 3;
     width: 50%;
-    margin-top: -50px;
+}
+
+.pd-desc-info {
+    min-height: 280px;
 }
 
 .pd-desc-card {
     background: #FFFFFF;
     border-radius: 20px;
-    padding: 50px 10%
+    padding: 50px 10%;
 }
 
 .pd-desc-delivery {
@@ -234,7 +213,6 @@
     line-height: 35px;
     letter-spacing: 0.03em;
     text-align: left;
-    padding-top: 20px;
 
     letter-spacing: 0.03em;
 
@@ -264,11 +242,12 @@
     margin-top: 30px;
 }
 
+
 .pd-size-vector {
-    background-color: #FFBA33;
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    z-index: 2;
 
     margin-left: 25px;
     margin-right: 25px;
@@ -282,6 +261,7 @@
     font-weight: 700;
     line-height: 45px;
     letter-spacing: 0em;
+    color: #000000;
     text-align: center;
     cursor: pointer;
 
@@ -293,12 +273,34 @@
 
 }
 
-.pd-size-vector:hover {
+.pd-size-checkmark {
+    width: 70px;
+    height: 70px;
+    z-index: -1;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #F4F4F8;
+  }
+
+
+.pd-size-vector:hover input ~ .pd-size-checkmark{
     background-color: #fcaf16;
 }
 
-.pd-size-vector:active {
+.pd-size-vector input:checked ~ .pd-size-checkmark{
     background-color: #FFBA33;
+}
+
+.pd-size-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
 }
 
 .pd-delivery-container {
@@ -419,8 +421,8 @@
 .pd-checkout-container {
     z-index: 1;
     display: flex;
-    padding: 10px 5%;
-    margin-bottom: -10px;
+    padding: 0px 5%;
+    margin-bottom: 60px;
     justify-content: center;
 }
 
@@ -466,7 +468,7 @@
     margin-bottom: 0px;
 
 
-    font-family: Poppins;
+    font-family: "Poppins";
     font-size: 20px;
     font-weight: 400;
     line-height: 30px;
@@ -577,4 +579,34 @@
 
 .pd-checkout-button:active {
     background-color: #FFBA33;
+}
+
+@media (max-width:860px) {
+    .pd-main-content {
+        flex-direction: column;
+    }
+
+    .pd-left-content {
+        width: 100%;
+    }
+
+    .pd-right-content {
+        width: 100%;
+    }
+
+    .pd-checkout-container {
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: -120px;
+    }
+
+    .pd-product-checkout {
+        width: 100%;
+    }
+
+    .pd-checkout-button {
+        margin-top: 25px;
+        width: 100%;
+        height: 50px;
+    }
 }

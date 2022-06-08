@@ -16,6 +16,7 @@ import ProductDetail from "./pages/Product Detail";
 import Profile from "./pages/Profile";
 import History from "./pages/History";
 import Payment from "./pages/Payment";
+import Dashboard from "./pages/Dashboard";
 
 function App(){
   return(
@@ -28,9 +29,10 @@ function App(){
           <Route path="/product/:favorite" element={<Product />} />
           <Route path="/product" element={<Product />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/productDetail" element={<ProductDetail />} />
+          <Route path="/product/detail/:id" element={<ProductDetail />} />
           <Route path="/history" element={<History />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
   );

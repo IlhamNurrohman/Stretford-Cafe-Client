@@ -84,6 +84,7 @@ class Product extends Component {
     getFood = (categories) => {
         getProduct(categories)
             .then((res) => {
+                console.log(res.data.data);
                 this.setState({
                     product: { ...this.state.product, isFood: res.data.data },
                 });
@@ -128,7 +129,6 @@ class Product extends Component {
     render() {
         const { searchParams, params,
         } = this.props;
-        console.log(searchParams.get("categories"));
 
         const { product } = this.state;
         const { isFavorite, isCoffee, isNonCoffee, isFood, categories, allProduct } = product;
@@ -257,7 +257,18 @@ class Product extends Component {
                                     //             />
                                     //         );
                                     //     })
-                                        : searchParams.get("categories") === "coffee" ? isCoffee.map((product) => {
+                                    : searchParams.get("categories") === "coffee" ? isCoffee.map((product) => {
+                                        return (
+                                            <CardProduct
+                                                id={product.id}
+                                                pictures={`http://localhost:8000${product.pictures}`}
+                                                name={product.name}
+                                                price={product.price}
+                                                key={product.id}
+                                            />
+                                        );
+                                    })
+                                        : searchParams.get("categories") === "non coffee" ? isNonCoffee.map((product) => {
                                             return (
                                                 <CardProduct
                                                     id={product.id}
@@ -268,7 +279,7 @@ class Product extends Component {
                                                 />
                                             );
                                         })
-                                            : searchParams.get("categories") === "non coffee" ? isNonCoffee.map((product) => {
+                                            : searchParams.get("categories") === "food" ? isFood.map((product) => {
                                                 return (
                                                     <CardProduct
                                                         id={product.id}
@@ -279,7 +290,7 @@ class Product extends Component {
                                                     />
                                                 );
                                             })
-                                                : searchParams.get("categories") === "food" ? isFood.map((product) => {
+                                                : allProduct.map((product) => {
                                                     return (
                                                         <CardProduct
                                                             id={product.id}
@@ -289,18 +300,7 @@ class Product extends Component {
                                                             key={product.id}
                                                         />
                                                     );
-                                                })
-                                                    : allProduct.map((product) => {
-                                                        return (
-                                                            <CardProduct
-                                                                id={product.id}
-                                                                pictures={`http://localhost:8000${product.pictures}`}
-                                                                name={product.name}
-                                                                price={product.price}
-                                                                key={product.id}
-                                                            />
-                                                        );
-                                                    })}
+                                                })}
                             </div>
 
                         </div>

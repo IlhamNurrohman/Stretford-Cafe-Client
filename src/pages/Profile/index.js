@@ -11,8 +11,8 @@ import "./Profile.css";
 import axios from "axios";
 
 export default class Profile extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             isLoggedIn: localStorage.getItem('userinfo') ? true : false,
             users: [],
@@ -26,7 +26,7 @@ export default class Profile extends Component {
             lastname: "",
             pictures: "",
             isUpdated: false,
-            image_src: Default,
+            image_src: "",
             use_src: true,
             isShow: false,
             isEdit: false,
@@ -89,16 +89,14 @@ export default class Profile extends Component {
             .then(result => {
                 //console.log(result.data.data[0])
                 this.setState({
-                    users: result.data.data[0]
-                })
-                this.setState({
-                    getBirthday: this.state.users.birthday
-
+                    users: result.data.data[0],
+                    image_src: this.state.users.use_src ? this.state.users.use_src : Default
                 })
             })
             .catch(error => {
                 console.log(error)
             })
+
     }
     componentDidUpdate() {
         if (this.state.isUpdated) {

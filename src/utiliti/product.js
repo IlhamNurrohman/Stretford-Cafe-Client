@@ -36,19 +36,13 @@ export async function getAllProduct() {
     console.log(error);
   }
 }
-
-{/* <input
-                                type="text"
-                                className="form-control ps-5 rounded-5 bg-light"
-                                id="exampleFormControlInput1"
-                                placeholder="search"
-                                onChange={(event) => {
-                                    event.preventDefault();
-                                    navigate(`/products?=${event.target.value}`);
-                                }}
-                            />
-                            <img
-                                className="position-relative bottom-50 img-search"
-                                src={Search}
-                                alt="search"
-                            /> */}
+export const getProductDetail = async (id) => {
+  try {
+    const URL = `http://localhost:8000/products/detail/${parseInt(id)}`;
+    const results = await axios.get(URL);
+    //console.log(results)
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
