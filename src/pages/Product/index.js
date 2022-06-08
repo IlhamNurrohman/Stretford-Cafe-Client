@@ -106,6 +106,7 @@ class Product extends Component {
     // };
 
     componentDidMount() {
+        document.title="Product"
         this.getAllProductsPage();
     }
 

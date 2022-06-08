@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../CardProduct/CardProduct.css";
 
 export default function Cardproduct(props) {
@@ -13,8 +13,7 @@ export default function Cardproduct(props) {
     <>
       <button
         className="btn"
-        onClick={handleClick}
-      >
+        onClick={handleClick}>
         <div className="card"
           style={{ borderRadius: "30px", width: "126px", height: "212.41px", boxShadow: "0px 30px 60px", color: "rgba(57, 57, 57, 0.1)", marginBottom: "40%" }}>
           <img key={props.pictures} src={props.pictures} className="" alt={props.name} style={{ borderRadius: "100px", width: "70%", marginTop: "-30%", marginLeft: "15%" }}>

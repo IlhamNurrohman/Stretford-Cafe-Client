@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import Header from "../../component/Header/Header";
 import Footer from "../../component/Footer/Footer";
-//import ColdBrew from "../../assets/img/long black.png"
 
 import "./ProductDetail.css";
 //import axios from "axios";
@@ -17,9 +16,6 @@ class ProductDetail extends Component {
             product: {
                 getProduct: [],
             },
-            // size: "",
-            // allSize: [],
-            // cart: [],
         }
     }
 
@@ -50,7 +46,9 @@ class ProductDetail extends Component {
                     {params.id ? (
                         <section className="pd-main-container">
                             <div className="pd-title-menu">
-                                <Link to={"/product"}>{`${getProduct.category === "non coffee" ? "Non Coffee" : getProduct.category}`}</Link><span>{`>${getProduct.name}`}</span></div>
+                                <Link to={"/product"}>
+                                    {`${getProduct.category === "non coffee" ? "Non Coffee" : getProduct.category}`}
+                                </Link><span>{`>${getProduct.name}`}</span></div>
                             <section className="pd-main-content">
                                 <div className="pd-left-content">
                                     <div className="pd-main-img-container">
