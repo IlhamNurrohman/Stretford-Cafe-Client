@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "Rubik";
+    src: url("../../assets/font/Rubik/Rubik-VariableFont_wght.ttf");
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("../../assets/font/Poppins/Poppins-Regular.ttf");
+  }
 .h-main-container {
     background-image: url(https://s3-alpha-sig.figma.com/img/e28e/5de4/4a9e22aa898e67b55b5a3d7685117d1d?Expires=1654473600&Signature=Wey-nl8PTHBYW8nJLpJc2H61j-i4AfBMWvPQl6Q1~8hc3eRKvpfNkQcPiPYEGO2PTOfMGF8U9Z0B4S5SRsdUABchimTIKJN~2QWlwgZwkte133R08WlZ6WkXVMCr-yTp2i0CiCJDTwRomx4VOkYYbuRwCa62rmjyqpNk1eB9nY0-cBNRpwfy147iYlcIpCT4-pfaMnG75LeKBI6msQn23W11LS8vnUhwJmslauVO~ZQkosQGzD5HCbWaApVrD2shejObSd7zcnVciukc0SS-zssUt~EPvIx~gkd4Nurtz6ePbzvbpXY56RCvQNIDs3u50L08z-X-JharbKdxeoG3fw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
     background-size: cover;
@@ -15,7 +23,7 @@
 
 
 .h-title h1 {
-    font-family: Rubik;
+    font-family: "Rubik";
     font-size: 40px;
     font-weight: 700;
     line-height: 47px;
@@ -25,7 +33,7 @@
 }
 
 .h-title p {
-    font-family: Rubik;
+    font-family: "Rubik";
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
@@ -34,7 +42,7 @@
 }
 
 .h-select-all {
-    font-family: Poppins;
+    font-family: "Poppins";
     font-size: 18px;
     font-weight: 700;
     line-height: 30px;
@@ -65,6 +73,8 @@
 
 .h-product-img {
     width: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .h-product-info {
@@ -73,7 +83,7 @@
 }
 
 .h-product-name {
-    font-family: Poppins;
+    font-family: "Poppins";
     font-size: 22px;
     font-weight: 700;
     line-height: 38px;
@@ -92,7 +102,7 @@
 }
 
 .h-product-price {
-    font-family: Poppins;
+    font-family: "Poppins";
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
@@ -104,7 +114,7 @@
 }
 
 .h-product-status {
-    font-family: Poppins;
+    font-family: "Poppins";
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;

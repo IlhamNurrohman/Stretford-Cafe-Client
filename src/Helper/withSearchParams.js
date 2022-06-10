@@ -1,17 +1,16 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 
-function withSearchParams(Component) {
+export default function withSearchParams(Component) {
   function WithSearchParams(props) {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchparams] = useSearchParams();
     return (
       <Component
         searchParams={searchParams}
-        setSearchParams={setSearchParams}
+        setSearchparams={setSearchparams}
+        {...props}
       />
     );
   }
   return WithSearchParams;
 }
-
-export default withSearchParams;

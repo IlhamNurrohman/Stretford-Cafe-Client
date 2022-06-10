@@ -30,7 +30,7 @@
 
 .pd-title-menu a{
     text-decoration: none;
-    
+    margin-left: 80px;
     color: #4F5665;
 }
 
@@ -41,7 +41,8 @@
     line-height: 24px;
     letter-spacing: 0em;
     text-align: left;
-
+    margin-left: 5px;
+    margin-right: 5px;
     color: #6A4029;
 
 }
@@ -64,6 +65,8 @@
 
 .pd-main-img {
     width: 400px;
+    border-radius: 50%;
+    margin-top: -100px;
 }
 
 .pd-main-product-name {
@@ -176,6 +179,7 @@
 
 .pd-desc-info {
     min-height: 280px;
+
 }
 
 .pd-desc-card {
@@ -208,11 +212,12 @@
 
 .pd-desc-info {
     font-family: "Poppins";
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 35px;
     letter-spacing: 0.03em;
     text-align: left;
+    margin-top: 40px;
 
     letter-spacing: 0.03em;
 
@@ -407,7 +412,9 @@
     color: #9F9F9F;
     background-color: #EDEDED;
 
-    border: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
     border-bottom: 1px solid #9F9F9F
 }
 
@@ -443,10 +450,12 @@
     justify-content: center;
     align-items: center;
     flex: 1;
+
 }
 
 .pd-check-out-img {
     width: 100px;
+    border-radius: 50%;
 }
 
 .pd-checkout-info {
