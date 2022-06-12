@@ -1,38 +1,121 @@
 p {
-    margin: 0;
-  }
-  
-  h1 {
-    text-align: center;
-    font-weight: 700;
-    font-size: calc(1.375rem + 0.75vw);
-    color: #6a4029;
-    margin-bottom: 3rem;
-  }
-  
-  h2 {
-    font-weight: 700;
-    font-size: calc(1.25rem + 0.5vw);
-    color: #000;
-  }
-  
-  .dashboard-container {
-    font-family: 'Poppins';
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    padding: 2.5vw 7.5vw;
-    border-bottom: 1px solid #9f9f9f;
-  }
-  
-  .report-wrapper {
-    margin-top: 1rem;
-    width: 100%;
-    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-    border-radius: 20px;
-    padding: 2rem;
-  }
-  
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 700;
+  font-size: calc(1.375rem + 0.75vw);
+  color: #6a4029;
+  margin-bottom: 3rem;
+  padding-top: 30px;
+  margin-left: -3rem;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: calc(1.25rem + 0.5vw);
+  color: #000;
+}
+
+.dashboard-container {
+  font-family: 'Poppins';
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 2.5vw 7.5vw;
+  border-bottom: 1px solid #9f9f9f;
+}
+
+.report-wrapper {
+  /* flex: 1; */
+  margin-top: 1rem;
+  width: 90%;
+  height: 833px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  margin-left: -1rem;
+
+}
+
+.download-report-btn {
+  /* flex: 1; */
+  width: 90%;
+  height: 60px;
+  background: rgba(106, 64, 41, 1);
+  box-shadow: rgb(147, 114, 97) 0px 5px 15px;
+  border-radius: 20px;
+  padding: 1rem;
+  margin-bottom: 10rem;
+  margin-left: -1rem;
+  text-align: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 1);
+  font-size: 20px;
+  font-family: 'Rubik';
+  cursor: pointer;
+}
+
+.download-report-btn:hover {
+  background-color: #7c523c;
+}
+
+.user-wrapper {
+  /* flex: 1; */
+  margin-top: 1rem;
+  width: 90%;
+  height: 400px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  margin-left: -2rem;
+}
+
+.gols-wrapper {
+  /* flex: 1; */
+  margin-top: 1rem;
+  width: 90%;
+  height: 400px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  margin-left: -2rem;
+}
+
+.share-report-btn {
+  /* flex: 1; */
+  width: 90%;
+  height: 60px;
+  background: rgba(106, 64, 41, 1);
+  box-shadow: rgb(147, 114, 97) 0px 5px 15px;
+  border-radius: 20px;
+  padding: 1rem;
+  margin-bottom: 10rem;
+  margin-left: -2rem;
+  text-align: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 1);
+  font-size: 20px;
+  font-family: 'Rubik';
+  cursor: pointer;
+}
+
+.share-report-btn:hover {
+  background-color: #7c523c;
+}
+
+.download-report-btn,
+.share-report-btn {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}

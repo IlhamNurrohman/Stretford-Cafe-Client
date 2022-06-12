@@ -81,6 +81,7 @@ export default class Profile extends Component {
         }
     };
     componentDidMount() {
+        document.title = "Profile"
         const userInfo = JSON.parse(localStorage.getItem("userinfo"));
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
         //console.log(config);
@@ -144,8 +145,8 @@ export default class Profile extends Component {
                                                 ?  `http://localhost:8000${this.state.users.pictures}`
                                                 : this.state.image_src} className="img-profile" alt="img-profile" />
                                         </div>
-                                        <h4 className="username" style={{ marginLeft: "-33px" }}>{this.state.users.username ? this.state.users.username : "Display Name"}</h4>
-                                        <p className="email" style={{ paddingLeft: "30px" }}>{this.state.users.email ? this.state.users.email : "Email"}</p>
+                                        <h4 className="username" style={{ marginLeft: "-28px" }}>{this.state.users.username ? this.state.users.username : "Display Name"}</h4>
+                                        <p className="email" style={{ marginLeft: "30px" }}>{this.state.users.email ? this.state.users.email : "Email"}</p>
                                         {this.state.isError ? <p>{this.state.errorMsg}</p> : <></>}
                                         <div className="choose-photo">
                                             <input type="file" hidden name="image" ref={this.inputFile} onChange={this.fileChange} />

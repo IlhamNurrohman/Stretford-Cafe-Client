@@ -67,6 +67,7 @@
 
 .pm-product-img {
     width: 90px;
+    border-radius: 50%;
 }
 
 .pm-item-detail {

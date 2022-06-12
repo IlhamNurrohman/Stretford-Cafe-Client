@@ -38,7 +38,7 @@ export async function getAllProduct() {
 }
 export const getProductDetail = async (id) => {
   try {
-    const URL = `http://localhost:8000/products/detail/${parseInt(id)}`;
+    const URL = `http://localhost:8000/products/detail/${id}`;
     const results = await axios.get(URL);
     //console.log(results)
     return results;

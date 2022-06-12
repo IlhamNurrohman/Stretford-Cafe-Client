@@ -17,7 +17,7 @@ import withParams from "../../Helper/withParams";
 import {
   getProduct,
   getFavorite,
-  // getSearch,
+  //getSearch,
   getAllProduct,
 } from "../../utiliti/product";
 
@@ -32,12 +32,12 @@ class Product extends Component {
         isFood: [],
         isAll: [],
         allProduct: [],
-        // find: [],
+        //search: [],
       }
     };
   }
-  getAllProductsPage = () => {
-    getAllProduct()
+  getAllProductsPage = async () => {
+    await getAllProduct()
       .then((res) => {
         this.setState({
           product: { ...this.state.product, allProduct: res.data.data },
@@ -47,42 +47,42 @@ class Product extends Component {
         console.log("ERROR GET PRODUCTS", err);
       });
   };
-  getFav = () => {
-    getFavorite()
+  getFav = async () => {
+   await getFavorite()
       .then((res) => {
         this.setState({
           product: { ...this.state.product, isFavorite: res.data.data },
         });
       })
       .catch((err) => {
-        console.log("Product not defined", err);
+        console.log("ERROR GET PRODUCTS", err);
       });
   };
 
-  getCoffee = (categories) => {
-    getProduct(categories)
+  getCoffee = async (categories) => {
+   await getProduct(categories)
       .then((res) => {
         this.setState({
           product: { ...this.state.product, isCoffee: res.data.data },
         });
       })
       .catch((err) => {
-        console.log("Product not defined", err);
+        console.log("ERROR GET PRODUCTS", err);
       });
   };
-  getNonCoffee = (categories) => {
-    getProduct(categories)
+  getNonCoffee = async (categories) => {
+   await getProduct(categories)
       .then((res) => {
         this.setState({
           product: { ...this.state.product, isNonCoffee: res.data.data },
         });
       })
       .catch((err) => {
-        console.log("Product not defined", err);
+        console.log("ERROR GET PRODUCTS", err);
       });
   };
-  getFood = (categories) => {
-    getProduct(categories)
+  getFood = async (categories) => {
+   await getProduct(categories)
       .then((res) => {
         console.log(res.data.data);
         this.setState({
@@ -90,29 +90,32 @@ class Product extends Component {
         });
       })
       .catch((err) => {
-        console.log("Product not defined", err);
+        console.log("ERROR GET PRODUCTS", err);
       });
   };
-  // getSearchProduct = (find) => {
-  //     getSearch(find)
-  //         .then((res) => {
-  //             this.setState({
-  //                 product: { ...this.state.product, find: res.data.data },
-  //             });
-  //         })
-  //         .catch((err) => {
-  //             console.log("ERROR SEARCH PRODUCT", err);
-  //         });
-  // };
+//   getSearchProduct = (search) => {
+//       getSearch(search)
+//           .then((res) => {
+//               this.setState({
+//                   product: { ...this.state.product, search: res.data.data },
+//               });
+//           })
+//           .catch((err) => {
+//               console.log("ERROR SEARCH PRODUCT", err);
+//           });
+//   };
 
-  componentDidMount() {
+  async componentDidMount() {
     document.title = "Product"
-    this.getAllProductsPage();
+    await this.getAllProductsPage();
+    await this.getCoffee("coffee");
+    await this.getNonCoffee("non coffee");
+    await this.getFood("food");
   }
 
   componentDidUpdate(pageProps) {
     const {
-      //location: { find },
+      //location: { search },
       searchParams,
       params,
     } = this.props;
@@ -120,7 +123,7 @@ class Product extends Component {
       this.getCoffee("coffee");
       this.getNonCoffee("non coffee");
       this.getFood("food");
-      //this.getSearchProduct(find.slice(6));
+      //this.getSearchProduct(search.slice(6));
     }
     if (pageProps.params !== params) {
       this.getFav();
@@ -140,7 +143,7 @@ class Product extends Component {
         <Header searchParams={searchParams.get("name")} />
         <div className="container-fluid">
           <div className="row" style={{ height: "100%", maxWidth: "100%", paddingLeft: "5%", marginBottom: "80px" }}>
-            <div className="col-sm-4" style={{ width: "40%" }}>
+            <div className="col-sm-4" style={{ width: "40%", borderRight: "0.5px solid rgba(159, 159, 159, 1)"}}>
               <h3 className="user-profile" style={{ color: "rgba(106, 64, 41, 1)", fontFamily: "Rubik", paddingLeft: "19%" }}>Promo Today</h3>
               <h6 className="desc"
                 style={{ color: "black", fontSize: "14px", fontFamily: "Rubik", paddingTop: "5%", paddingLeft: "10%" }}>
@@ -216,22 +219,28 @@ class Product extends Component {
                 <br />4. Should make member card to apply coupon</p>
             </div>
             <div className="col-sm-8" style={{ borderLeft: "1px rgba(159, 159, 159, 1)", width: "60%" }}>
-              <nav className="navbar" style={{ paddingLeft: "10%", width: "100%" }}>
                 <ul className="wrapper-menu-category">
-                  <li className={isFavorite === undefined ? 'active-menu' : null}>
-                    <Link to="/product/favorite">Favorite & Promo</Link>
+                  <li className="link-category" style={{textDecoration: "none"}}>
+                    <Link className={isFavorite === undefined ? 'active-menu' : 'menu-nonactive'} 
+                    to="/product/favorite">Favorite & Promo</Link>
                   </li>
-                  <li className={categories === 'coffee' ? 'active-menu' : null}>
-                    <Link to="/product?categories=coffee">Coffee</Link>
+                  <li className="link-category">
+                    <Link className={categories === 'coffee' ? 'active-menu' : 'menu-nonactive'}
+                    to="/product?categories=coffee">Coffee</Link>
                   </li>
-                  <li className={categories === 'non coffee' ? 'active-menu' : null}>
-                    <Link to="/product?categories=non+coffee">Non Coffee</Link>
+                  <li className="link-category">
+                    <Link className={categories === 'non coffee' ? 'active-menu' : 'menu-nonactive'}
+                    to="/product?categories=non+coffee">Non Coffee</Link>
                   </li>
-                  <li className={categories === 'food' ? 'active-menu' : null}>
-                    <Link to="/product?categories=food">Foods</Link>
+                  <li className="link-category">
+                    <Link className={categories === 'food' ? 'active-menu' : 'menu-nonactive'}
+                     to="/product?categories=food">Foods</Link>
+                  </li>
+                  <li className="link-category"> 
+                    <Link className={allProduct === undefined ? 'active-menu' : 'menu-nonactive'}
+                    to="/product">All</Link>
                   </li>
                 </ul>
-              </nav>
               <div className="row row-cols-1 row-cols-md-4 g-3" style={{ paddingTop: "10%", maxWidth: "650px" }}>
                 {params.favorite === "favorite" ? isFavorite.map((product) => {
                   return (
@@ -246,18 +255,18 @@ class Product extends Component {
                     </div>
                   );
                 })
-                  // : searchParams.get("name") === location.find.slice(6)
-                  //     ? find.map((product) => {
-                  //         return (
-                  //             <CardProduct
-                  //                 id={product.id}
-                  //                 pictures={`http://localhost:8000${product.pictures}`}
-                  //                 name={product.name}
-                  //                 price={product.price}
-                  //                 key={product.id}
-                  //             />
-                  //         );
-                  //     })
+                //   : searchParams.get("name") === location.search.slice(6)
+                //       ? search.map((product) => {
+                //           return (
+                //               <CardProduct
+                //                   id={product.id}
+                //                   pictures={`http://localhost:8000${product.pictures}`}
+                //                   name={product.name}
+                //                   price={product.price}
+                //                   key={product.id}
+                //               />
+                //           );
+                //       })
                   : searchParams.get("categories") === "coffee" ? isCoffee.map((product) => {
                     return (
                       <CardProduct

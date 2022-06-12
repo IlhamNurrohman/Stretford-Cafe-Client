@@ -11,6 +11,9 @@ import Bank from "../../assets/icon/Vector (2).png"
 import Cod from "../../assets/icon/fast-delivery 3.png"
 
 export default class Payment extends Component {
+    componentDidMount() {
+        document.title = "Payment"
+    }
     render() {
         return (
             <div>
@@ -22,7 +25,8 @@ export default class Payment extends Component {
                             <div className="pm-order-summary">Order Summary</div>
                             <div className="pm-all-order">
                                 <div className="pm-order-item">
-                                    <div className="pm-item-img"><img src={Hazelnut} alt="" className="pm-product-img" /></div>
+                                    <div className="pm-item-img">
+                                        <img src={Hazelnut} alt="" className="pm-product-img" /></div>
                                     <div className="pm-item-detail">
                                         <p>Hazelnut Latte</p>
                                         <p>x 1</p>
@@ -30,7 +34,7 @@ export default class Payment extends Component {
                                     </div>
                                     <div className="pm-item-price">IDR 24.0</div>
                                 </div>
-                                <div className="pm-order-item">
+                                {/* <div className="pm-order-item">
                                     <div className="pm-item-img"><img src={Hazelnut} alt="" className="pm-product-img" /></div>
                                     <div className="pm-item-detail">
                                         <p>Hazelnut Latte</p>
@@ -38,7 +42,7 @@ export default class Payment extends Component {
                                         <p>Regular</p>
                                     </div>
                                     <div className="pm-item-price">IDR 24.0</div>
-                                </div>
+                                </div> */}
 
                             </div>
                             <div className="pm-border"></div>

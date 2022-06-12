@@ -2,6 +2,7 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import "../CardProduct/CardProduct.css";
+import { formater } from "../../Helper/formatNumber";
 
 export default function Cardproduct(props) {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function Cardproduct(props) {
           <div className="card-body">
             <h5 key={props.name} className="card-title custom-product-name" style={{ marginBottom: "35%" }}>{props.name}</h5>
             <p key={props.price} className="card-text custom-product-price"
-              style={{ textAlign: "center", fontFamily: "Poppins", color: "rgba(106, 64, 41, 1)", }}>{`IDR. ${props.price}`}</p>
+              style={{ textAlign: "center", fontFamily: "Poppins", color: "rgba(106, 64, 41, 1)", }}>{`${formater.format(props.price)}`}</p>
           </div>
         </div>
       </button>
