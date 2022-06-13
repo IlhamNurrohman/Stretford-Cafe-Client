@@ -1,5 +1,6 @@
 import React from "react";
 import './CardHistory.css';
+import { formater } from "../../Helper/formatNumber";
 
 export default function Cardproduct(props) {
     return (
@@ -13,12 +14,10 @@ export default function Cardproduct(props) {
                         <div className="h-product-name">{props.name}</div>
                         <div className="h-product-price-status-container">
                             <div className="h-product-price-status">
-                                <div className="h-product-price">{props.sub_total}</div>
-                                <div className="h-product-status">{props.delivery}</div>
+                                <div className="h-product-price">{`${formater.format(props.sub_total)}`}</div>
+                                <div className="h-product-price">{props.delivery_methods_id}</div>
                             </div>
-                            <div className="h-product-checklist">
-                                <input type="checkbox" />
-                            </div>
+                            <input type="checkbox" className="form-check-input" />
                         </div>
                     </div>
                 </div>

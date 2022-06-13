@@ -52,7 +52,7 @@ export default class History extends Component {
                             pictures={`http://localhost:8000${item.pictures}`}
                             name={item.name} 
                             sub_total={item.sub_total}
-                            delivery={item.delivery}  />
+                            delivery_methods_id={item.delivery_methods_id}  />
                         ))}
                     </section>
                 </main>

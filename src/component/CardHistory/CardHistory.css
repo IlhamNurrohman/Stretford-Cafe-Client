@@ -80,6 +80,7 @@
 .h-product-info {
     display: flex;
     flex-direction: column;
+    margin-left: 10px;
 }
 
 .h-product-name {
@@ -128,4 +129,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 20px;
 }

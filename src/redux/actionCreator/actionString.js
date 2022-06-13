@@ -8,6 +8,11 @@ export const pictProduct = "SET_IMAGE"
 export const nameProduct = "SET_NAME"
 export const priceProduct = "SET_PRICE"
 
+export const loginString = "LOGIN"
+export const logoutString = "LOGOUT"
+export const getUserDataString = "GET_USER_DATA"
+export const changePageString = "CHANGE_PAGE"
+
 export const searchProductString = "SEARCH_PRODUCT"
 
 

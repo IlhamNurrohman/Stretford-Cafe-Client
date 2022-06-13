@@ -22,7 +22,8 @@ export class Payment extends Component {
             product: [],
             users: [],
             payment: "",
-            token: localStorage.getItem("token"),
+            isPost: false,
+            isLoggedIn: localStorage.getItem('userinfo') ? true : false,
         };
     }
     productDetailPage = (id) => {
@@ -43,7 +44,7 @@ export class Payment extends Component {
         axios
             .get("http://localhost:8000/users/profile-detail", config)
             .then(result => {
-                console.log(result.data.data[0])
+                //console.log(result.data.data[0])
                 this.setState({
                     users: result.data.data[0]
                 })
@@ -54,22 +55,33 @@ export class Payment extends Component {
     };
 
     handlePostTransaction = () => {
-        const { counter, addToCart: { delivery, productId }, id } = this.props
-        const product_id = productId
-        const total_price = (this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0)
-        const quantity = counter
-        const user_id = id
-        const payment_method = this.state.payment
-        const delivery_method = delivery
+        const { counter, cart: { delivery, productId } } = this.props
+        const products_id = productId
+        const sub_total = (this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0)
+        const qty = counter
+        const users_id = this.state.users.id
+        const payment_methods_id = this.state.payment
+        const delivery_methods_id = delivery
+        const date = new Date(Date.now())
+        const created_at = new Date(Date.now())
 
-        const { token } = this.props.userInfo
-        const config = { headers: { Authorization: `Bearer ${token}` } }
+        const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+        const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
 
-        const body = { product_id, total_price, quantity, user_id, payment_method, delivery_method }
+        const body = { date, sub_total, payment_methods_id, products_id, qty, users_id, delivery_methods_id, created_at }
+        console.log(users_id)
         axios
             .post('http://localhost:8000/transactions', body, config)
             .then(result => {
                 console.log(result)
+                this.setState({
+                    isPost: true
+                });
+                let x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 10000);
             })
             .catch(error => {
                 console.log(error)
@@ -145,13 +157,13 @@ export class Payment extends Component {
                                     </div>
                                     <div className="address-detail-card">
                                         <div className="pm-address-detail">
-                                            <input
+                                            {/* <input
                                                 type="text"
                                                 className="address-payment p-2"
                                                 value={`Delivery to ${this.state.users.address}`}
                                                 disabled
-                                            />
-                                            {/* <span>Delivery to</span> Iskandar Street */}
+                                            /> */}
+                                            <span>Delivery to</span> {delivery === "Door Delivery" ? "Delivery to" : delivery}
                                         </div>
                                         <div className="pm-border"></div>
                                         <div className="pm-address-detail">
@@ -195,10 +207,10 @@ export class Payment extends Component {
                                                 </div>
                                                 <p>Card</p>
                                                 <input type="radio" name="pm-method-input"
-                                                    value="Card"
+                                                    value="1"
                                                     onChange={(event) => {
                                                         this.setState({
-                                                            paymentMethods: event.target.value,
+                                                            payment: event.target.value,
                                                         });
                                                     }} />
                                                 <span className="checkmark"></span>
@@ -210,10 +222,10 @@ export class Payment extends Component {
                                                 </div>
                                                 <p>Bank account</p>
                                                 <input type="radio" name="pm-method-input"
-                                                    value="Bank"
+                                                    value="3"
                                                     onChange={(event) => {
                                                         this.setState({
-                                                            paymentMethods: event.target.value,
+                                                            payment: event.target.value,
                                                         });
                                                     }} />
                                                 <span className="checkmark"></span>
@@ -225,7 +237,7 @@ export class Payment extends Component {
                                                 </div>
                                                 <p>Cash on Delivery</p>
                                                 <input type="radio" name="pm-method-input"
-                                                    value="COD"
+                                                    value="8"
                                                     onChange={(event) => {
                                                         this.setState({
                                                             paymentMethods: event.target.value,
@@ -243,14 +255,17 @@ export class Payment extends Component {
                     </section>
                 </main>
                 <Footer />
+                <div id="snackbar">
+                    Transactions Success
+                </div>
             </>
         )
     }
 }
 const mapStateToProps = (state) => {
-    const { cart, counter: { counter } } = state;
+    const { cart, counter: { counter }, id } = state;
     return {
-        cart, counter
+        cart, counter, id
     };
 };
 
