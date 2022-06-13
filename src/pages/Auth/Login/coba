@@ -8,10 +8,14 @@ import googleIcon from "../../../assets/icon/google-logo-png-suite-everything-yo
 import fbIcon from "../../../assets/icon/Facebook.png";
 import twIcon from "../../../assets/icon/Twitter.png";
 import igIcon from "../../../assets/icon/Intagram.png";
+import OpenEye from "../../../assets/icon/open-eye.png";
+import ClosedEye from "../../assets/icon/closed-eye.png";
 
 import "./Login.css";
+import { connect } from 'react-redux'
+import { loginAction } from '../../../redux/actionCreator/auth'
 
-export default class Login extends Component {
+class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -24,9 +28,13 @@ export default class Login extends Component {
             isLoggedin: false
         };
     };
+    componentDidMount() {
+        document.title = "Login"
+    }
     render() {
         // const userInfo = JSON.parse(localStorage.getItem("userinfo"));
         // console.log(userInfo.token)
+        const { isSuccess } = this.props
         if (this.state.isSuccess === true) {
             return <Navigate to="/" />
         }
@@ -56,8 +64,16 @@ export default class Login extends Component {
                                     password: e.target.value,
                                 });
                             }} />
+                            <div className="icon-pass-container"
+                                onClick={() => {
+                                    this.setState({
+                                        isPasswordShown: !this.state.isPasswordShown
+                                    })
+                                }}>
+                                {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
+                            </div>
                             <Link to={"/forgotPassword"} style={{ textDecoration: "none", fontFamily: "Rubik" }}><p className="" style={{ textDecoration: "none", fontFamily: "Rubik" }}>Forgot Password?</p></Link>
-                            <label>
+                            {/* <label>
                                 <input
                                     type="checkbox"
                                     value={this.state.isPasswordShown}
@@ -68,34 +84,11 @@ export default class Login extends Component {
                                     }}
                                 />
                                 Show Password
-                            </label>
+                            </label> */}
                             <div className="register-button" onClick={() => {
                                 const { email, password } = this.state;
-                                const body = { email,password };
-                                axios
-                                    .post("http://localhost:8000/auth", body)
-                                    .then((result) => {
-                                        console.log(result.data);
-                                        localStorage.setItem(
-                                            "userinfo",
-                                            JSON.stringify(result.data.data)
-                                        );
-                                        this.setState({
-                                            isSuccess: true
-                                        })
-                                    })
-                                    .catch((error) => {
-                                        console.log(error);
-                                        let x = document.getElementById("snackbar");
-                                        x.className = "show";
-                                        setTimeout(function () {
-                                            x.className = x.className.replace("show", "");
-                                        }, 3000);
-                                        this.setState({
-                                            isError: true,
-                                            errorMsg: error.response.data.err.msg,
-                                        });
-                                    });
+                                const body = { email, password };
+                                this.props.dispatch(loginAction(body))
                             }}>Login</div>
                         </form>
                         <div className="google-button">
@@ -146,3 +139,9 @@ export default class Login extends Component {
         );
     }
 }
+const mapStateToProps = (reduxState) => {
+    const { auth: { userInfo, isSuccess } } = reduxState
+    return { userInfo, isSuccess }
+}
+
+export default connect(mapStateToProps)(Login);

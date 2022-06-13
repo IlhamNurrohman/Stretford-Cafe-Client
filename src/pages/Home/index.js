@@ -21,6 +21,9 @@ import starIcon from "../../assets/icon/star.png";
 import "./Home.css";
 
 export default class Home extends Component {
+    componentDidMount(){
+        document.title = "Home"
+    }
     render() {
         return (
             <div>

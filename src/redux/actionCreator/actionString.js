@@ -15,5 +15,8 @@ export const changePageString = "CHANGE_PAGE"
 
 export const searchProductString = "SEARCH_PRODUCT"
 
-
 export const setCartFulfilled = "SET_CART_FULFILLED"
+
+export const PENDING = "_PENDING";
+export const FULFILLED = "_FULFILLED";
+export const REJECTED = "_REJECTED";

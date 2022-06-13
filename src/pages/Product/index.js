@@ -89,10 +89,11 @@ class Product extends Component {
       axios
         .get(url)
         .then(result => {
-          console.log(result)
+          //console.log(totalPage)
           this.setState({
             product: result.data.data,
             totalPage: !result.data.meta ? "1" : result.data.meta.totalPage
+
           });
         }).catch(error => {
           console.log(error)
@@ -101,7 +102,7 @@ class Product extends Component {
         doAxios: false
       })
     }
-
+    
 
     // if(this.state.searchName !== ''){
     //     axios
@@ -122,6 +123,7 @@ class Product extends Component {
 
   render() {
     // const { searchParam } = this.props
+    console.log(this.state.totalPage)
     return (
       <div>
         <Header />

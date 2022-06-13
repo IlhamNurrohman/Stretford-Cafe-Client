@@ -18,3 +18,7 @@ export async function GetUser(token) {
       console.log(error);
     }
   }
+
+  export async function loginUser(body) {
+    return axios.post("http://localhost:8000/auth", body)
+  }
