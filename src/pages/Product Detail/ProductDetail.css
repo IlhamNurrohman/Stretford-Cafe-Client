@@ -497,15 +497,20 @@
     color: #9F9F9F;
     background-color: #EDEDED;
 
-    border: none;
-    border-bottom: 1px solid #9F9F9F
+    
+    border-bottom: 1.5px solid black !important;
+    border-radius: 0%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
 }
 
 .pd-settime input:active,
 .pd-settime input:focus {
-    border: none;
-    border-bottom: 1px solid #000000;
-    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1.5px solid black ;
 }
 
 .pd-checkout-container {

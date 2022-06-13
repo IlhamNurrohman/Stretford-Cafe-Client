@@ -1,50 +1,49 @@
-import { counterUpAction, counterDownAction, sizeProduct, idProduct, timeProduct, deliveryProduct, pictProduct, nameProduct, priceProduct } from "../actionCreator/actionString"
+// import { counterUpAction, counterDownAction, sizeProduct, idProduct, timeProduct, deliveryProduct, pictProduct, nameProduct, priceProduct } from "../actionCreator/actionString"
 
-const initialState = {
-  id: "",
-  price: 0,
-  size: [],
-  delivery: "",
-  time: "",
-  qty: 0,
-  name: "",
-  pictures: "",
-  counter: 0,
-}
+// const initialState = {
+//   qty: 0,
+//   id: "",
+//   price: 0,
+//   size: [],
+//   delivery: "",
+//   time: "",
+//   name: "",
+//   pictures: "",
+// }
 
-const cartReducers = (prevState = initialState, action) => {
-  switch (action.type) {
-    case counterUpAction:
-      return { ...prevState, counter: prevState.counter + 1 }
-    case counterDownAction:
-      return { ...prevState, counter: prevState.counter - 1 }
-    case idProduct:
-      const { id } = action.payload
-      return { ...prevState, id }
-    case sizeProduct:
-      const { size }  = action.payload
-      return { ...prevState, size }
-    case timeProduct:
-      const { time } = action.payload
-      return { ...prevState, time }
-    case deliveryProduct:
-      const { delivery } = action.payload
-      return { ...prevState, delivery }
-    case pictProduct:
-      const { pictures } = action.payload
-      return { ...prevState, pictures }
-    case nameProduct:
-      const { name } = action.payload
-      return { ...prevState, name }
-    case priceProduct:
-      const { price } = action.payload
-      return { ...prevState, price }
-    default:
-      return prevState
-  }
-};
+// const cartReducers = (prevState = initialState, action) => {
+//   switch (action.type) {
+//     case counterUpAction:
+//       return { ...prevState, qty: prevState.qty + 1 }
+//     case counterDownAction:
+//       return { ...prevState, qty: prevState.qty - 1 }
+//     case idProduct:
+//       const { id } = action.payload
+//       return { ...prevState, id }
+//     case sizeProduct:
+//       const { size }  = action.payload
+//       return { ...prevState, size }
+//     case timeProduct:
+//       const { time } = action.payload
+//       return { ...prevState, time }
+//     case deliveryProduct:
+//       const { delivery } = action.payload
+//       return { ...prevState, delivery }
+//     case pictProduct:
+//       const { pictures } = action.payload
+//       return { ...prevState, pictures }
+//     case nameProduct:
+//       const { name } = action.payload
+//       return { ...prevState, name }
+//     case priceProduct:
+//       const { price } = action.payload
+//       return { ...prevState, price }
+//     default:
+//       return prevState
+//   }
+// };
 
-export default cartReducers;
+// export default cartReducers;
 
 // // const initialState = {
 // //   item: [],
@@ -71,21 +70,22 @@ export default cartReducers;
 
 // // export default deliveryItem;
 
-// import { setCartFulfilled } from "../actionCreator/actionString";
+import { setCartFulfilled } from "../actionCreator/actionString";
 
-// const initialState = {
-//     size: "",
-//     delivery: ""
-// }
+const initialState = {
+    productId: "",
+    size: "",
+    delivery: ""
+}
 
-// const addCartReducer = (prevState = initialState, action) => {
-//     switch (action.type) {
-//         case setCartFulfilled:
-//             return { ...prevState, size: action.size, delivery: action.delivery}
+const addCartReducer = (prevState = initialState, action) => {
+    switch (action.type) {
+        case setCartFulfilled:
+            return { ...prevState, size: action.size, delivery: action.delivery, productId: action.productId}
 
-//         default:
-//             return { ...prevState }
-//     }
-// }
+        default:
+            return { ...prevState }
+    }
+}
 
-// export default addCartReducer
+export default addCartReducer

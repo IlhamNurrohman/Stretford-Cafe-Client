@@ -8,5 +8,7 @@ export const pictProduct = "SET_IMAGE"
 export const nameProduct = "SET_NAME"
 export const priceProduct = "SET_PRICE"
 
+export const searchProductString = "SEARCH_PRODUCT"
+
 
 export const setCartFulfilled = "SET_CART_FULFILLED"

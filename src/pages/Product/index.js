@@ -1,324 +1,336 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import axios from 'axios'
+import React, { Component } from 'react'
+import Footer from '../../component/Footer/Footer'
+import Header from '../../component/Header/Header'
+import { Link } from 'react-router-dom'
+import withSearchParams from '../../Helper/withSearchParams'
+import withLocation from '../../Helper/withLocation'
+// import { Routes, Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { formater } from '../../Helper/formatNumber'
 
-import Header from "../../component/Header/Header";
-import Footer from "../../component/Footer/Footer";
-import CardProduct from "../../component/CardProduct/CardProduct";
+
+import "./Product.css"
+
+//import Check from "../../assets/img/Vectorcheck.png"
 import mothersImg from "../../assets/img/image 46.png";
 import sundayImg from "../../assets/img/image 43.png";
 import halloweenImg from "../../assets/img/image 45.png";
 
-
-import "./Product.css";
-import withSearchParams from "../../Helper/withSearchParams";
-import withLocation from "../../Helper/withLocation";
-import withParams from "../../Helper/withParams";
-
-import {
-  getProduct,
-  getFavorite,
-  //getSearch,
-  getAllProduct,
-} from "../../utiliti/product";
+// import ColdBrew from "../../assets/img/coldbrew.png"
 
 class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: {
-        isFavorite: [],
-        isCoffee: [],
-        isNonCoffee: [],
-        isFood: [],
-        isAll: [],
-        allProduct: [],
-        //search: [],
-      }
+      product: [],
+      categoryActive: "all",
+      doAxios: false,
+      sort: "category",
+      order: "asc",
+      page: 1,
+      limit: "12",
+      totalPage: "1",
+      searchProduct: this.props.searchProduct,
+      meta: null,
+      pageActive: "product",
+      setSearchParams: this.props.setSearchParams.bind(this)
+
     };
   }
-  getAllProductsPage = async () => {
-    await getAllProduct()
-      .then((res) => {
-        this.setState({
-          product: { ...this.state.product, allProduct: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
-      });
-  };
-  getFav = async () => {
-   await getFavorite()
-      .then((res) => {
-        this.setState({
-          product: { ...this.state.product, isFavorite: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
-      });
-  };
 
-  getCoffee = async (categories) => {
-   await getProduct(categories)
-      .then((res) => {
-        this.setState({
-          product: { ...this.state.product, isCoffee: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
-      });
-  };
-  getNonCoffee = async (categories) => {
-   await getProduct(categories)
-      .then((res) => {
-        this.setState({
-          product: { ...this.state.product, isNonCoffee: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
-      });
-  };
-  getFood = async (categories) => {
-   await getProduct(categories)
-      .then((res) => {
-        console.log(res.data.data);
-        this.setState({
-          product: { ...this.state.product, isFood: res.data.data },
-        });
-      })
-      .catch((err) => {
-        console.log("ERROR GET PRODUCTS", err);
-      });
-  };
-//   getSearchProduct = (search) => {
-//       getSearch(search)
-//           .then((res) => {
-//               this.setState({
-//                   product: { ...this.state.product, search: res.data.data },
-//               });
-//           })
-//           .catch((err) => {
-//               console.log("ERROR SEARCH PRODUCT", err);
-//           });
-//   };
+  // setSearchName = (props) => {
+  //     this.setState({
+  //         searchName: props
+  //     })
+  // }
 
-  async componentDidMount() {
+  componentDidMount() {
     document.title = "Product"
-    await this.getAllProductsPage();
-    await this.getCoffee("coffee");
-    await this.getNonCoffee("non coffee");
-    await this.getFood("food");
+    console.log(this.state.searchProduct)
+    this.state.setSearchParams('')
+    axios
+      .get('http://localhost:8000/products')
+      .then(result => {
+        this.setState({
+          product: result.data.data,
+          totalPage: result.data.meta.totalPage
+        });
+      }).catch(error => {
+        console.log(error)
+      })
   }
 
-  componentDidUpdate(pageProps) {
-    const {
-      //location: { search },
-      searchParams,
-      params,
-    } = this.props;
-    if (pageProps.searchParams !== searchParams) {
-      this.getCoffee("coffee");
-      this.getNonCoffee("non coffee");
-      this.getFood("food");
-      //this.getSearchProduct(search.slice(6));
+  componentDidUpdate() {
+    if (this.state.doAxios) {
+      let params = ''
+      let url = `http://localhost:8000/products`
+      if (this.state.categoryActive === "all") {
+        url += `?page=${this.state.page}&limit=${this.state.limit}&`
+        params += `page=${this.state.page}&limit=${this.state.limit}&`
+      }
+      if (this.state.categoryActive === "favorite") {
+        url += `/favorite?`
+        params += 'categories=favorite&'
+      }
+      if (this.state.categoryActive !== "all" && this.state.categoryActive !== "favorite") {
+        url += `?categories=${this.state.categoryActive}&page=${this.state.page}&limit=${this.state.limit}&`
+        params += `categories=${this.state.categoryActive}&page=${this.state.page}&limit=${this.state.limit}&`
+      }
+
+      if (this.props.searchProduct) {
+        url += `find=${this.state.searchProduct}&`
+        params += `find=${this.state.searchProduct}&`
+      }
+      url += `sort=${this.state.sort}&order=${this.state.order}`
+      params += `sort=${this.state.sort}&order=${this.state.order}`
+      this.state.setSearchParams(params)
+
+      axios
+        .get(url)
+        .then(result => {
+          console.log(result)
+          this.setState({
+            product: result.data.data,
+            totalPage: !result.data.meta ? "1" : result.data.meta.totalPage
+          });
+        }).catch(error => {
+          console.log(error)
+        })
+      this.setState({
+        doAxios: false
+      })
     }
-    if (pageProps.params !== params) {
-      this.getFav();
-    }
+
+
+    // if(this.state.searchName !== ''){
+    //     axios
+    //         .get(`http://localhost:8080/products?name=${this.state.searchName}`)
+    //         .then(result=>{
+    //             this.setState({
+    //                 product: result.data.data
+    //             })
+    //             this.setState({
+    //                 searchName: ''
+    //             })
+    //         })
+    //         .catch(error=>{
+    //             console.log(error)
+    //         })
+    // }
   }
 
   render() {
-    const { searchParams, params,
-    } = this.props;
-
-    const { product } = this.state;
-    const { isFavorite, isCoffee, isNonCoffee, isFood, categories, allProduct } = product;
-    //console.log(isFavorite);
-    //const categories = this.props.match.params.categories;
+    // const { searchParam } = this.props
     return (
       <div>
-        <Header searchParams={searchParams.get("name")} />
+        <Header />
         <div className="container-fluid">
-          <div className="row" style={{ height: "100%", maxWidth: "100%", paddingLeft: "5%", marginBottom: "80px" }}>
-            <div className="col-sm-4" style={{ width: "40%", borderRight: "0.5px solid rgba(159, 159, 159, 1)"}}>
-              <h3 className="user-profile" style={{ color: "rgba(106, 64, 41, 1)", fontFamily: "Rubik", paddingLeft: "19%" }}>Promo Today</h3>
-              <h6 className="desc"
-                style={{ color: "black", fontSize: "14px", fontFamily: "Rubik", paddingTop: "5%", paddingLeft: "10%" }}>
-                Coupons will be updated every weeks.</h6>
-              <h6 className="desc"
-                style={{ color: "black", fontSize: "14px", fontFamily: "Rubik", paddingBottom: "5%", paddingLeft: "25%" }}>
-                Check them out!</h6>
-              <div className="card mb-3" style={{ maxWidth: "80%", background: "rgba(136, 183, 136, 1)" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img src={mothersImg} className="img-fluid rounded-start" style={{ paddingTop: "10%" }} />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h6 className="card-text" style={{ fontFamily: "Rubik" }}>HAPPY MOTHER’S DAY!</h6>
-                      <p className="card-text" style={{ fontFamily: "Rubik", fontSize: "14px" }}>Get one of our
-                        favorite menu for
-                        free!</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="card mb-3" style={{ maxWidth: "80%", background: "rgba(245, 195, 97, 1)" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img src={sundayImg} className="img-fluid rounded-start" style={{ paddingTop: "8%" }} />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h6 className="card-text" style={{ fontFamily: "Rubik", paddingTop: "2%" }}>Get a cup of coffee
-                        for free on sunday morning</h6>
-                      <p className="card-text" style={{ fontFamily: "Rubik", fontSize: "14px" }}>Only at 7 to 9 AM
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="card mb-3" style={{ maxWidth: "80%", background: "rgba(136, 183, 136, 1)" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img src={mothersImg} className="img-fluid rounded-start" style={{ paddingTop: "8%" }} />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h6 className="card-text" style={{ fontFamily: "Rubik" }}>HAPPY MOTHER’S DAY!</h6>
-                      <p className="card-text" style={{ fontFamily: "Rubik", fontSize: "14px" }}>Get one of our
-                        favorite menu for
-                        free!</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="card mb-3" style={{ maxWidth: "80%", background: "rgba(197, 147, 120, 1)" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img src={halloweenImg} className="img-fluid rounded-start" style={{ paddingTop: "8%" }} />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h6 className="card-text" style={{ fontFamily: "Rubik" }}>HAPPY HALLOWEEN!</h6>
-                      <p className="card-text" style={{ fontFamily: "Rubik", fontSize: "14px" }}>Do you like chicken
-                        wings? Get 1 free only if you buy pinky promise</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button type="button" className="btn btn-lg"
-                style={{ width: "80%", marginBottom: "10%", background: "rgba(106, 64, 41, 1)", color: "white", borderRadius: "20px" }}>Apply Coupon</button>
-              <h6 style={{ fontFamily: "Rubik", paddingTop: "10%" }}>Terms and Condition</h6>
-              <p style={{ fontFamily: "Rubik" }}>1. You can only apply 1 coupon per day
-                <br />2. It only for dine in
-                <br />3. Buy 1 get 1 only for new user
-                <br />4. Should make member card to apply coupon</p>
+        <div className="row" style={{ height: "100%", maxWidth: "100%", paddingLeft: "1%", marginBottom: "80px", paddingTop: "20px"}}>
+          <div className="col-sm-4" style={{ width: "40%", borderRight: "0.5px solid rgba(159, 159, 159, 1)" }}>
+            <div className="custom-promo-title">
+              <h3 className="custom-promo-title-head">Promo Today</h3>
+              <p className="custom-promo-paragraph">Coupons will be updated every weeks. Check them out! </p>
             </div>
-            <div className="col-sm-8" style={{ borderLeft: "1px rgba(159, 159, 159, 1)", width: "60%" }}>
-                <ul className="wrapper-menu-category">
-                  <li className="link-category" style={{textDecoration: "none"}}>
-                    <Link className={isFavorite === undefined ? 'active-menu' : 'menu-nonactive'} 
-                    to="/product/favorite">Favorite & Promo</Link>
-                  </li>
-                  <li className="link-category">
-                    <Link className={categories === 'coffee' ? 'active-menu' : 'menu-nonactive'}
-                    to="/product?categories=coffee">Coffee</Link>
-                  </li>
-                  <li className="link-category">
-                    <Link className={categories === 'non coffee' ? 'active-menu' : 'menu-nonactive'}
-                    to="/product?categories=non+coffee">Non Coffee</Link>
-                  </li>
-                  <li className="link-category">
-                    <Link className={categories === 'food' ? 'active-menu' : 'menu-nonactive'}
-                     to="/product?categories=food">Foods</Link>
-                  </li>
-                  <li className="link-category"> 
-                    <Link className={allProduct === undefined ? 'active-menu' : 'menu-nonactive'}
-                    to="/product">All</Link>
-                  </li>
-                </ul>
-              <div className="row row-cols-1 row-cols-md-4 g-3" style={{ paddingTop: "10%", maxWidth: "650px" }}>
-                {params.favorite === "favorite" ? isFavorite.map((product) => {
-                  return (
-                    <div className="col" style={{ marginLeft: "0%", marginRight: "0%", marginBottom: "30px" }}>
-                      <CardProduct
-                        id={product.id}
-                        pictures={`http://localhost:8000${product.pictures}`}
-                        name={product.name}
-                        price={product.price}
-                        key={product.id}
-                      />
-                    </div>
-                  );
-                })
-                //   : searchParams.get("name") === location.search.slice(6)
-                //       ? search.map((product) => {
-                //           return (
-                //               <CardProduct
-                //                   id={product.id}
-                //                   pictures={`http://localhost:8000${product.pictures}`}
-                //                   name={product.name}
-                //                   price={product.price}
-                //                   key={product.id}
-                //               />
-                //           );
-                //       })
-                  : searchParams.get("categories") === "coffee" ? isCoffee.map((product) => {
-                    return (
-                      <CardProduct
-                        id={product.id}
-                        pictures={`http://localhost:8000${product.pictures}`}
-                        name={product.name}
-                        price={product.price}
-                        key={product.id}
-                      />
-                    );
-                  })
-                    : searchParams.get("categories") === "non coffee" ? isNonCoffee.map((product) => {
-                      return (
-                        <CardProduct
-                          id={product.id}
-                          pictures={`http://localhost:8000${product.pictures}`}
-                          name={product.name}
-                          price={product.price}
-                          key={product.id}
-                        />
-                      );
-                    })
-                      : searchParams.get("categories") === "food" ? isFood.map((product) => {
-                        return (
-                          <CardProduct
-                            id={product.id}
-                            pictures={`http://localhost:8000${product.pictures}`}
-                            name={product.name}
-                            price={product.price}
-                            key={product.id}
-                          />
-                        );
-                      })
-                        : allProduct.map((product) => {
-                          return (
-                            <CardProduct
-                              id={product.id}
-                              pictures={`http://localhost:8000${product.pictures}`}
-                              name={product.name}
-                              price={product.price}
-                              key={product.id}
-                            />
-                          );
-                        })}
+            <div className="custom-promo-card row mother-day-card">
+              <div className="col-4 custom-promo-pict"><img
+                src={mothersImg}
+                alt="mother's-day-promo" className="custom-promo-img" /></div>
+              <div className="col custom-card-text">
+                <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
               </div>
+            </div>
+            <div className="custom-promo-card row sunday-morning-card">
+              <div className="col-4 custom-promo-pict"><img
+                src={sundayImg}
+                alt="free-sunday-morning" className="custom-promo-img" /></div>
+              <div className="col custom-card-text">
+                <p className="custom-card-info"><b>Get a cup of coffee for free on sunday morning</b><br />Only at 7 to 9
+                  AM
+                </p>
+              </div>
+            </div>
+            <div className="custom-promo-card row mother-day-card">
+              <div className="col-4 custom-promo-pict"><img
+                src={mothersImg}
+                alt="mother's-day-promo" className="custom-promo-img" /></div>
+              <div className="col custom-card-text">
+                <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
+              </div>
+            </div>
+            <div className="custom-promo-card row halloween-card">
+              <div className="col-4 custom-promo-pict"><img
+                src={halloweenImg}
+                alt="halloween-promo" className="custom-promo-img" /></div>
+              <div className="col custom-card-text">
+                <p className="custom-card-info"><b>HAPPY HALLOWEEN!
+                </b><br />Do you like chicken wings? Get 1 free only if you buy pinky promise</p>
+              </div>
+            </div>
+            <div className="custom-apply-button">Apply Coupon</div>
+            <div className="custom-term">
+              <p className="custom-term-title">Terms and Condition</p>
+              <p>1. You can only apply 1 coupon per day</p>
+              <p>2. It only for dine in</p>
+              <p>3. Buy 1 get 1 only for new user</p>
+              <p>4. Should make member card to apply coupon</p>
+            </div>
+          </div>
+          <div className="col-sm-8" style={{ borderLeft: "1px rgba(159, 159, 159, 1)", width: "60%" }}>
+            <nav className="custom-product-nav">
+              <ul className="row">
+                <li className="col-2">
+                  <div className={this.state.categoryActive === "favorite" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                    onClick={
+                      () => {
+                        this.setState({
+                          doAxios: true,
+                          categoryActive: "favorite"
+                        })
+                      }
+                    }
+                  >Favorite & Promo</div>
+                </li>
+                <li className="col">
+                  <div className={this.state.categoryActive === "coffee" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                    onClick={
+                      () => {
+                        this.setState({
+                          doAxios: true,
+                          categoryActive: "coffee"
+                        })
+                      }
+                    }
+                  >Coffee</div>
+                </li>
+                <li className="col">
+                  <div className={this.state.categoryActive === "non coffee" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                    onClick={() => {
+                      this.setState({
+                        doAxios: true,
+                        categoryActive: "non coffee"
+                      })
+                    }}
+                  >Non Coffee</div>
+                </li>
+                <li className="col">
+                  <div className={this.state.categoryActive === "food" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                    onClick={() => {
+                      this.setState({
+                        doAxios: true,
+                        categoryActive: "food"
+                      })
+                    }}
+                  >Foods</div>
+                </li>
+                <li className="col">
+                  <div className={this.state.categoryActive === "all" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                    onClick={() => {
+                      this.setState({
+                        doAxios: true,
+                        categoryActive: "all"
+                      })
 
+                    }}
+                  >All</div>
+                </li>
+              </ul>
+              <div className='dropdown-sort'>
+                <label htmlFor="sort-product">Sort by: </label>
+                <select name="sort-product" id="sort-product"
+                  onClick={(e) => {
+                    this.setState({
+                      sort: e.target.value
+                    })
+                  }}
+                >
+                  <option value="categories">Category</option>
+                  <option value="name">Name</option>
+                  <option value="price">Price</option>
+                  <option value="created_at">Release</option>
+                </select>
+                <select name="order-product" id="order-product"
+                  onChange={(e) => {
+                    this.setState({
+                      order: e.target.value
+                    })
+                  }}
+                >
+                  <option value="asc">asc</option>
+                  <option value="desc">desc</option>
+                </select>
+                <div className="confirm-button"
+                  onClick={() => {
+                    this.setState({
+                      doAxios: true
+                    })
+                  }}
+                ><img src="" alt="check" /></div>
+              </div>
+            </nav>
+            <div className="custom-food-container">
+              <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
+                {this.state.product.length === 0 ? <div>DATA NOT FOUND</div> :
+                  this.state.product.map((product) => (
+                    <div className="col">
+                        <div key={product.id} className="card"
+                          style={{ borderRadius: "30px", width: "126px", height: "212.41px", boxShadow: "0px 30px 60px", color: "rgba(57, 57, 57, 0.1)", marginBottom: "40%" }}>
+                          <Link to={`/product/detail/${product.id}`}>
+                            <img src={`http://localhost:8000${product.pictures}`} className="" alt={product.name} style={{ borderRadius: "100px", width: "70%", marginTop: "-30%", marginLeft: "15%" }}/>
+                          </Link>
+                        <div className="card-body">
+                          <h5 className="card-title custom-product-name" style={{ marginBottom: "35%" }}>
+                            {product.name}
+                          </h5>
+                          <p className="card-text custom-product-price"
+                          style={{ textAlign: "center", fontFamily: "Poppins", color: "rgba(106, 64, 41, 1)", }}> {formater.format(product.price)}</p>
+                        </div>
+                        </div>
+                    </div>
+                  ))}
+              </div>
+              <div className='product-page-button-container'>
+                <div>
+                  {this.state.page === 1 ?
+                    <div className='product-page-button-empty'></div> :
+                    <div className="product-page-button-prev"
+                      onClick={() => {
+                        this.setState({
+                          page: this.state.page - 1,
+                          doAxios: true
+                        })
+                      }}
+                    >Prev Page</div>}
+                </div>
+                <div className='product-page-number'>{this.state.page}</div>
+                <div>
+                  {this.state.page === Number(this.state.totalPage) ?
+                    <div className='product-page-button-empty'></div> :
+                    <div className="product-page-button-next"
+                      onClick={() => {
+                        this.setState({
+                          page: this.state.page + 1,
+                          doAxios: true
+                        })
+                      }}
+                    >Next Page</div>}
+                </div>
+              </div>
+              <div className="custom-notes">*the price has been cutted by discount appears</div>
             </div>
           </div>
         </div>
+        </div>
         <Footer />
       </div>
-    );
+
+    )
   }
 }
-export default withLocation(withSearchParams(withParams(Product)));
+
+const mapStateToProps = (reduxState) => {
+  const { searchProduct: { searchProduct } } = reduxState
+  return { searchProduct }
+}
+
+export default connect(mapStateToProps)(withLocation(withSearchParams(Product)))

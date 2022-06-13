@@ -1,22 +1,101 @@
 import React, { Component } from 'react'
+import axios from "axios";
+import { connect } from "react-redux";
 import Header from "../../component/Header/Header";
 import Footer from "../../component/Footer/Footer";
+import { formater } from '../../Helper/formatNumber'
 
 import "./Payment.css"
+import { getProductDetail } from "../../utiliti/product";
 
 // import img
-import Hazelnut from "../../assets/img/hazelnut.png"
+//import Hazelnut from "../../assets/img/hazelnut.png"
 import Card from "../../assets/icon/Vector (3).png"
 import Bank from "../../assets/icon/Vector (2).png"
 import Cod from "../../assets/icon/fast-delivery 3.png"
+//import CardPayment from "../../component/CardPayment/CardPayment";
 
-export default class Payment extends Component {
+export class Payment extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            product: [],
+            users: [],
+            payment: "",
+            token: localStorage.getItem("token"),
+        };
+    }
+    productDetailPage = (id) => {
+        getProductDetail(id)
+            .then((res) => {
+                this.setState({
+                    product: res.data.data[0]
+                });
+            })
+            .catch((err) => {
+                console.log("ERROR GET PRODUCTS", err);
+            });
+    };
+    getInfoUser = () => {
+        const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+        const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+        //console.log(config);
+        axios
+            .get("http://localhost:8000/users/profile-detail", config)
+            .then(result => {
+                console.log(result.data.data[0])
+                this.setState({
+                    users: result.data.data[0]
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    };
+
+    handlePostTransaction = () => {
+        const { counter, addToCart: { delivery, productId }, id } = this.props
+        const product_id = productId
+        const total_price = (this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0)
+        const quantity = counter
+        const user_id = id
+        const payment_method = this.state.payment
+        const delivery_method = delivery
+
+        const { token } = this.props.userInfo
+        const config = { headers: { Authorization: `Bearer ${token}` } }
+
+        const body = { product_id, total_price, quantity, user_id, payment_method, delivery_method }
+        axios
+            .post('http://localhost:8000/transactions', body, config)
+            .then(result => {
+                console.log(result)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
     componentDidMount() {
         document.title = "Payment"
+        const { cart: { productId } } = this.props
+        axios
+            .get(`http://localhost:8000/products/detail/${productId}`)
+            .then(result => {
+                console.log(this.state.product)
+                this.setState({
+                    product: result.data.data[0],
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        const { token } = this.state;
+        this.getInfoUser(token);
     }
     render() {
+        const { counter, cart: { size, delivery }, } = this.props
         return (
-            <div>
+            <>
                 <Header />
                 <main className="pm-main-container">
                     <div className="pm-title">Checkout your item now!</div>
@@ -24,45 +103,37 @@ export default class Payment extends Component {
                         <section className="pm-left-content">
                             <div className="pm-order-summary">Order Summary</div>
                             <div className="pm-all-order">
-                                <div className="pm-order-item">
-                                    <div className="pm-item-img">
-                                        <img src={Hazelnut} alt="" className="pm-product-img" /></div>
-                                    <div className="pm-item-detail">
-                                        <p>Hazelnut Latte</p>
-                                        <p>x 1</p>
-                                        <p>Regular</p>
+                                <div className="pm-all-order">
+                                    <div className="pm-order-item">
+                                        <div className="pm-item-img">
+                                            <img src={`http://localhost:8000${this.state.product.pictures}`} alt="" className="pm-product-img" /></div>
+                                        <div className="pm-item-detail">
+                                            <p>{this.state.product.name}</p>
+                                            <p>x{counter}</p>
+                                            <p>{size}</p>
+                                        </div>
+                                        <div className="pm-item-price">{formater.format(this.state.product.price)}</div>
                                     </div>
-                                    <div className="pm-item-price">IDR 24.0</div>
                                 </div>
-                                {/* <div className="pm-order-item">
-                                    <div className="pm-item-img"><img src={Hazelnut} alt="" className="pm-product-img" /></div>
-                                    <div className="pm-item-detail">
-                                        <p>Hazelnut Latte</p>
-                                        <p>x 1</p>
-                                        <p>Regular</p>
-                                    </div>
-                                    <div className="pm-item-price">IDR 24.0</div>
-                                </div> */}
-
                             </div>
                             <div className="pm-border"></div>
                             <div className="pm-all-order-info">
                                 <div className="pm-subtotal">
                                     <div className="pm-info">SUBTOTAL</div>
-                                    <div className="pm-price">IDR 120.000</div>
+                                    <div className="pm-price">{formater.format(this.state.product.price * counter)}</div>
                                 </div>
                                 <div className="pm-tax">
                                     <div className="pm-info">TAX {'&'} FEES</div>
-                                    <div className="pm-price">IDR 20.000</div>
+                                    <div className="pm-price">{formater.format(this.state.product.price * counter * 10 / 100)}</div>
                                 </div>
                                 <div className="pm-shipping">
                                     <div className="pm-info">SHIPPING</div>
-                                    <div className="pm-price">IDR 10.000</div>
+                                    <div className="pm-price">{formater.format(delivery === "Door Delivery" ? 10000 : 0)}</div>
                                 </div>
                             </div>
                             <div className="pm-total-order-price">
                                 <div className="pm-total-info-title">TOTAL</div>
-                                <div className="pm-total-info-price">IDR 150.000</div>
+                                <div className="pm-total-info-price">{formater.format((this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0))}</div>
                             </div>
                         </section>
                         <section className="pm-right-content">
@@ -74,16 +145,41 @@ export default class Payment extends Component {
                                     </div>
                                     <div className="address-detail-card">
                                         <div className="pm-address-detail">
-                                            <span>Delivery to</span> Iskandar Street
+                                            <input
+                                                type="text"
+                                                className="address-payment p-2"
+                                                value={`Delivery to ${this.state.users.address}`}
+                                                disabled
+                                            />
+                                            {/* <span>Delivery to</span> Iskandar Street */}
                                         </div>
                                         <div className="pm-border"></div>
                                         <div className="pm-address-detail">
-                                            Km 5 refinery road oppsite re
-                                            public road, effurun, Jakarta
+                                            <input
+                                                type="text"
+                                                className="address-payment p-2"
+                                                value={this.state.users.address}
+                                                onChange={(event) => {
+                                                    this.setState({
+                                                        address: event.target.value,
+                                                    })
+                                                }}
+                                                disabled
+                                            />
                                         </div>
                                         <div className="pm-border"></div>
                                         <div className="pm-address-detail">
-                                            +62 81348287878
+                                            <input
+                                                type="text"
+                                                className="address-payment p-2"
+                                                value={this.state.users.phone}
+                                                onChange={(event) => {
+                                                    this.setState({
+                                                        phone: event.target.value,
+                                                    })
+                                                }}
+                                                disabled
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +194,13 @@ export default class Payment extends Component {
                                                     <img src={Card} alt="card" className='pm-card-vector' />
                                                 </div>
                                                 <p>Card</p>
-                                                <input type="radio" name="pm-method-input" />
+                                                <input type="radio" name="pm-method-input"
+                                                    value="Card"
+                                                    onChange={(event) => {
+                                                        this.setState({
+                                                            paymentMethods: event.target.value,
+                                                        });
+                                                    }} />
                                                 <span className="checkmark"></span>
                                             </label>
                                             <div className="pm-border"></div>
@@ -107,7 +209,13 @@ export default class Payment extends Component {
                                                     <img src={Bank} alt="" className='pm-bank-vector' />
                                                 </div>
                                                 <p>Bank account</p>
-                                                <input type="radio" name="pm-method-input" />
+                                                <input type="radio" name="pm-method-input"
+                                                    value="Bank"
+                                                    onChange={(event) => {
+                                                        this.setState({
+                                                            paymentMethods: event.target.value,
+                                                        });
+                                                    }} />
                                                 <span className="checkmark"></span>
                                             </label>
                                             <div className="pm-border"></div>
@@ -116,7 +224,13 @@ export default class Payment extends Component {
                                                     <img src={Cod} alt="" className='pm-cod-vector' />
                                                 </div>
                                                 <p>Cash on Delivery</p>
-                                                <input type="radio" name="pm-method-input" />
+                                                <input type="radio" name="pm-method-input"
+                                                    value="COD"
+                                                    onChange={(event) => {
+                                                        this.setState({
+                                                            paymentMethods: event.target.value,
+                                                        });
+                                                    }} />
                                                 <span className="checkmark"></span>
                                             </label>
                                         </form>
@@ -124,12 +238,20 @@ export default class Payment extends Component {
                                 </div>
 
                             </div>
-                            <div className="pm-confirm-button">Confirm and Pay</div>
+                            <div className="pm-confirm-button" onClick={this.handlePostTransaction}>Confirm and Pay</div>
                         </section>
                     </section>
                 </main>
                 <Footer />
-            </div>
+            </>
         )
     }
 }
+const mapStateToProps = (state) => {
+    const { cart, counter: { counter } } = state;
+    return {
+        cart, counter
+    };
+};
+
+export default connect(mapStateToProps)(Payment);

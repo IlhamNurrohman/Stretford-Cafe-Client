@@ -45,18 +45,18 @@ export default class Login extends Component {
                     <section className="register">
                         <form className="register-form">
                             <label htmlFOR="email">Email Address :</label>
-                            <input type="text" name="email" placeholder="Enter your email address" onChange={(e) => {
+                            <input type="text" clasaName="email" placeholder="Enter your email address" onChange={(e) => {
                                 this.setState({
                                     email: e.target.value,
                                 });
                             }} />
                             <label htmlFOR="password">Password :</label>
-                            <input type={`${this.state.isPasswordShown ? "text" : "password"}`} name="password" placeholder="Enter your phone password" onChange={(e) => {
+                            <input type={`${this.state.isPasswordShown ? "text" : "password"}`} className="password" placeholder="Enter your phone password" onChange={(e) => {
                                 this.setState({
                                     password: e.target.value,
                                 });
                             }} />
-                            <Link to={"/ForgotPassword"} style={{ textDecoration: "none", fontFamily: "Rubik" }}><p className="" style={{ textDecoration: "none", fontFamily: "Rubik" }}>Forgot Password?</p></Link>
+                            <Link to={"/forgotPassword"} style={{ textDecoration: "none", fontFamily: "Rubik" }}><p className="" style={{ textDecoration: "none", fontFamily: "Rubik" }}>Forgot Password?</p></Link>
                             <label>
                                 <input
                                     type="checkbox"

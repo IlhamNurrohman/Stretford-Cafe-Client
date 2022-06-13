@@ -2,16 +2,16 @@ import axios from "axios";
 
 export async function getProduct(categories, search, page = 1) {
   try {
-    const URL = `http://localhost:8000/products?categories=${categories}&page=${page}&limit=12&find${search}`;
+    const URL = `http://localhost:8000/products?categories=${categories}&page=${page}&limit=12&name${search}`;
     const result = await axios.get(URL);
     return result;
   } catch (error) {
     console.log(error);
   }
 }
-export async function getSearch(find) {
+export async function getSearch(search) {
   try {
-    const URL = `http://localhost:8000/products?=${find}&page=1&limit=12`;
+    const URL = `http://localhost:8000/products?=${search}&page=1&limit=12`;
     const results = await axios.get(URL);
     return results;
   } catch (error) {

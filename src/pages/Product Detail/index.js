@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 import Header from "../../component/Header/Header";
@@ -8,41 +8,28 @@ import Footer from "../../component/Footer/Footer";
 import "./ProductDetail.css";
 //import axios from "axios";
 import withParams from "../../Helper/withParams";
-import withLocation from "../../Helper/withLocation";
 import { getProductDetail } from "../../utiliti/product";
+import { counterUp, counterDown } from '../../redux/actionCreator/counter';
+import { AddCart } from '../../redux/actionCreator/cart';
 import { formater } from "../../Helper/formatNumber";
 
-import {
-    counterUp,
-    counterDown,
-    setDelivery,
-    setIdProduct,
-    setPictures,
-    setName,
-    setSize,
-    setTime,
-    setPrice,
-} from "../../redux/actionCreator/cart";
 class ProductDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isCheckOut: false,
-            successMsg: "",
-            errorMsg: "",
-            token: localStorage.getItem("token"),
-            product: {
-                getProduct: [],
-            },
+            product: [],
+            productId: "",
+            size: "",
+            delivery: "",
+            cart: [],
         }
     }
 
-    getProductDetailPage = (id) => {
+    productDetailPage = (id) => {
         getProductDetail(id)
             .then((res) => {
-                //console.log(res.data)
                 this.setState({
-                    product: { ...this.state.product, getProduct: res.data.data[0] },
+                    product: res.data.data[0] 
                 });
             })
             .catch((err) => {
@@ -50,45 +37,25 @@ class ProductDetail extends Component {
             });
     };
 
-    setAddCart(event) {
-        event.preventDefault();
-        const { getProduct } = this.state.product;
-        console.log(getProduct);
-        const {
-            params: { id },
-            dispatch,
-        } = this.props;
-        dispatch(setIdProduct(id));
-        dispatch(setPictures(getProduct.pictures));
-        dispatch(setName(getProduct.name));
-        dispatch(setPrice(getProduct.price));
-        dispatch(setSize);
-    }
-
-    checkOutHandle = () => {
-        const { token } = this.state;
-        if (token) {
-            this.setState({
-                isCheckOut: true,
-            });
-        }
+    checkOutHandle(e) {
+        e.preventDefault();
         // this.setState({
-        //   showModal: true,
-        // });
-    };
+        //     allSize: this.state.allSize.push(this.state.size),
+        // })
+        this.state.allSize.push(this.state.size)
+        console.log(this.state.allSize)
+    }
 
     componentDidMount() {
-        const {
-            params: { id },
-            location: state,
-        } = this.props;
-        this.getProductDetailPage(id);
+        document.title = "Product Detail";
+        const { params: { id }, } = this.props;
+        this.productDetailPage(id);
     }
     render() {
-        const { params, dispatch, counter, size, delivery } = this.props;
-        //console.log(counter);
-        const { getProduct } = this.state.product
-        if (this.state.isCheckOut) return <Navigate to="/payment" />;
+        const { params, counter, CounterDown, CounterUp, doAddToCart, cart } = this.props;
+        //console.log(cart);
+        const { product } = this.state;
+        
         return (
             <div>
                 <Header />
@@ -97,54 +64,60 @@ class ProductDetail extends Component {
                         <section className="pd-main-container">
                             <div className="pd-title-menu">
                                 <Link to={"/product"}>
-                                    {`${getProduct.category === "non coffee" ? "Non Coffee" : getProduct.category}`}
-                                </Link><span>{`>${getProduct.name}`}</span></div>
+                                    {`${product.category === "non coffee" ? "Non Coffee" : product.category}`}
+                                </Link><span>{`>${product.name}`}</span></div>
                             <section className="pd-main-content">
                                 <div className="pd-left-content">
                                     <div className="pd-main-img-container">
-                                        <img src={`http://localhost:8000${getProduct.pictures}`} alt="coldbrew" className="pd-main-img" />
+                                        <img src={`http://localhost:8000${product.pictures}`} alt="coldbrew" className="pd-main-img" />
                                     </div>
                                     <div className="pd-main-product-name">
-                                        <h2>{getProduct.name}</h2>
-                                        <p>{`${formater.format(getProduct.price)}`}</p>
+                                        <h2>{product.name}</h2>
+                                        <p>{`${formater.format(product.price)}`}</p>
                                     </div>
                                     <div className="pd-addcart-button"
-                                        onClick={this.setAddCart}
+                                        onClick={() => {
+                                            doAddToCart(this.state.size, this.state.delivery, params.id)
+                                            // console.log(this.state.size)
+                                        }}
                                     >Add to Cart</div>
                                     <div className="pd-askstaff-button">Ask a Staff</div>
                                 </div>
                                 <div className="pd-right-content">
                                     <div className="pd-desc-card">
                                         <div className="pd-desc-delivery">
-                                            <p>Delivery only on <span>Monday to friday</span>  at <span>{getProduct.start_hours} am - {getProduct.end_hours} pm</span> </p>
+                                            <p>Delivery only on <span>Monday to friday</span>  at <span>{product.start_hours} am - {product.end_hours} pm</span> </p>
                                         </div>
                                         <div className="pd-desc-info">
                                             <p>
-                                                {getProduct.description}
+                                                {product.description}
                                             </p>
                                         </div>
                                         <div className="pd-choose-size">
                                             <h4 className="pd-size-title">Choose a size</h4>
                                             <div className="pd-size-container">
                                                 <label className="pd-size-vector">R
-                                                    <input type="radio" className='pd-size-input' name='pd-size-input' value="2"
-                                                        onClick={() => {
-                                                            dispatch(setSize("Reguler"));
-                                                        }}
+                                                    <input type="radio" className='pd-size-input' name='pd-size-input'
+                                                        onChange={() => {
+                                                            this.setState({ size: "Reguler" })
+                                                        }
+                                                        }
                                                     /><span className='pd-size-checkmark'></span>
                                                 </label>
                                                 <label className="pd-size-vector">L
-                                                    <input type="radio" className='pd-size-input' name='pd-size-input' value="3"
-                                                        onClick={() => {
-                                                            dispatch(setSize("Large"));
-                                                        }}
+                                                    <input type="radio" className='pd-size-input' name='pd-size-input'
+                                                        onChange={() => {
+                                                            this.setState({ size: "Large" })
+                                                        }
+                                                        }
                                                     /><span className='pd-size-checkmark'></span>
                                                 </label>
                                                 <label className="pd-size-vector">XL
-                                                    <input type="radio" className='pd-size-input' name='pd-size-input' value="6"
-                                                        onClick={() => {
-                                                            dispatch(setSize("Extra Large"));
-                                                        }}
+                                                    <input type="radio" className='pd-size-input' name='pd-size-input'
+                                                        onChange={() => {
+                                                            this.setState({ size: "Extra Large" })
+                                                        }
+                                                        }
                                                     /><span className='pd-size-checkmark'></span>
                                                 </label>
                                             </div>
@@ -156,35 +129,31 @@ class ProductDetail extends Component {
                                             <label className="pd-dm-button-inactive">
                                                 <input type="radio" name="pd-dm-input" className='pd-dm-input' />
                                                 <span className="pd-dm-checkmark"
-                                                    value="1"
-                                                    //checked={delivery === 1}
-                                                    onChange={(event) => {
-                                                        dispatch(setDelivery(event.target.value));
-                                                    }}>Dine in</span></label>
+                                                    onClick={() => {
+                                                        this.setState({ delivery: "Dine In" })
+                                                    }}
+                                                >Dine in</span>
+                                            </label>
                                             <label className="pd-dm-button-inactive">
                                                 <input type="radio" name="pd-dm-input" className='pd-dm-input' />
                                                 <span className="pd-dm-checkmark"
-                                                    value="2"
-                                                    //checked={delivery === 2}
-                                                    onChange={(event) => {
-                                                        dispatch(setDelivery(event.target.value));
-                                                    }}>Door Delivery</span></label>
+                                                    onClick={() => {
+                                                        this.setState({ delivery: "Door Delivery" })
+                                                    }}
+                                                >Door Delivery</span>
+                                            </label>
                                             <label className="pd-dm-button-inactive">
                                                 <input type="radio" name="pd-dm-input" className='pd-dm-input' />
                                                 <span className="pd-dm-checkmark"
-                                                    value="6"
-                                                    //checked={delivery === 6}
-                                                    onChange={(event) => {
-                                                        dispatch(setDelivery(event.target.value));
-                                                    }}>Pick up</span></label>
+                                                    onClick={() => {
+                                                        this.setState({ delivery: "Pick Up" })
+                                                    }}
+                                                >Pick up</span>
+                                            </label>
                                         </div>
                                         <form className="pd-settime">
                                             <label htmlFor="settime">Set time:</label>
-                                            <input type="time" className="settime" id="settime" placeholder="Enter the time you'll arrived"
-                                                value={this.state.time}
-                                                onChange={(event) => {
-                                                    dispatch(setTime(event.target.value));
-                                                }} />
+                                            <input type="time" className="settime" id="settime" placeholder="Enter the time you'll arrived" />
                                         </form>
                                     </div>
                                 </div>
@@ -192,28 +161,29 @@ class ProductDetail extends Component {
                             <section className="pd-checkout-container">
                                 <div className="pd-product-checkout">
                                     <div className="pd-checkout-img">
-                                        <img src={`http://localhost:8000${getProduct.pictures}`} alt="coldbrew" className='pd-check-out-img' />
+                                        <img src={`http://localhost:8000${product.pictures}`} alt="coldbrew" className='pd-check-out-img' />
                                     </div>
                                     <div className="pd-checkout-info">
-                                        <h4 className="pd-checkout-name">{getProduct.name}</h4>
+                                        <h4 className="pd-checkout-name">{product.name}</h4>
                                         <div className="pd-checkout-details">
-                                            {counter !== 0 ? (
-                                                <p>{`x${counter}`}</p>
-                                            ) : null}
-                                            <p>{size} {delivery}</p>
+                                            {/* {this.state.allSize.map((size) => ( */}
+                                            <p>x{counter.counter} ({cart.size}) <br/>{cart.delivery}</p>
+                                            {/* {size === 2 ? "Regular" : size === 3 ? "Large" : "Extra Large"} */}
+                                            {/* ))} */}
+                                            <p></p>
+                                            {/* <p>x1 (Large)</p>
+                                            <p>x1 (Regular)</p> */}
                                         </div>
                                     </div>
                                     <div className="pd-checkout-quantity">
-                                        <div className="pd-minus-button" onClick={() => {
-                                            if (counter > 0) {
-                                                dispatch(counterDown());
-                                            }
-                                        }}>-</div>
-                                        <div className="pd-quantity">{counter}</div>
-                                        <div className="pd-plus-button" onClick={() => dispatch(counterUp())}>+</div>
+                                        <div className="pd-minus-button" onClick={() => CounterDown()}>-</div>
+                                        <div className="pd-quantity">{counter.counter}</div>
+                                        <div className="pd-plus-button" onClick={() => CounterUp()}>+</div>
                                     </div>
                                 </div>
-                                <div className="pd-checkout-button" onClick={this.checkOutHandle}>CHECKOUT</div>
+                                <div className="pd-checkout-button">
+                                    <Link to="/payment" style={{textDecoration: "none"}}>CHECKOUT</Link>
+                                    </div>
                             </section>
                         </section>
                     ) : null}
@@ -224,11 +194,24 @@ class ProductDetail extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    const {
-        cart: { counter, size, delivery },
-    } = state;
-    return { counter, size, delivery };
+const mapStateToProps = (reduxState) => {
+    const { counter, cart } = reduxState
+    return {
+        counter, cart
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        CounterUp: () => {
+            dispatch(counterUp())
+        },
+        CounterDown: () => {
+            dispatch(counterDown())
+        },
+        doAddToCart: (size, delivery, id) => {
+            dispatch(AddCart(size, delivery, id))
+        }
+    }
 }
 
-export default connect(mapStateToProps)(withLocation(withParams(ProductDetail)))
+export default connect(mapStateToProps, mapDispatchToProps)(withParams(ProductDetail))

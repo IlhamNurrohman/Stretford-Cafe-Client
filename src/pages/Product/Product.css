@@ -1,74 +1,417 @@
-@font-face {
-    font-family: "Rubik";
-    src: url("../../assets/font/Rubik/Rubik-VariableFont_wght.ttf");
-  }
-  @font-face {
-    font-family: "Poppins";
-    src: url("../../assets/font/Poppins/Poppins-Regular.ttf");
-  }
+.custom-promo-img {
+  width: 70px;
+}
+
+
+.custom-promo-column {
+  padding-top: 30px;
+  margin-left: -3%;
+  padding-right: 2.5%;
+  border-right: 0.5px solid #9F9F9F;
+  max-height: 1500px;
+}
+
+.custom-promo-title-head {
+  font-family: Rubik;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #6A4029;
+
+}
+
+.custom-promo-paragraph {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #000000;
+
+  margin-bottom: 40px;
+
+}
+
+.custom-promo-card {
+  width: 90%;
+  height: 100px;
+  margin: 30px 5%;
+  border-radius: 20px;
+
+  background-color: aqua;
+}
+
+.mother-day-card {
+  background: #88B788;
+}
+
+.sunday-morning-card {
+  background: #F5C361;
+}
+
+.halloween-card {
+  background: #C59378;
+}
+
+.custom-promo-pict {
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-card-text {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.custom-card-info {
+  margin-bottom: 0px;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.custom-apply-button {
+  width: 90%;
+  height: 64px;
+  margin: 50px 5%;
+
+  background: #6A4029;
+  border-radius: 20px;
+
+  font-family: Poppins;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  color: #FFFFFF;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.custom-apply-button:hover {
+  background-color: #552d17;
+}
+
+.custom-apply-button:active {
+  background-color: #6A4029;
+}
+
+.custom-term-title {
+  font-family: Rubik;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.custom-term {
+  font-family: Rubik;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  margin-top: 100px;
+  margin-left: 5%;
+
+}
+
+/* main product */
+
+.custom-main-product-column {
+  padding-top: 30px;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+  /* border-left: 0.5px solid #9F9F9F; */
+  height: 1500px;
+}
+
+.custom-product-nav {
+  margin-bottom: 40px;
+}
+
+.custom-product-nav li {
+  display: inline;
+
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  /* identical to box height */
+
+  color: #9F9F9F;
+}
+
+.custom-product-nav-active {
+  font-family: Rubik;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  text-decoration: none;
+  color: #6A4029;
+  border-bottom: 3px solid #6A4029;
+  cursor: pointer;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.custom-product-nav-inactive {
+  font-family: Rubik;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  text-decoration: none;
+  color: #9F9F9F;
+  cursor: pointer;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.custom-product-nav a:hover {
+  font-family: Rubik;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  text-decoration: none;
+  color: #6A4029;
+  border-bottom: 3px solid #6A4029;
+
+}
+
+.custom-product-nav-inactive:hover {
+  font-family: Rubik;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  text-decoration: none;
+  color: #6A4029;
+  border-bottom: 3px solid #6A4029;
+
+}
+
+.dropdown-sort{
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.dropdown-sort label{
+
+  font-family: Rubik;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+}
+
+.custom-food-container {
+  padding: 50px 5%;
+}
+
+.custom-product-row {
+  margin-bottom: 80px;
+}
+
+.custom-product-card-all {
+  display: flex;
+  flex-direction: row;
+}
+
+.custom-product-card {
+  max-width: 150px;
+  min-height: 200px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 30px 60px rgba(57, 57, 57, 0.1);
+  border-radius: 30px;
+}
+
+.custom-product-promo {
+  z-index: 1;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 110px;
+
+  width: 50px;
+  height: 35px;
+
+  background-color: #FFFFFF;
+  border-radius: 20px;
+
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 38px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.custom-product-name {
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  min-height: 65px;
+
+}
+
+.custom-card-img-container {
+  max-width: 250px;
+  min-height: 150px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-img-top {
-    width: 100%;
-    height: 30%;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: 50% 50%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .card-img-top,
 .custom-product-info {
-    margin-top: -40px;
+  margin-top: -40px;
 }
-.custom-product-name {
-    font-family: "Poppins";
-    font-size: 20px;
-    font-weight: 900;
-    line-height: 22px;
-    letter-spacing: 0em;
-    text-align: center;
 
-    min-height: 65px;
-
-}
 .custom-product-price {
-    font-family: "Poppins";
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 26px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #6A4029;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #6A4029;
 }
-.wrapper-menu-category {
+
+
+.product-page-button-container{
   display: flex;
-  list-style: none;
-  /* flex-wrap: nowrap; */
+  justify-content: center;
+  column-gap: 50px;
+  margin-bottom: 20px;
+}
+
+.product-page-button-empty, .product-page-button-next, .product-page-button-prev{
+  width: 100px;
+}
+
+.product-page-number{
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #6A4029;
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
-  text-decoration: none;
+  max-width: 20px;
 }
 
-.wrapper-menu-category li {
-  margin: 30px;
-  font-family: "Rubik";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 24px;
-  color: #9f9f9f;
+.product-page-button-prev, .product-page-button-next{
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #6A4029;
+  border: 2px #6A4029 solid;
+  padding: 5px;
+  border-radius: 5px;
   cursor: pointer;
-  text-decoration: none;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
 }
 
-.active-menu {
-  font-weight: bold !important;
-  font-size: 20px;
-  color: #6a4029 !important;
-  border-bottom: 2px solid #6a4029;
+.custom-notes {
+  font-family: Poppins;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  color: #6A4029;
+  margin-top: 0px;
+  margin-bottom: 40px;
+  margin-left: 60px;
 }
-.link-category{
-  text-decoration: none;
+
+@media (max-width:800px) {
+  .custom-main-container {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .custom-promo-column {
+      width: 100%;
+  }
+
+  .custom-main-product-column {
+      width: 100%;
+  }
+
+
 }
-.main-col-4{
-  border-right: 0.5px solid rgba(159, 159, 159, 1);
+
+@media (max-width: 500px) {
+  .custom-product-nav a {
+      font-size: 14px;
+  }
 }

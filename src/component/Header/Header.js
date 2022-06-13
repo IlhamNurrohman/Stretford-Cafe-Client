@@ -62,7 +62,7 @@ export default function Header(props) {
                                     const { categories, page } = props;
                                     if (location.search.includes("categories")) {
                                         navigate(
-                                            `/product?categories=${categories}&page=${page}&find=${event.target.value}`
+                                            `/product?categories=${categories}&page=${page}&name=${event.target.value}`
                                         );
                                     }
                                     if (!location.search.includes("categories")) {

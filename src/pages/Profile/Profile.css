@@ -94,13 +94,15 @@ body {
   }
 
   input[type="email"],
+  input[type="text"],
   input[type="date"] {
     background-color: white;
-    border-bottom: 1.5px solid black;
+    border-bottom: 1.5px solid black ;
     border-radius: 0%;
     border-top: none;
     border-left: none;
     border-right: none;
+    width: 100%;
   }
   
   input:focus {
