@@ -15,7 +15,7 @@ export default class Login extends Component {
         return (
             <div className="container">
                 <div className="column-image">
-                    <img src={asaidImg} className="side-image" alt="aside-image" />
+                    <img src={asaidImg} className="side-image" alt="aside" />
                 </div>
                 <div className="column-main">
                     <header className="side-title">
