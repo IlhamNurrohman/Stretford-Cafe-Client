@@ -8,6 +8,8 @@ import googleIcon from "../../../assets/icon/google-logo-png-suite-everything-yo
 import fbIcon from "../../../assets/icon/Facebook.png";
 import twIcon from "../../../assets/icon/Twitter.png";
 import igIcon from "../../../assets/icon/Intagram.png";
+import OpenEye from "../../../assets/icon/open-eye.png";
+import ClosedEye from "../../../assets/icon/closed-eye.png";
 
 import "./Login.css";
 
@@ -24,6 +26,9 @@ export default class Login extends Component {
             isLoggedin: false
         };
     };
+    componentDidMount(){
+        document.title = "Login"
+    }
     render() {
         // const userInfo = JSON.parse(localStorage.getItem("userinfo"));
         // console.log(userInfo.token)
@@ -45,19 +50,45 @@ export default class Login extends Component {
                     <section className="register">
                         <form className="register-form">
                             <label htmlFOR="email">Email Address :</label>
-                            <input type="text" clasaName="email" placeholder="Enter your email address" onChange={(e) => {
+                            <input type="email" clasaName="email" placeholder="Enter your email address" onChange={(e) => {
                                 this.setState({
                                     email: e.target.value,
                                 });
                             }} />
                             <label htmlFOR="password">Password :</label>
-                            <input type={`${this.state.isPasswordShown ? "text" : "password"}`} className="password" placeholder="Enter your phone password" onChange={(e) => {
+                            <div className='signup-input-pass-container'>
+                                        <input type={this.state.isPasswordShown ? "email" : "password"} id="password" placeholder="Enter your password" className='signup-input-pass' 
+                                        style={{justifyContent: "space-between", marginLeft: "0%", marginTop: "1%"}}
+                                            onChange={e => {
+                                                this.setState({
+                                                    password: e.target.value,
+                                                })
+                                            }}
+                                        />
+                                        <div className="icon-pass-container"
+                                            onClick={() => {
+                                                this.setState({
+                                                    isPasswordShown: !this.state.isPasswordShown
+                                                })
+                                            }}>
+                                            {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
+                                        </div>
+                                    </div>
+                            {/* <input type={`${this.state.isPasswordShown ? "email" : "password"}`} className="password" placeholder="Enter your phone password" onChange={(e) => {
                                 this.setState({
                                     password: e.target.value,
                                 });
                             }} />
+                            <div className="icon-pass-container"
+                                onClick={() => {
+                                    this.setState({
+                                        isPasswordShown: !this.state.isPasswordShown
+                                    })
+                                }}>
+                                {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
+                            </div> */}
                             <Link to={"/forgotPassword"} style={{ textDecoration: "none", fontFamily: "Rubik" }}><p className="" style={{ textDecoration: "none", fontFamily: "Rubik" }}>Forgot Password?</p></Link>
-                            <label>
+                            {/* <label>
                                 <input
                                     type="checkbox"
                                     value={this.state.isPasswordShown}
@@ -68,18 +99,16 @@ export default class Login extends Component {
                                     }}
                                 />
                                 Show Password
-                            </label>
+                            </label> */}
                             <div className="register-button" onClick={() => {
                                 const { email, password } = this.state;
                                 const body = { email,password };
                                 axios
                                     .post("http://localhost:8000/auth", body)
                                     .then((result) => {
-                                        console.log(result.data);
-                                        localStorage.setItem(
-                                            "userinfo",
-                                            JSON.stringify(result.data.data)
-                                        );
+                                        //console.log(result.data);
+                                        localStorage.setItem("userinfo", JSON.stringify(result.data.data));
+                                        localStorage.setItem("role", result.data.data.auth);
                                         this.setState({
                                             isSuccess: true
                                         })

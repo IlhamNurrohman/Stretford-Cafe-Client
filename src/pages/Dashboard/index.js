@@ -9,6 +9,9 @@ import userImg from "../../assets/img/image 39.png";
 import persentase from "../../assets/img/persentase.png";
 import persentase2 from "../../assets/img/Screen Shot 2022-06-12 at 00.59.59.png";
 export default class Profile extends Component {
+  componentDidMount(){
+    document.title = "Dashboard"
+  }
   render() {
     return (
       <div>

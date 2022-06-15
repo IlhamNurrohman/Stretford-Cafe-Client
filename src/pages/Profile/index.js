@@ -225,7 +225,7 @@ export default class Profile extends Component {
                                             <form className="row g-3">
                                                 <div className="col-md-5">
                                                     <label htmlFor="label-input" className="form-label">Email</label>
-                                                    <input type="email" className="input-form" id="inputEmail4"
+                                                    <input type="text" className="input-form" id="inputEmail4"
                                                         placeholder="Enter email address"
                                                         value={this.state.isEdit ? null : this.state.users.email}
                                                         disabled={this.state.isEdit ? false : true}

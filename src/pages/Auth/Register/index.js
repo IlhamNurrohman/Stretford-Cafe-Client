@@ -8,6 +8,8 @@ import googleIcon from "../../../assets/icon/google-logo-png-suite-everything-yo
 import fbIcon from "../../../assets/icon/Facebook.png";
 import twIcon from "../../../assets/icon/Twitter.png";
 import igIcon from "../../../assets/icon/Intagram.png";
+import OpenEye from "../../../assets/icon/open-eye.png";
+import ClosedEye from "../../../assets/icon/closed-eye.png";
 
 import "./Register.css";
 
@@ -41,18 +43,44 @@ export default class Register extends Component {
                     <section className="register">
                         <form className="register-form">
                             <label htmlFOR="email">Email Address :</label>
-                            <input type="text" name="email" placeholder="Enter your email address" onChange={(e) => {
+                            <input type="email" name="email" placeholder="Enter your email address" onChange={(e) => {
                                 this.setState({
                                     email: e.target.value,
                                 });
                             }} />
                             <label htmlFOR="password">Password :</label>
-                            <input type={`${this.state.isPasswordShown ? "text" : "password"}`} name="password" placeholder="Enter your password" onChange={(e) => {
+                            <div className='signup-input-pass-container'>
+                                        <input type={this.state.isPasswordShown ? "email" : "password"} id="password" placeholder="Enter your password" className='signup-input-pass' 
+                                        style={{justifyContent: "space-between", marginLeft: "0%", marginTop: "1%"}}
+                                            onChange={e => {
+                                                this.setState({
+                                                    password: e.target.value,
+                                                })
+                                            }}
+                                        />
+                                        <div className="icon-pass-container"
+                                            onClick={() => {
+                                                this.setState({
+                                                    isPasswordShown: !this.state.isPasswordShown
+                                                })
+                                            }}>
+                                            {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
+                                        </div>
+                                    </div>
+                            {/* <input type={`${this.state.isPasswordShown ? "email" : "password"}`} name="password" placeholder="Enter your password" onChange={(e) => {
                                 this.setState({
                                     password: e.target.value,
                                 });
                             }} />
-                            <label>
+                            <div className="icon-pass-container"
+                                onClick={() => {
+                                    this.setState({
+                                        isPasswordShown: !this.state.isPasswordShown
+                                    })
+                                }}>
+                                {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
+                            </div> */}
+                            {/* <label>
                                 <input
                                     type="checkbox"
                                     value={this.state.isPasswordShown}
@@ -63,9 +91,9 @@ export default class Register extends Component {
                                     }}
                                 />
                                 Show Password
-                            </label>
+                            </label> */}
                             <label htmlFOR="phone">Phone Number :</label>
-                            <input type="text" name="phone" placeholder="Enter your phone number" onChange={(e) => {
+                            <input type="email" name="phone" placeholder="Enter your phone number" onChange={(e) => {
                                 this.setState({
                                     phone: e.target.value,
                                 });

@@ -64,7 +64,7 @@ class ProductDetail extends Component {
                         <section className="pd-main-container">
                             <div className="pd-title-menu">
                                 <Link to={"/product"}>
-                                    {`${product.category === "non coffee" ? "Non Coffee" : product.category}`}
+                                    {`${product.categories === "non coffee" ? "Non Coffee" : product.categories}`}
                                 </Link><span>{`>${product.name}`}</span></div>
                             <section className="pd-main-content">
                                 <div className="pd-left-content">
