@@ -104,7 +104,7 @@ export default class Login extends Component {
                                 const { email, password } = this.state;
                                 const body = { email,password };
                                 axios
-                                    .post("http://localhost:8000/auth", body)
+                                    .post(`${process.env.REACT_APP_API_HOST}/auth`, body)
                                     .then((result) => {
                                         //console.log(result.data);
                                         localStorage.setItem("userinfo", JSON.stringify(result.data.data));

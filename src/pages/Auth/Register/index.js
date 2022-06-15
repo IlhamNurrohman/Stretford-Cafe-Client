@@ -111,7 +111,7 @@ export default class Register extends Component {
                                     phone,
                                 };
                                 axios
-                                    .post("http://localhost:8000/auth/new", body)
+                                    .post(`${process.env.REACT_APP_API_HOST}/auth/new`, body)
                                     .then((result) => {
                                         console.log(result);
                                         let x = document.getElementById("snackbar");

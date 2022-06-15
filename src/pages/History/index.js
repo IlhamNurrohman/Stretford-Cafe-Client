@@ -21,7 +21,7 @@ export default class History extends Component {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
         //console.log(config);
         axios
-            .get("http://localhost:8000/transactions", config)
+            .get(`${process.env.REACT_APP_API_HOST}/transactions`, config)
             .then(result => {
                 //console.log(result.data.data)
                 this.setState({
@@ -49,7 +49,7 @@ export default class History extends Component {
                         {this.state.history.map((item) => (
                             <CardHistory 
                             key={item.id} 
-                            pictures={`http://localhost:8000${item.pictures}`}
+                            pictures={`${process.env.REACT_APP_API_HOST}${item.pictures}`}
                             name={item.name} 
                             sub_total={item.sub_total}
                             delivery_methods_id={item.delivery_methods_id}  />

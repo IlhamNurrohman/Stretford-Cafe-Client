@@ -52,7 +52,7 @@ class Product extends Component {
     console.log(this.state.searchProduct)
     this.state.setSearchParams('')
     axios
-      .get('http://localhost:8000/products')
+      .get(`${process.env.REACT_APP_API_HOST}/products`)
       .then(result => {
         this.setState({
           product: result.data.data,
@@ -66,7 +66,7 @@ class Product extends Component {
   componentDidUpdate() {
     if (this.state.doAxios) {
       let params = ''
-      let url = `http://localhost:8000/products`
+      let url = `${process.env.REACT_APP_API_HOST}/products`
       if (this.state.categoryActive === "all") {
         url += `?page=${this.state.page}&limit=${this.state.limit}&`
         params += `page=${this.state.page}&limit=${this.state.limit}&`
@@ -270,7 +270,7 @@ class Product extends Component {
                         <div key={product.id} className="card"
                           style={{ borderRadius: "30px", width: "126px", height: "212.41px", boxShadow: "0px 30px 60px", color: "rgba(57, 57, 57, 0.1)", marginBottom: "40%" }}>
                           <Link to={`/product/detail/${product.id}`}>
-                            <img src={`http://localhost:8000${product.pictures}`} className="" alt={product.name} style={{ borderRadius: "100px", width: "70%", marginTop: "-30%", marginLeft: "15%" }} />
+                            <img src={`${process.env.REACT_APP_API_HOST}${product.pictures}`} className="" alt={product.name} style={{ borderRadius: "100px", width: "70%", marginTop: "-30%", marginLeft: "15%" }} />
                           </Link>
                           <div className="card-body">
                             <h5 className="card-title custom-product-name" style={{ marginBottom: "35%" }}>

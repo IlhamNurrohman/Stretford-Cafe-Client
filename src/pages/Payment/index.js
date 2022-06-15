@@ -42,7 +42,7 @@ export class Payment extends Component {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
         //console.log(config);
         axios
-            .get("http://localhost:8000/users/profile-detail", config)
+            .get(`${process.env.REACT_APP_API_HOST}/users/profile-detail`, config)
             .then(result => {
                 //console.log(result.data.data[0])
                 this.setState({
@@ -71,7 +71,7 @@ export class Payment extends Component {
         const body = { date, sub_total, payment_methods_id, products_id, qty, users_id, delivery_methods_id, created_at }
         console.log(users_id)
         axios
-            .post('http://localhost:8000/transactions', body, config)
+            .post(`${process.env.REACT_APP_API_HOST}/transactions`, body, config)
             .then(result => {
                 console.log(result)
                 this.setState({
@@ -91,7 +91,7 @@ export class Payment extends Component {
         document.title = "Payment"
         const { cart: { productId } } = this.props
         axios
-            .get(`http://localhost:8000/products/detail/${productId}`)
+            .get(`${process.env.REACT_APP_API_HOST}/products/detail/${productId}`)
             .then(result => {
                 console.log(this.state.product)
                 this.setState({
@@ -118,7 +118,7 @@ export class Payment extends Component {
                                 <div className="pm-all-order">
                                     <div className="pm-order-item">
                                         <div className="pm-item-img">
-                                            <img src={`http://localhost:8000${this.state.product.pictures}`} alt="" className="pm-product-img" /></div>
+                                            <img src={`${process.env.REACT_APP_API_HOST}${this.state.product.pictures}`} alt="" className="pm-product-img" /></div>
                                         <div className="pm-item-detail">
                                             <p>{this.state.product.name}</p>
                                             <p>x{counter}</p>

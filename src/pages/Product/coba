@@ -253,7 +253,7 @@ class Product extends Component {
                     <div className="col" style={{ marginLeft: "0%", marginRight: "0%", marginBottom: "30px" }}>
                       <CardProduct
                         id={product.id}
-                        pictures={`http://localhost:8000${product.pictures}`}
+                        pictures={`${process.env.REACT_APP_API_HOST}${product.pictures}`}
                         name={product.name}
                         price={product.price}
                         key={product.id}
@@ -265,7 +265,7 @@ class Product extends Component {
                     return (
                       <CardProduct
                         id={product.id}
-                        pictures={`http://localhost:8000${product.pictures}`}
+                        pictures={`${process.env.REACT_APP_API_HOST}${product.pictures}`}
                         name={product.name}
                         price={product.price}
                         key={product.id}
@@ -276,7 +276,7 @@ class Product extends Component {
                       return (
                         <CardProduct
                           id={product.id}
-                          pictures={`http://localhost:8000${product.pictures}`}
+                          pictures={`${process.env.REACT_APP_API_HOST}${product.pictures}`}
                           name={product.name}
                           price={product.price}
                           key={product.id}
@@ -287,7 +287,7 @@ class Product extends Component {
                         return (
                           <CardProduct
                             id={product.id}
-                            pictures={`http://localhost:8000${product.pictures}`}
+                            pictures={`${process.env.REACT_APP_API_HOST}${product.pictures}`}
                             name={product.name}
                             price={product.price}
                             key={product.id}
@@ -298,7 +298,7 @@ class Product extends Component {
                           return (
                             <CardProduct
                               id={product.id}
-                              pictures={`http://localhost:8000${product.pictures}`}
+                              pictures={`${process.env.REACT_APP_API_HOST}${product.pictures}`}
                               name={product.name}
                               price={product.price}
                               key={product.id}
@@ -309,7 +309,7 @@ class Product extends Component {
                             return (
                               <CardProduct
                                 id={product.id}
-                                pictures={`http://localhost:8000${product.pictures}`}
+                                pictures={`${process.env.REACT_APP_API_HOST}${product.pictures}`}
                                 name={product.name}
                                 price={product.price}
                                 key={product.id}

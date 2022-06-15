@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function editUser(token) {
     try {
-      const URL = `http://localhost:8000/users`;
+      const URL = `${process.env.REACT_APP_API_HOST}/users`;
       const result = await axios.pacth(URL, { headers: { Authorization: `Bearer ${token}` } });
       return result;
     } catch (error) {
@@ -11,7 +11,7 @@ export async function editUser(token) {
   }
 export async function GetUser(token) {
     try {
-      const URL = `http://localhost:8000/users/profile-detail`;
+      const URL = `${process.env.REACT_APP_API_HOST}/users/profile-detail`;
       const results = await axios.get(URL, { headers: { Authorization: `Bearer ${token}` } });
       return results;
     } catch (error) {
@@ -20,5 +20,5 @@ export async function GetUser(token) {
   }
 
   export async function loginUser(body) {
-    return axios.post("http://localhost:8000/auth", body)
+    return axios.post(`${process.env.REACT_APP_API_HOST}/auth`, body)
   }

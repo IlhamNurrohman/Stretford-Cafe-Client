@@ -33,7 +33,7 @@ export default class Profile extends Component {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
         //console.log(config);
         axios
-            .get("http://localhost:8000/users/profile-detail", config)
+            .get(`${process.env.REACT_APP_API_HOST}users/profile-detail`, config)
             .then(result => {
                 //console.log(result.data.data[0])
                 this.setState({
@@ -54,7 +54,7 @@ export default class Profile extends Component {
             const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
             //console.log(config);
             axios
-                .get("http://localhost:8000/users/profile-detail", config)
+                .get(`${process.env.REACT_APP_API_HOST}/users/profile-detail`, config)
                 .then(result => {
                     console.log(result.data.data[0])
                     this.setState({
@@ -84,7 +84,7 @@ export default class Profile extends Component {
                             <div className="row">
                                 <div className="col-md-4">
                                     <div className="container-fluid img-container">
-                                        <img src={`http://localhost:8000${this.state.users.pictures}`} className="img-profile" alt="img-profile" />
+                                        <img src={`${process.env.REACT_APP_API_HOST}${this.state.users.pictures}`} className="img-profile" alt="img-profile" />
                                     </div>
                                     <h4 className="username" style={{ marginLeft: "10px" }}>{this.state.users.username ? this.state.users.username : "Display Name"}</h4>
                                     <p className="email" style={{ paddingLeft: "30px" }}>{this.state.users.email ? this.state.users.email : "Email"}</p>
@@ -113,7 +113,7 @@ export default class Profile extends Component {
                                                 const userInfo = JSON.parse(localStorage.getItem("userinfo"));
                                                 const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
                                                 axios
-                                                    .patch('http://localhost:8000/users', body, config)
+                                                    .patch(`${process.env.REACT_APP_API_HOST}/users`, body, config)
                                                     .then(result => {
                                                         console.log(result)
                                                         //alert(result.data.msg)
