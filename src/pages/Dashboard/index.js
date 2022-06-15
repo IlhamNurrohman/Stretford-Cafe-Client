@@ -35,7 +35,7 @@ export default class Profile extends Component {
                 <div className="card-header" style={{background: "white"}}>
                   <div className="row g-0">
                     <div className="col-sm-4">
-                      <img src={userImg} style={{width: "70px", marginLeft: "-30px", borderRadius: "50%"}}></img>
+                      <img src={userImg} alt="user" style={{width: "70px", marginLeft: "-30px", borderRadius: "50%"}}></img>
                     </div>
                     <div className="col-sm-8">
                       <h6>Cheryn Laurent</h6>
@@ -45,7 +45,7 @@ export default class Profile extends Component {
                 </div>
                 <div className="card-body">
                   <h5 className="card-title">Best Staff of the Month</h5>
-                  <img src={persentase} style={{marginLeft: "5%", width: "90%", marginBottom: "10px", borderRadius: "50%"}}></img>
+                  <img src={persentase} alt="persentase" style={{marginLeft: "5%", width: "90%", marginBottom: "10px", borderRadius: "50%"}}></img>
                   <p className="card-text" style={{textAlign: "center", color: "rgba(124, 130, 138, 1)"}}>Achieved 3.5M of total 5M 478 Customer</p>
                 </div>
               </div>
@@ -53,7 +53,7 @@ export default class Profile extends Component {
                 <div className="card-body">
                   <h2 className="" style={{textAlign: "center", marginBottom: "1rem"}}>Goals</h2>
                   <p className="card-text" style={{textAlign: "center", color: "rgba(124, 130, 138, 1)", marginBottom: "1rem"}}>Your goals is still on 76%. Keep up the good work!</p>
-                  <img src={persentase2} style={{marginLeft: "5%", width: "90%", marginBottom: "10px", borderRadius: "50%"}}></img>
+                  <img src={persentase2} alt="persentase2" style={{marginLeft: "5%", width: "90%", marginBottom: "10px", borderRadius: "50%"}}></img>
                 </div>
               </div>
               <div className="share-report-btn">

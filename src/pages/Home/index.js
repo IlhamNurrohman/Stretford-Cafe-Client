@@ -48,7 +48,7 @@ export default class Home extends Component {
                             <div className="card mb-6 " style={{ maxWidth: "1140px" }}>
                                 <div className="row g-0">
                                     <div className="col-md-4">
-                                        <img className="img-fluid rounded-start icon-img" src={userIcon}></img>
+                                        <img className="img-fluid rounded-start icon-img" alt="userIcon" src={userIcon}></img>
                                     </div>
                                     <div className="col-md-8">
                                         <div className="card-body">
@@ -62,7 +62,7 @@ export default class Home extends Component {
                             <div className="card mb-6" style={{ maxWidth: "1140px" }}>
                                 <div className="row g-0">
                                     <div className="col-md-4">
-                                        <img className="img-fluid rounded-start icon-img" src={storeIcon}></img>
+                                        <img className="img-fluid rounded-start icon-img" alt="userIcon" src={storeIcon}></img>
                                     </div>
                                     <div className="col-md-8">
                                         <div className="card-body">
@@ -76,7 +76,7 @@ export default class Home extends Component {
                             <div className="card mb-6" style={{ maxWidth: "1140px" }}>
                                 <div className="row g-0">
                                     <div className="col-md-4">
-                                        <img className="img-fluid rounded-start icon-img" src={loveIcon}></img>
+                                        <img className="img-fluid rounded-start icon-img" alt="userIcon" src={loveIcon}></img>
                                     </div>
                                     <div className="col-md-8">
                                         <div className="card-body">
@@ -95,7 +95,7 @@ export default class Home extends Component {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-md-6">
-                                <img src={teamWork} alt="teamwork-image" className="img-team" />
+                                <img src={teamWork} alt="teamwork" className="img-team" />
                             </div>
                             <div className="col-md-6 desc-item">
                                 <h2 className="desc-title">
@@ -215,7 +215,7 @@ export default class Home extends Component {
                         </div>
                         <div className="row">
                             <div className="col-md-12">
-                                <img src={storeImg} className="img-fluid img-store" />
+                                <img src={storeImg} alt="userIcon" className="img-fluid img-store" />
                             </div>
                         </div>
                     </div>
@@ -230,7 +230,7 @@ export default class Home extends Component {
                         </div>
                         <div className="row">
                             <div className="col-md-12">
-                                <img src={sponsorImg} alt="sponsor-image" className="sponsor-image" />
+                                <img src={sponsorImg} alt="sponsor" className="sponsor-image" />
                             </div>
                         </div>
                     </div>
