@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 import asaidImg from "../../../assets/img/robert-bye-95vx5QVl9x4-unsplash 2.png";
 import logo from "../../../assets/icon/coffee 1.png";
-import googleIcon from "../../../assets/icon/google-logo-png-suite-everything-you-need-know-about-google-newest-0 2.png";
+//import googleIcon from "../../../assets/icon/google-logo-png-suite-everything-you-need-know-about-google-newest-0 2.png";
 import fbIcon from "../../../assets/icon/Facebook.png";
 import twIcon from "../../../assets/icon/Twitter.png";
 import igIcon from "../../../assets/icon/Intagram.png";
@@ -14,7 +15,7 @@ export default class Login extends Component {
         return (
             <div className="container">
                 <div className="column-image">
-                    <img src={asaidImg} className="side-image" alt="aside image" />
+                    <img src={asaidImg} className="side-image" alt="aside-image" />
                 </div>
                 <div className="column-main">
                     <header className="side-title">
@@ -46,19 +47,19 @@ export default class Login extends Component {
                         <aside className="link" aria-label="">
                             <h2 className="link-title">Product</h2>
                             <div className="link-item">
-                                <a href="">Download</a>
-                                <a href="">Pricing</a>
-                                <a href="">Locations</a>
-                                <a href="">Countries</a>
-                                <a href="">Blog</a>
+                                <Link to="#">Download</Link>
+                                <Link to="#">Pricing</Link>
+                                <Link to="#">Locations</Link>
+                                <Link to="#">Countries</Link>
+                                <Link to="#">Blog</Link>
                             </div>
                             <h2 className="link-title">Engage</h2>
                             <div className="link-item">
-                                <a href="">Coffe Shop ?</a>
-                                <a href="">About Us</a>
-                                <a href="">FAQ</a>
-                                <a href="">Privacy Policy</a>
-                                <a href="">Terms of Service</a>
+                                <Link to="#">Coffe Shop ?</Link>
+                                <Link to="#">About Us</Link>
+                                <Link to="#">FAQ</Link>
+                                <Link to="#">Privacy Policy</Link>
+                                <Link to="#">Terms of Service</Link>
                             </div>
                         </aside>
                     </footer>

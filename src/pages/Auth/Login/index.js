@@ -39,7 +39,7 @@ export default class Login extends Component {
         return (
             <div className="container">
                 <div className="column-image">
-                    <img src={asaidImg} className="side-image" alt="aside image" />
+                    <img src={asaidImg} className="side-image" alt="aside-image"/>
                 </div>
                 <div className="column-main">
                     <header className="side-title">
@@ -153,19 +153,19 @@ export default class Login extends Component {
                         <aside className="link" aria-label="">
                             <h2 className="link-title">Product</h2>
                             <div className="link-item">
-                                <a href="">Download</a>
-                                <a href="">Pricing</a>
-                                <a href="">Locations</a>
-                                <a href="">Countries</a>
-                                <a href="">Blog</a>
+                                <Link to="#">Download</Link>
+                                <Link to="#">Pricing</Link>
+                                <Link to="#">Locations</Link>
+                                <Link to="#">Countries</Link>
+                                <Link to="#">Blog</Link>
                             </div>
                             <h2 className="link-title">Engage</h2>
                             <div className="link-item">
-                                <a href="">Coffe Shop ?</a>
-                                <a href="">About Us</a>
-                                <a href="">FAQ</a>
-                                <a href="">Privacy Policy</a>
-                                <a href="">Terms of Service</a>
+                                <Link to="#">Coffe Shop ?</Link>
+                                <Link to="#">About Us</Link>
+                                <Link to="#">FAQ</Link>
+                                <Link to="#">Privacy Policy</Link>
+                                <Link to="#">Terms of Service</Link>
                             </div>
                         </aside>
                         <div id="snackbar">Password atau email salah</div>

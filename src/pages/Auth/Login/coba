@@ -117,19 +117,19 @@ class Login extends Component {
                         <aside className="link" aria-label="">
                             <h2 className="link-title">Product</h2>
                             <div className="link-item">
-                                <a href="">Download</a>
-                                <a href="">Pricing</a>
-                                <a href="">Locations</a>
-                                <a href="">Countries</a>
-                                <a href="">Blog</a>
+                                <a href="#">Download</a>
+                                <a href="#">Pricing</a>
+                                <a href="#">Locations</a>
+                                <a href="#">Countries</a>
+                                <a href="#">Blog</a>
                             </div>
                             <h2 className="link-title">Engage</h2>
                             <div className="link-item">
-                                <a href="">Coffe Shop ?</a>
-                                <a href="">About Us</a>
-                                <a href="">FAQ</a>
-                                <a href="">Privacy Policy</a>
-                                <a href="">Terms of Service</a>
+                                <a href="#">Coffe Shop ?</a>
+                                <a href="#">About Us</a>
+                                <a href="#">FAQ</a>
+                                <a href="#">Privacy Policy</a>
+                                <a href="#">Terms of Service</a>
                             </div>
                         </aside>
                         <div id="snackbar">Password atau email salah</div>

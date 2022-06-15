@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from "../../assets/icon/coffee 1.png";
 import fbIcon from "../../assets/icon/Facebook.png";
@@ -24,21 +25,21 @@ export default class Footer extends Component {
                                 <div class="col-md-2">
                                     <h2 class="link-title">Product</h2>
                                     <div class="footer-home-link">
-                                        <a href="" style={{textDecoration: "none"}}>Download</a>
-                                        <a href="" style={{textDecoration: "none"}}>Pricing</a>
-                                        <a href="" style={{textDecoration: "none"}}>Locations</a>
-                                        <a href="" style={{textDecoration: "none"}}>Countries</a>
-                                        <a href="" style={{textDecoration: "none"}}>Blog</a>
+                                        <Link to="#" style={{textDecoration: "none"}}>Download</Link>
+                                        <Link to="#" style={{textDecoration: "none"}}>Pricing</Link>
+                                        <Link to="#" style={{textDecoration: "none"}}>Locations</Link>
+                                        <Link to="#" style={{textDecoration: "none"}}>Countries</Link>
+                                        <Link to="#" style={{textDecoration: "none"}}>Blog</Link>
                                     </div>
                                 </div>
                                 <div class="col-md-2 ">
                                     <h2 class="link-title">Engage</h2>
                                     <div class="footer-home-link">
-                                        <a href="" style={{textDecoration: "none"}}>Coffe Shop ?</a>
-                                        <a href="" style={{textDecoration: "none"}}>About Us</a>
-                                        <a href="" style={{textDecoration: "none"}}>FAQ</a>
-                                        <a href="" style={{textDecoration: "none"}}>Privacy Policy</a>
-                                        <a href="" style={{textDecoration: "none"}}>Terms of Service</a>
+                                        <Link to="#" style={{textDecoration: "none"}}>Coffe Shop ?</Link>
+                                        <Link to="#" style={{textDecoration: "none"}}>About Us</Link>
+                                        <Link to="#" style={{textDecoration: "none"}}>FAQ</Link>
+                                        <Link to="#" style={{textDecoration: "none"}}>Privacy Policy</Link>
+                                        <Link to="#" style={{textDecoration: "none"}}>Terms of Service</Link>
                                     </div>
                                 </div>
                         </div>
