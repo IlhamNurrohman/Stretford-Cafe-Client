@@ -105,11 +105,7 @@ export default class Register extends Component {
                             }} />
                             <div className="register-button" onClick={() => {
                                 const { email, password, phone } = this.state;
-                                const body = {
-                                    email,
-                                    password,
-                                    phone,
-                                };
+                                const body = { email, password, phone };
                                 axios
                                     .post(`${process.env.REACT_APP_API_HOST}/auth/new`, body)
                                     .then((result) => {
