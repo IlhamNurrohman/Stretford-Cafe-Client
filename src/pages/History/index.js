@@ -49,7 +49,7 @@ export default class History extends Component {
                         {this.state.history.map((item) => (
                             <CardHistory 
                             key={item.id} 
-                            pictures={`${process.env.REACT_APP_API_HOST}${item.pictures}`}
+                            pictures={`${item.pictures}`}
                             name={item.name} 
                             sub_total={item.sub_total}
                             delivery_methods_id={item.delivery_methods_id}  />
