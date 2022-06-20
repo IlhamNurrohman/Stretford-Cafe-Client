@@ -146,7 +146,7 @@ class Login extends Component {
                             <p className="already-account-text">Don't have an account?</p>
                             <div className="underline"></div>
                         </section>
-                        <div className="login-here-button"><Link to="/Register" style={{ textDecoration: "none", color: "#fffefe" }}>Sign Up Here</Link></div>
+                        <div className="login-here-button"><Link to="/register" style={{ textDecoration: "none", color: "#fffefe" }}>Sign Up Here</Link></div>
                     </section>
                     <footer>
                         <aside className="describe" aria-label="">
