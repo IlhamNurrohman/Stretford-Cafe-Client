@@ -17,15 +17,15 @@ class EditProduct extends Component {
             //product: {},
             id: "",
             name: "",
-            sizes_id: "",
+            sizes_id: 0,
             description: "",
-            delivery_methods_id: "",
+            delivery_methods_id: 0,
             start_hours: "",
             end_hours: "",
-            stock: "",
+            stock: 0,
             pictures: Default,
-            categories_id: "",
-            price: "",
+            categories_id: 0,
+            price: 0,
             updated_at: new Date(Date.now()),
             isUpdate: false,
             isLoggedIn: localStorage.getItem('userinfo') ? true : false,
@@ -59,14 +59,14 @@ class EditProduct extends Component {
         if (this.state.name !== "") {
             body.append("name", this.state.name);
         }
-        if (this.state.sizes_id !== "") {
-            body.append("sizes_id", this.state.sizes_id);
+        if (this.state.sizes_id !== 0) {
+            body.append("sizes_id", Number(this.state.sizes_id));
         }
         if (this.state.description !== "") {
             body.append("description", this.state.description);
         }
-        if (this.state.delivery_methods_id !== "") {
-            body.append("delivery_methods_id", this.state.delivery_methods_id);
+        if (this.state.delivery_methods_id !== 0) {
+            body.append("delivery_methods_id", Number(this.state.delivery_methods_id));
         }
         if (this.state.start_hours !== "") {
             body.append("start_hours", this.state.start_hours);
@@ -74,17 +74,17 @@ class EditProduct extends Component {
         if (this.state.end_hours !== "") {
             body.append("end_hours", this.state.end_hours);
         }
-        if (this.state.stock !== "") {
-            body.append("stock", this.state.stock);
+        if (this.state.stock !== 0) {
+            body.append("stock", Number(this.state.stock));
         }
         if (this.state.pictures !== "") {
             body.append("pictures", this.state.pictures);
         }
-        if (this.state.categories_id !== "") {
-            body.append("categories_id", this.state.categories_id);
+        if (this.state.categories_id !== 0) {
+            body.append("categories_id", Number(this.state.categories_id));
         }
-        if (this.state.price !== "") {
-            body.append("price", this.state.price);
+        if (this.state.price !== 0) {
+            body.append("price", Number(this.state.price));
         }
         return body;
     };
