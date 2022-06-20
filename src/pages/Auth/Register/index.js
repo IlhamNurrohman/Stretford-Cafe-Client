@@ -134,7 +134,7 @@ export default class Register extends Component {
                                         }, 5000);
                                         this.setState({
                                             isError: true,
-                                            errorMsg: error.response.data.err,
+                                            errorMsg: error.response.data.err.msg,
                                         });
                                     });
                             }}>Sign Up</div>
