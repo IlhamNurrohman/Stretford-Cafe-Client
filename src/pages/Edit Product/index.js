@@ -357,7 +357,7 @@ class EditProduct extends Component {
                 </div>
                 <Footer />
                 {/* TOAST */}
-                <div id="snackbar-success">Product berhasil ditambahkan!</div>
+                <div id="snackbar-success">Update success !</div>
                 <div id="snackbar-fail">Terdapat kesalahan.</div>
             </div>
         )

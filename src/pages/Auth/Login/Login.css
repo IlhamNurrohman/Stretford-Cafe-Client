@@ -139,12 +139,11 @@ input,
 .register-button,
 .google-button,
 .login-here-button,
-.signup-input-pass-container,
-.signup-input-pass {
+.signup-input-pass-container{
   background: rgb(255, 255, 255);
   border: 1px solid rgb(79, 86, 101);
   border-radius: 10px;
-  height: 50px;
+  height: 60px;
   width: 400px ;
 }
 
@@ -353,10 +352,7 @@ footer-text {
 }
 .signup-input-pass, 
 .signup-input-pass:active{
-  border-right: none;
-  border-top: 1px solid rgb(79, 86, 101);
-  border-left: 1px solid rgb(79, 86, 101);
-  border-bottom: 1px solid rgb(79, 86, 101); 
+  border: none;
   outline: none;
   background-color: none;
 }

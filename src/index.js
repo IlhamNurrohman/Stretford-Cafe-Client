@@ -32,20 +32,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={
-              <PrivateLoggedIn>
-                <Register />
-              </PrivateLoggedIn>
-            } />
-            <Route path="/login" element={
-              <PrivateLoggedIn>
-                <Login />
-              </PrivateLoggedIn>
-            } />
+            <PrivateLoggedIn>
+              <Register />
+            </PrivateLoggedIn>
+          } />
+          <Route path="/login" element={
+            <PrivateLoggedIn>
+              <Login />
+            </PrivateLoggedIn>
+          } />
           <Route path="/profile" element={
-              <PrivateNotLoggedIn redirectedTo="/login">
-                <Profile />
-              </PrivateNotLoggedIn>
-            } />
+            <PrivateNotLoggedIn redirectedTo="/login">
+              <Profile />
+            </PrivateNotLoggedIn>
+          } />
           <Route path="/product/:favorite" element={<Product />} />
           <Route path="/product" element={<Product />} />
           <Route path="/addproduct" element={<AddProduct />} />
@@ -55,16 +55,19 @@ function App() {
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/product/detail/:id" element={<ProductDetail />} />
           <Route path="/history" element={
-              <PrivateNotLoggedIn redirectedTo="/login">
-                <History />
-              </PrivateNotLoggedIn>
-            } />
+            <PrivateNotLoggedIn redirectedTo="/login">
+              <History />
+            </PrivateNotLoggedIn>
+          } />
           <Route path="/payment" element={
-              <PrivateNotLoggedIn redirectedTo="/login">
-                <Payment />
-              </PrivateNotLoggedIn>
-            } />
-          <Route path="/dashboard" element={<Dashboard />} />
+            <PrivateNotLoggedIn redirectedTo="/login">
+              <Payment />
+            </PrivateNotLoggedIn>
+          } />
+          <Route path="/dashboard" element={
+            <PrivateNotLoggedIn redirectedTo="/login">
+              <Dashboard />
+            </PrivateNotLoggedIn>} />
         </Routes>
       </Router>
     </ReduxProvider>

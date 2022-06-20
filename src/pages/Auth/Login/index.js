@@ -12,8 +12,10 @@ import OpenEye from "../../../assets/icon/open-eye.png";
 import ClosedEye from "../../../assets/icon/closed-eye.png";
 
 import "./Login.css";
+import withLocation from '../../../Helper/withLocation';
+import { Modal } from "react-bootstrap";
 
-export default class Login extends Component {
+class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -23,11 +25,18 @@ export default class Login extends Component {
             isPasswordShown: false,
             isError: false,
             errorMsg: "",
-            isLoggedin: false
+            isLoggedin: false,
+            isShow: false
         };
     };
-    componentDidMount(){
+    componentDidMount() {
         document.title = "Login"
+        const { state = null } = this.props.location;
+        if (state !== null && !state.isAuthenticated) {
+            this.setState({
+                isShow: true,
+            });
+        }
     }
     render() {
         // const userInfo = JSON.parse(localStorage.getItem("userinfo"));
@@ -39,7 +48,7 @@ export default class Login extends Component {
         return (
             <div className="container">
                 <div className="column-image">
-                    <img src={asaidImg} className="side-image" alt="aside"/>
+                    <img src={asaidImg} className="side-image" alt="aside" />
                 </div>
                 <div className="column-main">
                     <header className="side-title">
@@ -57,23 +66,23 @@ export default class Login extends Component {
                             }} />
                             <label htmlFOR="password">Password :</label>
                             <div className='signup-input-pass-container'>
-                                        <input type={this.state.isPasswordShown ? "email" : "password"} id="password" placeholder="Enter your password" className='signup-input-pass' 
-                                        style={{justifyContent: "space-between", marginLeft: "0%", marginTop: "1%"}}
-                                            onChange={e => {
-                                                this.setState({
-                                                    password: e.target.value,
-                                                })
-                                            }}
-                                        />
-                                        <div className="icon-pass-container"
-                                            onClick={() => {
-                                                this.setState({
-                                                    isPasswordShown: !this.state.isPasswordShown
-                                                })
-                                            }}>
-                                            {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
-                                        </div>
-                                    </div>
+                                <input type={this.state.isPasswordShown ? "email" : "password"} id="password" placeholder="Enter your password" className='signup-input-pass'
+                                    style={{ justifyContent: "space-between", marginLeft: "0%", marginTop: "1%" }}
+                                    onChange={e => {
+                                        this.setState({
+                                            password: e.target.value,
+                                        })
+                                    }}
+                                />
+                                <div className="icon-pass-container"
+                                    onClick={() => {
+                                        this.setState({
+                                            isPasswordShown: !this.state.isPasswordShown
+                                        })
+                                    }}>
+                                    {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
+                                </div>
+                            </div>
                             {/* <input type={`${this.state.isPasswordShown ? "email" : "password"}`} className="password" placeholder="Enter your phone password" onChange={(e) => {
                                 this.setState({
                                     password: e.target.value,
@@ -102,7 +111,7 @@ export default class Login extends Component {
                             </label> */}
                             <div className="register-button" onClick={() => {
                                 const { email, password } = this.state;
-                                const body = { email,password };
+                                const body = { email, password };
                                 axios
                                     .post(`${process.env.REACT_APP_API_HOST}/auth`, body)
                                     .then((result) => {
@@ -170,8 +179,24 @@ export default class Login extends Component {
                         </aside>
                         <div id="snackbar">Password atau email salah</div>
                     </footer>
+                    <Modal
+                        show={this.state.isShow}
+                        onHide={() => {
+                            this.setState({ isShow: false },
+                            );
+                        }}
+                    >
+                        <Modal.Header>
+                            <Modal.Title className='profile-modal-title'>Please Login</Modal.Title>
+                        </Modal.Header>
+                        {/* <Modal.Body></Modal.Body> */}
+                        <Modal.Footer>
+                            {/* <Button></Button> */}
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             </div>
         );
     }
 }
+export default withLocation(Login)
