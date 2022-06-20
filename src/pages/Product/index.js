@@ -16,6 +16,7 @@ import "./Product.css"
 import mothersImg from "../../assets/img/image 46.png";
 import sundayImg from "../../assets/img/image 43.png";
 import halloweenImg from "../../assets/img/image 45.png";
+import editIcon from "../../assets/icon/edit-icon.png";
 
 // import ColdBrew from "../../assets/img/coldbrew.png"
 
@@ -49,7 +50,7 @@ class Product extends Component {
 
   componentDidMount() {
     document.title = "Product"
-    console.log(this.state.searchProduct)
+    //console.log(this.state.searchProduct)
     this.state.setSearchParams('')
     axios
       .get(`${process.env.REACT_APP_API_HOST}/products`)
@@ -112,7 +113,7 @@ class Product extends Component {
     //console.log(this.state.totalPage)
     return (
       <div>
-        <Header setSearchName={this.setSearchName.bind(this)}/>
+        <Header setSearchName={this.setSearchName.bind(this)} />
         <div className="container-fluid">
           <div className="row" style={{ height: "100%", maxWidth: "100%", paddingLeft: "1%", marginBottom: "80px", paddingTop: "20px" }}>
             <div className="col-sm-4" style={{ width: "40%", borderRight: "0.5px solid rgba(159, 159, 159, 1)" }}>
@@ -164,13 +165,13 @@ class Product extends Component {
                 <p>4. Should make member card to apply coupon</p>
               </div>
               {this.state.role !== "admin" ? (
-                  <></>
-                ) : (
-                  <div className="coupon-button d-flex justify-content-around mt-5">
-                    <div className="custom-apply-button">Edit Promo</div>
-                    <div className="custom-apply-button">Create Promo</div>
-                  </div>
-                )}
+                <></>
+              ) : (
+                <div className="coupon-button d-flex justify-content-around mt-5">
+                  <Link to="/editpromo" className="custom-apply-button" style={{ textDecoration: "none" }}>Edit Promo</Link>
+                  <Link to="/addpromo" className="custom-apply-button" style={{ textDecoration: "none" }}>Create Promo</Link>
+                </div>
+              )}
             </div>
             <div className="col-sm-8" style={{ borderLeft: "1px rgba(159, 159, 159, 1)", width: "60%" }}>
               <nav className="custom-product-nav">
@@ -279,6 +280,17 @@ class Product extends Component {
                             <p className="card-text custom-product-price"
                               style={{ textAlign: "center", fontFamily: "Poppins", color: "rgba(106, 64, 41, 1)", }}> {formater.format(product.price)}</p>
                           </div>
+                          {this.state.role !== "admin" ? (
+                            <></>
+                          ) : (
+                            <button type="button" class="btn position-relative" style={{ border: "none", marginTop: "-20%", marginLeft: "-20%" }}>
+                              <span class="position-absolute top-100 start-100 translate-middle p-2 border border-light rounded-circle" style={{ background: "rgba(106, 64, 41, 1)" }}>
+                                <Link to={`/editproduct/${product.id}`}>
+                                <img src={editIcon} alt="edit" style={{ width: "20px", height: "20px", alignItems: "center" }} /></Link>
+                                <span class="visually-hidden">Edit</span>
+                              </span>
+                            </button>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -312,13 +324,12 @@ class Product extends Component {
                 </div>
                 <div className="custom-notes">*the price has been cutted by discount appears</div>
                 {this.state.role !== "admin" ? (
-                    <></>
-                  ) : (
-                    <div className="coupon-button d-flex justify-content-around mt-5">
-                      <div className="custom-apply-button">EDIT PRODUCT</div>
-                      <div className="custom-apply-button">CREATE PRODUCT</div>
-                    </div>
-                  )}
+                  <></>
+                ) : (
+                  <div className="coupon-button d-flex justify-content-around mt-5">
+                    <Link to="/addproduct" className="custom-apply-button" style={{ textDecoration: "none" }}>CREATE PRODUCT</Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>

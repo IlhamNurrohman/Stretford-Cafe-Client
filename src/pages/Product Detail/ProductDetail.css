@@ -278,9 +278,9 @@
 }
 
 
-.pd-size-vector:hover input~.pd-size-checkmark {
+/* .pd-size-vector:hover input~.pd-size-checkmark {
     background-color: #fcaf16;
-}
+} */
 
 .pd-size-vector input:checked~.pd-size-checkmark {
     background-color: #FFBA33;
@@ -391,12 +391,12 @@
     -o-user-select: none;
 }
 
-.pd-dm-button-inactive:hover input~.pd-dm-checkmark {
+/* .pd-dm-button-inactive:hover input~.pd-dm-checkmark {
     background: #6A4029;
     box-shadow: 0px 6px 20px rgba(137, 85, 55, 0.4);
     color: #FFFFFF;
     font-weight: 700;
-}
+} */
 
 .pd-dm-button-inactive input:checked~.pd-dm-checkmark {
     background: #6A4029;

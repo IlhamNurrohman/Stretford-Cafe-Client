@@ -46,3 +46,13 @@ export const getProductDetail = async (id) => {
     console.log(error);
   }
 };
+export const updateProduct = async (id) => {
+  try {
+    const URL = `${process.env.REACT_APP_API_HOST}/products/${id}`;
+    const results = await axios.get(URL);
+    //console.log(results)
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};

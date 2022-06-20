@@ -135,9 +135,9 @@ export default class Profile extends Component {
                 <div>
                     <Header />
                     <div className="profile-row">
-                        <div className="container-fluid">
+                        <div className="container-fluid" >
                             <h3 className="user-profile">User Profile</h3>
-                            <div className="card g-0" style={{ marginLeft: "-50px", maxWidth: "1100px", height: "900px", borderRadius: "10px", boxShadow: "0px 6px 20px rgba(0, 0, 0, 0.22)" }}>
+                            <div className="card g-0" style={{ marginLeft: "-50px", maxWidth: "1100px", height: "1000px", borderRadius: "10px", boxShadow: "0px 6px 20px rgba(0, 0, 0, 0.22)", marginBottom: "20%" }}>
                                 <div className="row">
                                     <div className="col-md-4">
                                         <div className="container-fluid img-container">

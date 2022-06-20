@@ -93,7 +93,8 @@ export default class Register extends Component {
                                 Show Password
                             </label> */}
                             <label htmlFOR="phone">Phone Number :</label>
-                            <input type="email" name="phone" placeholder="Enter your phone number" onChange={(e) => {
+                            <input type="email" name="phone" placeholder="Enter your phone number" 
+                            onChange={(e) => {
                                 this.setState({
                                     phone: e.target.value,
                                 });
