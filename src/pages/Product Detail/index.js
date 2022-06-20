@@ -69,7 +69,7 @@ class ProductDetail extends Component {
                             <section className="pd-main-content">
                                 <div className="pd-left-content">
                                     <div className="pd-main-img-container">
-                                        <img src={`${process.env.REACT_APP_API_HOST}${product.pictures}`} alt="coldbrew" className="pd-main-img" />
+                                        <img src={`${product.pictures}`} alt="coldbrew" className="pd-main-img" />
                                     </div>
                                     <div className="pd-main-product-name">
                                         <h2>{product.name}</h2>
@@ -160,7 +160,7 @@ class ProductDetail extends Component {
                             <section className="pd-checkout-container">
                                 <div className="pd-product-checkout">
                                     <div className="pd-checkout-img">
-                                        <img src={`${process.env.REACT_APP_API_HOST}${product.pictures}`} alt="coldbrew" className='pd-check-out-img' />
+                                        <img src={`${product.pictures}`} alt="coldbrew" className='pd-check-out-img' />
                                     </div>
                                     <div className="pd-checkout-info">
                                         <h4 className="pd-checkout-name">{product.name}</h4>

@@ -8,14 +8,14 @@ import withLocation from '../../Helper/withLocation'
 // import { Routes, Route, Link } from 'react-router-dom'
 //import { connect } from 'react-redux'
 import { formater } from '../../Helper/formatNumber'
-
+import moment from 'moment'
 
 import "./Product.css"
 
 //import Check from "../../assets/icon/check.png"
-import mothersImg from "../../assets/img/image 46.png";
-import sundayImg from "../../assets/img/image 43.png";
-import halloweenImg from "../../assets/img/image 45.png";
+//import mothersImg from "../../assets/img/image 46.png";
+// import sundayImg from "../../assets/img/image 43.png";
+// import halloweenImg from "../../assets/img/image 45.png";
 import editIcon from "../../assets/icon/edit-icon.png";
 
 // import ColdBrew from "../../assets/img/coldbrew.png"
@@ -25,6 +25,7 @@ class Product extends Component {
     super(props);
     this.state = {
       product: [],
+      promo: [],
       categoryActive: "all",
       doAxios: false,
       sort: "categories",
@@ -62,9 +63,20 @@ class Product extends Component {
       }).catch(error => {
         console.log(error)
       })
+
+    axios
+      .get(`${process.env.REACT_APP_API_HOST}/promos`)
+      .then(result => {
+        this.setState({
+          promo: result.data.data,
+        });
+      }).catch(error => {
+        console.log(error)
+      })
   }
 
   componentDidUpdate() {
+    // this.state.getPromo();
     if (this.state.doAxios) {
       let params = ''
       let url = `${process.env.REACT_APP_API_HOST}/products`
@@ -121,15 +133,30 @@ class Product extends Component {
                 <h3 className="custom-promo-title-head">Promo Today</h3>
                 <p className="custom-promo-paragraph">Coupons will be updated every weeks. Check them out! </p>
               </div>
-              <div className="custom-promo-card row mother-day-card">
-                <div className="col-4 custom-promo-pict"><img
-                  src={mothersImg}
-                  alt="mother's-day-promo" className="custom-promo-img" /></div>
-                <div className="col custom-card-text">
-                  <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
-                </div>
-              </div>
-              <div className="custom-promo-card row sunday-morning-card">
+              {this.state.promo.length === 0 ? <div>DATA NOT FOUND</div> :
+                this.state.promo.map((promo) => (
+                  <div className="custom-promo-card row mother-day-card">
+                    <div className="col-4 custom-promo-pict">
+                      <img src={`${promo.pictures}`}
+                        alt="promo" className="custom-promo-img" />
+                    </div>
+                    <div className="col custom-card-text">
+                      <p className="custom-card-info"><b>{promo.coupon_code}</b><br />Only{moment(promo.start_date).format('MMM Do YYYY')} <br />to {moment(promo.end_date).format('MMM Do YYYY')}</p>
+                    </div>
+                    {this.state.role !== "admin" ? (
+                      <></>
+                    ) : (
+                      <button type="button" class="btn position-relative" style={{ border: "none", marginTop: "-20%", marginLeft: "-20%" }}>
+                        <span class="position-absolute top-0 start-100 translate-middle-y p-2 border border-light rounded-circle" style={{ background: "rgba(106, 64, 41, 1)" }}>
+                          <Link to={`/editpromo/${promo.id}`}>
+                            <img src={editIcon} alt="edit" style={{ width: "20px", height: "20px", alignItems: "center" }} /></Link>
+                          <span class="visually-hidden">Edit</span>
+                        </span>
+                      </button>
+                    )}
+                  </div>
+                ))}
+              {/* <div className="custom-promo-card row sunday-morning-card">
                 <div className="col-4 custom-promo-pict"><img
                   src={sundayImg}
                   alt="free-sunday-morning" className="custom-promo-img" /></div>
@@ -155,7 +182,7 @@ class Product extends Component {
                   <p className="custom-card-info"><b>HAPPY HALLOWEEN!
                   </b><br />Do you like chicken wings? Get 1 free only if you buy pinky promise</p>
                 </div>
-              </div>
+              </div>  */}
               <div className="custom-apply-button">Apply Coupon</div>
               <div className="custom-term">
                 <p className="custom-term-title">Terms and Condition</p>
@@ -168,7 +195,6 @@ class Product extends Component {
                 <></>
               ) : (
                 <div className="coupon-button d-flex justify-content-around mt-5">
-                  <Link to="/editpromo" className="custom-apply-button" style={{ textDecoration: "none" }}>Edit Promo</Link>
                   <Link to="/addpromo" className="custom-apply-button" style={{ textDecoration: "none" }}>Create Promo</Link>
                 </div>
               )}
@@ -235,7 +261,7 @@ class Product extends Component {
                 <div className='dropdown-sort'>
                   <label htmlFor="sort-product"></label>
                   <select className="btn btn-light sort-product" id="sort-product"
-                    onClick={(e) => {
+                    onChange={(e) => {
                       this.setState({
                         sort: e.target.value
                       })
@@ -286,7 +312,7 @@ class Product extends Component {
                             <button type="button" class="btn position-relative" style={{ border: "none", marginTop: "-20%", marginLeft: "-20%" }}>
                               <span class="position-absolute top-100 start-100 translate-middle p-2 border border-light rounded-circle" style={{ background: "rgba(106, 64, 41, 1)" }}>
                                 <Link to={`/editproduct/${product.id}`}>
-                                <img src={editIcon} alt="edit" style={{ width: "20px", height: "20px", alignItems: "center" }} /></Link>
+                                  <img src={editIcon} alt="edit" style={{ width: "20px", height: "20px", alignItems: "center" }} /></Link>
                                 <span class="visually-hidden">Edit</span>
                               </span>
                             </button>

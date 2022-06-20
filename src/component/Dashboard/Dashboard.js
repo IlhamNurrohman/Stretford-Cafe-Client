@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from 'react-chartjs-2';
 import { ArcElement,
   LineElement,
@@ -25,6 +25,7 @@ import { ArcElement,
   Tooltip, Chart } from "chart.js";
 //import BarElement from "chartjs-plugin-datalabels";
 import "../Dashboard/Dashboard.css";
+import axios from "axios";
 
 Chart.register(
     ArcElement,
@@ -53,15 +54,27 @@ Chart.register(
 );
 
 const BarChart = () => {
+  const [dashboard, setDashboard] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_HOST}/transactions/dashboard`)
+      .then(result => {
+        setDashboard(result.data.data)
+      }).catch(error => {
+        console.log(error)
+      })
+
+  },[])
+  console.log(dashboard)
     return (
         <div>
         <Bar
             data={{
-                labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+                labels: dashboard.map(item => item.date),
                 datasets: [
                     {
                         label: ['Income'],
-                        data: [3000000, 5000000, 4500000, 5000000, 2000000, 3000000],
+                        data: dashboard.map(item => item.revenue),
                         backgroundColor: ['rgba(255, 186, 51, 1)'],
                         borderColor: [
                           'rgba(255, 186, 51, 1)',

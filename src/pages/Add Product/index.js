@@ -81,9 +81,6 @@ class AddProduct extends Component {
         this.inputFile.current.click();
         event.preventDefault();
     };
-    handleChangeCategories(event) {
-        this.setState({ categories_id: event.target.value });
-    }
     componentDidMount() {
         document.title = "Add Product"
     }
@@ -323,7 +320,7 @@ class AddProduct extends Component {
                 </div>
                 <Footer />
                 {/* TOAST */}
-                <div id="snackbar-success">Product berhasil ditambahkan!</div>
+                <div id="snackbar-success">Promo berhasil ditambahkan!</div>
                 <div id="snackbar-fail">Terdapat kesalahan.</div>
             </div>
         )

@@ -118,7 +118,7 @@ export class Payment extends Component {
                                 <div className="pm-all-order">
                                     <div className="pm-order-item">
                                         <div className="pm-item-img">
-                                            <img src={`${process.env.REACT_APP_API_HOST}${this.state.product.pictures}`} alt="" className="pm-product-img" /></div>
+                                            <img src={`${this.state.product.pictures}`} alt="" className="pm-product-img" /></div>
                                         <div className="pm-item-detail">
                                             <p>{this.state.product.name}</p>
                                             <p>x{counter}</p>

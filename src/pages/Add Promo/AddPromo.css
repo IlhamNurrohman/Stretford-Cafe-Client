@@ -274,7 +274,7 @@
   .pd-dm-button-inactive input:checked~.pd-dm-checkmark {
     background-color: #FFBA33;
     box-shadow: 0px 6px 20px rgba(137, 85, 55, 0.4);
-    color: #FFFFFF;
+    color: #6A4029;
     font-weight: 700;
   }
   
