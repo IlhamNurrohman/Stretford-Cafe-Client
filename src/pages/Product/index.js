@@ -271,7 +271,7 @@ class Product extends Component {
                         <div key={product.id} className="card"
                           style={{ borderRadius: "30px", width: "126px", height: "212.41px", boxShadow: "0px 30px 60px", color: "rgba(57, 57, 57, 0.1)", marginBottom: "40%" }}>
                           <Link to={`/product/detail/${product.id}`}>
-                            <img src={`${process.env.REACT_APP_API_HOST}${product.pictures}`} className="" alt={product.name} style={{ borderRadius: "100px", width: "70%", marginTop: "-30%", marginLeft: "15%" }} />
+                            <img src={`${product.pictures}`} className="" alt={product.name} style={{ borderRadius: "100px", width: "70%", marginTop: "-30%", marginLeft: "15%" }} />
                           </Link>
                           <div className="card-body">
                             <h5 className="card-title custom-product-name" style={{ marginBottom: "35%" }}>

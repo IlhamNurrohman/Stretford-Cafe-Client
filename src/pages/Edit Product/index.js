@@ -14,7 +14,8 @@ class EditProduct extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: {},
+            //product: {},
+            id: "",
             name: "",
             sizes_id: "",
             description: "",
@@ -26,7 +27,7 @@ class EditProduct extends Component {
             categories_id: "",
             price: "",
             updated_at: new Date(Date.now()),
-            isPost: false,
+            isUpdate: false,
             isLoggedIn: localStorage.getItem('userinfo') ? true : false,
         }
         this.inputFile = React.createRef();
@@ -36,17 +37,17 @@ class EditProduct extends Component {
             .then((res) => {
                 console.log(res);
                 this.setState({
-                    name: res.data.data.name,
-                    price: res.data.data.price,
-                    pictures: res.data.data.pictures,
-                    description: res.data.data.description,
-                    delivery_methods_id: res.data.data.delivery_methods_id,
-                    start_hours: res.data.data.start_hours,
-                    end_hours: res.data.data.end_hours,
-                    stock: res.data.data.stock,
-                    categories_id: res.data.data.categories_id,
-                    sizes_id: res.data.data.sizes_id,
-                    product: res.data.data[0]
+                    id: res.data.data[0].id,
+                    name: res.data.data[0].name,
+                    price: res.data.data[0].price,
+                    pictures: res.data.data[0].pictures,
+                    description: res.data.data[0].description,
+                    delivery_methods_id: res.data.data[0].delivery_methods_id,
+                    start_hours: res.data.data[0].start_hours,
+                    end_hours: res.data.data[0].end_hours,
+                    stock: res.data.data[0].stock,
+                    categories_id: res.data.data[0].categories_id,
+                    sizes_id: res.data.data[0].sizes_id
                 });
             })
             .catch((err) => {
@@ -125,8 +126,8 @@ class EditProduct extends Component {
                                 <span>Add new product</span>
                             </div>
                             <div className="container-fluid img-container">
-                                <img src={this.state.image_src
-                                    ? `${process.env.REACT_APP_API_HOST}${this.state.product.pictures}`
+                                <img src={!this.state.image_src
+                                    ? `${this.state.pictures}`
                                     : this.state.image_src} className="img-profile" alt="img-profile" />
                             </div>
                             {/* {this.state.isError ? <p>{this.state.errorMsg}</p> : <></>} */}
@@ -144,7 +145,7 @@ class EditProduct extends Component {
                             </div>
                             <div>
                                 <input type="time" placeholder='Select start hour' class="form-select" aria-label="Default select example" style={{ width: "65%", height: "50px", borderRadius: "20px", marginTop: "10px", marginLeft: "10px" }}
-                                value={this.state.product.start_hours}
+                                value={this.state.start_hours}
                                     onChange={(e) => {
                                         this.setState({
                                             start_hours: e.target.value,
@@ -153,6 +154,7 @@ class EditProduct extends Component {
                             </div>
                             <div>
                                 <input type="time" class="form-select" aria-label="Default select example" style={{ width: "65%", height: "50px", borderRadius: "20px", marginTop: "20px", marginLeft: "10px" }}
+                                value={this.state.end_hours}
                                     onChange={(e) => {
                                         this.setState({
                                             end_hours: e.target.value,
@@ -164,6 +166,7 @@ class EditProduct extends Component {
                             </div>
                             <div>
                                 <input type="stock" placeholder="Input stock" class="form-select" aria-label="Default select example" style={{ width: "65%", height: "50px", borderRadius: "20px", marginTop: "10px", marginLeft: "10px" }}
+                                value={this.state.stock}
                                     onChange={(e) => {
                                         this.setState({
                                             stock: e.target.value,
@@ -187,7 +190,7 @@ class EditProduct extends Component {
                                     <label htmlFor="label-input" className="form-label">Name</label>
                                     <input type="text" className="input-form" id="inputEmail4"
                                         placeholder="Enter name product"
-                                        value={this.state.product.name}
+                                        value={this.state.name}
                                         onChange={(e) => {
                                             this.setState({
                                                 name: e.target.value,
@@ -196,7 +199,7 @@ class EditProduct extends Component {
                                     <label htmlFor="label-input" className="form-label">Price</label>
                                     <input type="text" className="input-form" id="inputEmail4"
                                         placeholder="Enter price product"
-                                        value={this.state.product.price}
+                                        value={this.state.price}
                                         onChange={(e) => {
                                             this.setState({
                                                 price: e.target.value,
@@ -204,7 +207,7 @@ class EditProduct extends Component {
                                         }} />
                                     <label htmlFor="label-input" className="form-label">Description</label>
                                     <input type="text" className="input-textarea" id="inputEmail4" placeholder="Enter description product"
-                                    value={this.state.product.description}
+                                    value={this.state.description}
                                         onChange={(e) => {
                                             this.setState({
                                                 description: e.target.value,
@@ -322,11 +325,11 @@ class EditProduct extends Component {
 
                                             const body = this.setDataProduct();
                                             axios
-                                                .post(`${process.env.REACT_APP_API_HOST}/products`, body, config)
+                                                .patch(`${process.env.REACT_APP_API_HOST}/products/${this.state.id}`, body, config)
                                                 .then(result => {
                                                     console.log(result)
                                                     this.setState({
-                                                        isPost: true
+                                                        isUpdate: true
                                                     });
                                                     let x = document.getElementById("snackbar-success");
                                                     x.className = "show";

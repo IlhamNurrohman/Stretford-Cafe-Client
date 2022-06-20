@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import Footer from '../../component/Footer/Footer'
 import Header from '../../component/Header/Header'
-//import Default from "../../assets/img/dummy-image.jpg";
+import Default from "../../assets/img/Screen Shot 2022-06-20 at 11.20.36.png";
 
 import "./AddProduct.css"
 
@@ -18,7 +18,7 @@ class AddProduct extends Component {
             start_hours: "",
             end_hours: "",
             stock: "",
-            pictures: "",
+            pictures: Default,
             categories_id: "",
             price: "",
             created_at: new Date(Date.now()),
@@ -101,9 +101,9 @@ class AddProduct extends Component {
                                 <span>Add new product</span>
                             </div>
                             <div className="container-fluid img-container">
-                                <img src={this.state.image_src
-                                    ? `${process.env.REACT_APP_API_HOST}${this.state.pictures}`
-                                    : this.state.image_src} className="img-profile" alt="img-profile" />
+                                <img src={!this.state.image_src
+                                    ? `${this.state.pictures}`
+                                    : this.state.image_src} className="img-profile" alt="img-profile" style={{marginLeft: "-17.5%"}}/>
                             </div>
                             {/* {this.state.isError ? <p>{this.state.errorMsg}</p> : <></>} */}
                             <div className="choose-photo">
