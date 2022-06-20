@@ -149,7 +149,7 @@ export default class Register extends Component {
                             <p className="already-account-text">Already have an account?</p>
                             <div className="underline"></div>
                         </section>
-                        <div className="login-here-button"><Link to="/Login" style={{ textDecoration: "none", color: "#fffefe" }}>Login Here</Link></div>
+                        <div className="login-here-button"><Link to="/login" style={{ textDecoration: "none", color: "#fffefe" }}>Login Here</Link></div>
                     </section>
                     <footer>
                         <aside className="describe" aria-label="">
