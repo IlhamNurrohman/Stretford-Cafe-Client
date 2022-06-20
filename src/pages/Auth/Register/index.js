@@ -117,7 +117,7 @@ export default class Register extends Component {
                                             x.className = x.className.replace("show", "");
                                         }, 3000);
                                         setTimeout(() => {
-                                            this.props.history.push("/Login");
+                                            this.props.history.push("/login");
                                         }, 3001);
                                         this.setState({
                                             isSuccess: true,
@@ -134,7 +134,7 @@ export default class Register extends Component {
                                         }, 5000);
                                         this.setState({
                                             isError: true,
-                                            errorMsg: error.response.data.err.msg,
+                                            errorMsg: error.response.data.err,
                                         });
                                     });
                             }}>Sign Up</div>
