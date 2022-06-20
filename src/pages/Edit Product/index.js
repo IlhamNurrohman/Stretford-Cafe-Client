@@ -328,7 +328,7 @@ class EditProduct extends Component {
 
                                             const body = this.setDataProduct();
                                             axios
-                                                .patch(`${process.env.REACT_APP_API_HOST}/products/${this.state.id}`, body, config)
+                                                .patch(`${process.env.REACT_APP_API_HOST}/products/${this.props.params.id}`, body, config)
                                                 .then(result => {
                                                     console.log(result)
                                                     this.setState({
@@ -341,7 +341,7 @@ class EditProduct extends Component {
                                                     }, 10000);
                                                 })
                                                 .catch(error => {
-                                                    //console.log(error)
+                                                    console.log(error)
                                                     var x = document.getElementById("snackbar-fail");
                                                     x.className = "show";
                                                     setTimeout(function () {
