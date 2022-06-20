@@ -142,7 +142,7 @@ export default class Profile extends Component {
                                     <div className="col-md-4">
                                         <div className="container-fluid img-container">
                                             <img src={!this.state.image_src 
-                                                ?  `${process.env.REACT_APP_API_HOST}${this.state.users.pictures}`
+                                                ?  `${this.state.users.pictures}`
                                                 : this.state.image_src} className="img-profile" alt="img-profile" />
                                         </div>
                                         <h4 className="username" style={{ marginLeft: "-28px" }}>{this.state.users.username ? this.state.users.username : "Display Name"}</h4>
