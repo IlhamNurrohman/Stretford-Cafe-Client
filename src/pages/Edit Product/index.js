@@ -219,24 +219,27 @@ class EditProduct extends Component {
                                             <label className="new-category-button-inactive">
                                                 <input type="radio" name="new-category-input" className='new-category-input' />
                                                 <span className="new-category-checkmark"
+                                                value={this.state.categories_id}
                                                     onClick={() => {
-                                                        this.setState({ categories_id: "1" })
+                                                        this.setState({ categories_id: 1 })
                                                     }}
                                                 >Coffee</span>
                                             </label>
                                             <label className="new-category-button-inactive">
                                                 <input type="radio" name="new-category-input" className='new-category-input' />
                                                 <span className="new-category-checkmark"
+                                                value={this.state.categories_id}
                                                     onClick={() => {
-                                                        this.setState({ categories_id: "4" })
+                                                        this.setState({ categories_id: 4 })
                                                     }}
                                                 >Non Coffee</span>
                                             </label>
                                             <label className="new-category-button-inactive">
                                                 <input type="radio" name="new-category-input" className='new-category-input' />
                                                 <span className="new-category-checkmark"
+                                                value={this.state.categories_id}
                                                     onClick={() => {
-                                                        this.setState({ categories_id: "6" })
+                                                        this.setState({ categories_id: 6 })
                                                     }}
                                                 >Food</span>
                                             </label>
@@ -338,7 +341,7 @@ class EditProduct extends Component {
                                                     }, 10000);
                                                 })
                                                 .catch(error => {
-                                                    console.log(error)
+                                                    //console.log(error)
                                                     var x = document.getElementById("snackbar-fail");
                                                     x.className = "show";
                                                     setTimeout(function () {
