@@ -77,7 +77,7 @@ export class Payment extends Component {
                 this.setState({
                     isPost: true
                 });
-                let x = document.getElementById("snackbar");
+                let x = document.getElementById("better");
                 x.className = "show";
                 setTimeout(function () {
                     x.className = x.className.replace("show", "");
@@ -255,7 +255,7 @@ export class Payment extends Component {
                     </section>
                 </main>
                 <Footer />
-                <div id="snackbar">
+                <div id="better">
                     Transactions Success
                 </div>
             </>

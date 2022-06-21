@@ -120,9 +120,9 @@ export default class Register extends Component {
                                         setTimeout(function () {
                                             x.className = x.className.replace("show", "");
                                         }, 3000);
-                                        setTimeout(() => {
-                                            this.props.history.push("/login");
-                                        }, 4000);
+                                        // setTimeout(() => {
+                                        //     this.props.history.push("/login");
+                                        // }, 4000);
                                         this.setState({
                                             isSuccess: true,
                                             isError: false,
