@@ -24,6 +24,10 @@ export default class Register extends Component {
         errorMsg: "",
         isSuccess: false,
     };
+    componentDidMount() {
+        document.title = "Register"
+        
+    }
     render() {
         // if (this.state.isSuccess === true) {
         //     return <Navigate to="/Login" />
@@ -118,7 +122,7 @@ export default class Register extends Component {
                                         }, 3000);
                                         setTimeout(() => {
                                             this.props.history.push("/login");
-                                        }, 3001);
+                                        }, 4000);
                                         this.setState({
                                             isSuccess: true,
                                             isError: false,
@@ -126,7 +130,7 @@ export default class Register extends Component {
                                         });
                                     })
                                     .catch((error) => {
-                                        console.log(error)
+                                        // console.log(error)
                                         let x = document.getElementById("toast");
                                         x.className = "show";
                                         setTimeout(function () {
@@ -134,7 +138,7 @@ export default class Register extends Component {
                                         }, 5000);
                                         this.setState({
                                             isError: true,
-                                            errorMsg: error.response.data.err.msg,
+                                            errorMsg: error.response.data.err,
                                         });
                                     });
                             }}>Sign Up</div>

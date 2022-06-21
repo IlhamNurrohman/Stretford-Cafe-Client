@@ -22,7 +22,7 @@ export default class Profile extends Component {
             <div className="col-sm-8">
               <div className="report-wrapper">
                 <h2>Weekly</h2>
-                <p>Last 6 days</p>
+                <p>Last 7 days</p>
                 <BarChart
                 />
               </div>
