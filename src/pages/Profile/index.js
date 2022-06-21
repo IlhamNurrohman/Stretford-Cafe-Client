@@ -141,9 +141,14 @@ export default class Profile extends Component {
                                 <div className="row">
                                     <div className="col-md-4">
                                         <div className="container-fluid img-container">
-                                            <img src={!this.state.image_src 
-                                                ?  `${this.state.users.pictures}`
-                                                : this.state.image_src} className="img-profile" alt="img-profile" />
+                                            <img src=
+                                            {this.state.image_src === null ? 
+                                            this.state.users.pictures ? `${this.state.users.pictures}`
+                                            : Default : this.state.image_src} className="img-profile" alt="img-profile" />
+                                            {/* <img src=
+                                            {this.state.file === null ?
+                                            this.state.profile.profile_picture ? `${this.state.profile.profile_picture}` 
+                                            : Profpic : this.state.file} alt="profile_photo" className="profile-picture" /> */}
                                         </div>
                                         <h4 className="username" style={{ marginLeft: "-28px" }}>{this.state.users.username ? this.state.users.username : "Display Name"}</h4>
                                         <p className="email" style={{ marginLeft: "30px" }}>{this.state.users.email ? this.state.users.email : "Email"}</p>
