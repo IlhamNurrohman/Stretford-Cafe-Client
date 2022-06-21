@@ -23,11 +23,11 @@
 ## Preview
 
 <div style="display:grid; grid-template-areas: 'a b'; row-gap:5px; align-items:left">
-<img src="assets/img/login.png"  alt="login" style="width: 400px"/>
-<img src="assets/img/register.png"  alt="register" style="width: 400px"/>
-<img src="assets/img/home.png"  alt="home" style="width: 400px"/>
-<img src="assets/img/product.png"  alt="product" style="width: 400px"/>
-<img src="assets/img/profile.png"  alt="profile" style="width: 400px"/>
+<img src="src/assets/img/login.png"  alt="login" style="width: 400px"/>
+<img src="src/assets/img/register.png"  alt="register" style="width: 400px"/>
+<img src="src/assets/img/home.png"  alt="home" style="width: 400px"/>
+<img src="src/assets/img/product.png"  alt="product" style="width: 400px"/>
+<img src="src/assets/img/profile.png"  alt="profile" style="width: 400px"/>
 </div>
 
 
