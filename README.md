@@ -1,7 +1,7 @@
 <h1 style="text-align:center">Stretford Cafe</h1>
 
 <div style="display:flex; justify-content:center">
-    <img src="assets/icon/coffee 1.png" alt="news-icon" />
+    <img src="src/assets/icon/coffee 1.png" alt="" />
 </div>
 
 ## Built With
