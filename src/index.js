@@ -15,6 +15,7 @@ import Login from "./pages/Auth/Login";
 import ForgotPassword from "./pages/Auth/Forgot Password";
 import Product from "./pages/Product";
 import AddProduct from "./pages/Add Product";
+import NotFound from "./pages/404";
 import EditProduct from "./pages/Edit Product";
 import AddPromo from "./pages/Add Promo";
 import EditPromo from "./pages/Edit Promo";
@@ -54,6 +55,7 @@ function App() {
           <Route path="/editpromo/:id" element={<EditPromo />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/product/detail/:id" element={<ProductDetail />} />
+          <Route path="*" element={<NotFound/>} />
           <Route path="/history" element={
             <PrivateNotLoggedIn redirectedTo="/login">
               <History />
