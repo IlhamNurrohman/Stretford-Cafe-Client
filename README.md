@@ -1,4 +1,4 @@
-<h1 style="text-align:center">Stretford Cafe</h1>
+<h1 style="text-align:center">Stretford Cafe - Frontend</h1>
 
 <div style="display:flex; justify-content:center">
     <img src="src/assets/icon/coffee 1.png" alt="stretford-cafe" />
@@ -87,7 +87,7 @@ You may also see any lint errors in the console.
 
 ## Deployment
 
-[Netlify deploy link](https://stretford-cafe-react.netlify.app/)
+[Netlify deploy link](https://stretford-cafe-react.netlify.app)
 ## Related Projects
 
 [Stretford Cafe Backend](https://github.com/IlhamNurrohman/Stretford-Cafe)
