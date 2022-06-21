@@ -24,7 +24,7 @@ export default class Profile extends Component {
             gender: "",
             firstname: "",
             lastname: "",
-            pictures: "",
+            pictures: null,
             isUpdated: false,
             image_src: "",
             use_src: true,
