@@ -14,7 +14,7 @@
 
 1. Clone the repository
    ```
-   $ git clone https://github.com/IlhamNurrohman/Stretford-cafe-client.git
+   $ git clone https://github.com/IlhamNurrohman/stretford-cafe-client.git
    ```
 2. Open VS Code or you can download and install it [here](https://code.visualstudio.com/)
 3. To make it easier, you can install Live Server Extension for VS Code [here](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
