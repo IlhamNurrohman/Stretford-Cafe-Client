@@ -217,27 +217,27 @@ class EditProduct extends Component {
                                     <div className="new-category-container">
                                         <div className="new-category-button">
                                             <label className="new-category-button-inactive">
-                                                <input type="radio" name="new-category-input" className='new-category-input' />
+                                                <input type="radio" name="new-category-input" className='new-category-input' 
+                                                checked={this.state.categories_id === 1 ? true : false}/>
                                                 <span className="new-category-checkmark"
-                                                value={this.state.categories_id}
                                                     onClick={() => {
                                                         this.setState({ categories_id: 1 })
                                                     }}
                                                 >Coffee</span>
                                             </label>
                                             <label className="new-category-button-inactive">
-                                                <input type="radio" name="new-category-input" className='new-category-input' />
+                                                <input type="radio" name="new-category-input" className='new-category-input' 
+                                                checked={this.state.categories_id === 4 ? true : false}/>
                                                 <span className="new-category-checkmark"
-                                                value={this.state.categories_id}
                                                     onClick={() => {
                                                         this.setState({ categories_id: 4 })
                                                     }}
                                                 >Non Coffee</span>
                                             </label>
                                             <label className="new-category-button-inactive">
-                                                <input type="radio" name="new-category-input" className='new-category-input' />
+                                                <input type="radio" name="new-category-input" className='new-category-input' 
+                                                checked={this.state.categories_id === 6 ? true : false}/>
                                                 <span className="new-category-checkmark"
-                                                value={this.state.categories_id}
                                                     onClick={() => {
                                                         this.setState({ categories_id: 6 })
                                                     }}
@@ -250,6 +250,7 @@ class EditProduct extends Component {
                                     <div className="pd-size-container">
                                         <label className="pd-size-vector">R
                                             <input type="radio" className='pd-size-input' name='pd-size-input'
+                                            checked={this.state.sizes_id === 2 ? true : false}
                                                 onChange={() => {
                                                     this.setState({ sizes_id: 2 })
                                                 }}
@@ -257,6 +258,7 @@ class EditProduct extends Component {
                                         </label>
                                         <label className="pd-size-vector">L
                                             <input type="radio" className='pd-size-input' name='pd-size-input'
+                                            checked={this.state.sizes_id === 3 ? true : false}
                                                 onChange={() => {
                                                     this.setState({ sizes_id: 3 })
                                                 }}
@@ -264,6 +266,7 @@ class EditProduct extends Component {
                                         </label>
                                         <label className="pd-size-vector">XL
                                             <input type="radio" className='pd-size-input' name='pd-size-input'
+                                            checked={this.state.sizes_id === 5 ? true : false}
                                                 onChange={() => {
                                                     this.setState({ sizes_id: 5 })
                                                 }}
@@ -271,6 +274,7 @@ class EditProduct extends Component {
                                         </label>
                                         <label className="pd-size-vector-gram">250 gr
                                             <input type="radio" className='pd-size-input' name='pd-size-input'
+                                            checked={this.state.sizes_id === 9 ? true : false}
                                                 onChange={() => {
                                                     this.setState({ sizes_id: 9 })
                                                 }}
@@ -278,6 +282,7 @@ class EditProduct extends Component {
                                         </label>
                                         <label className="pd-size-vector-gram">300 gr
                                             <input type="radio" className='pd-size-input' name='pd-size-input'
+                                            checked={this.state.sizes_id === 10 ? true : false}
                                                 onChange={() => {
                                                     this.setState({ sizes_id: 10 })
                                                 }}
@@ -286,6 +291,7 @@ class EditProduct extends Component {
                                         </label>
                                         <label className="pd-size-vector-gram">500 gr
                                             <input type="radio" className='pd-size-input' name='pd-size-input'
+                                            checked={this.state.sizes_id === 11 ? true : false}
                                                 onChange={() => {
                                                     this.setState({ sizes_id: 11 })
                                                 }}
@@ -298,6 +304,7 @@ class EditProduct extends Component {
                                         <label className="pd-dm-button-inactive">
                                             <input type="radio" name="pd-dm-input" className='pd-dm-input' />
                                             <span className="pd-dm-checkmark"
+                                            checked={this.state.delivery_methods_id === 1 ? true : false}
                                                 onClick={() => {
                                                     this.setState({ delivery_methods_id: 1 })
                                                 }}
@@ -306,6 +313,7 @@ class EditProduct extends Component {
                                         <label className="pd-dm-button-inactive">
                                             <input type="radio" name="pd-dm-input" className='pd-dm-input' />
                                             <span className="pd-dm-checkmark"
+                                            checked={this.state.delivery_methods_id === 2 ? true : false}
                                                 onClick={() => {
                                                     this.setState({ delivery_methods_id: 2 })
                                                 }}
@@ -314,6 +322,7 @@ class EditProduct extends Component {
                                         <label className="pd-dm-button-inactive">
                                             <input type="radio" name="pd-dm-input" className='pd-dm-input' />
                                             <span className="pd-dm-checkmark"
+                                            checked={this.state.delivery_methods_id === 6 ? true : false}
                                                 onClick={() => {
                                                     this.setState({ delivery_methods_id: 6 })
                                                 }}

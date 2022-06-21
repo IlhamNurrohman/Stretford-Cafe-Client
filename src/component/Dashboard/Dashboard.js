@@ -65,12 +65,12 @@ const BarChart = () => {
       })
 
   },[])
-  console.log(dashboard)
+  // console.log(dashboard)
     return (
         <div>
         <Bar
             data={{
-                labels: dashboard.map(item => item.date),
+                labels: dashboard.map(item => item.date.split("T")[0]),
                 datasets: [
                     {
                         label: ['Income'],
@@ -83,7 +83,7 @@ const BarChart = () => {
                     }
                 ]
             }}
-            height={'360px'}
+            height={'200px'}
             options={{
                 plugins: {
                   legend: {

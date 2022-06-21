@@ -309,7 +309,7 @@ class Product extends Component {
                           {this.state.role !== "admin" ? (
                             <></>
                           ) : (
-                            <button type="button" class="btn position-relative" style={{ border: "none", marginTop: "-20%", marginLeft: "-20%" }}>
+                            <button type="button" class="btn position-relative " style={{ border: "none", marginTop: "-20%", marginLeft: "-20%"}}>
                               <span class="position-absolute top-100 start-100 translate-middle p-2 border border-light rounded-circle" style={{ background: "rgba(106, 64, 41, 1)" }}>
                                 <Link to={`/editproduct/${product.id}`}>
                                   <img src={editIcon} alt="edit" style={{ width: "20px", height: "20px", alignItems: "center" }} /></Link>
