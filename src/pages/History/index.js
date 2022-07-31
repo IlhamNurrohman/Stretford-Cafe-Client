@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 import Header from "../../component/Header/Header";
 import Footer from "../../component/Footer/Footer";
 import CardHistory from "../../component/CardHistory/CardHistory";
@@ -8,7 +8,7 @@ import CardHistory from "../../component/CardHistory/CardHistory";
 import './History.css';
 import axios from "axios";
 
-import { getUserDataAction } from '../../redux/actionCreator/userData'
+// import { getUserDataAction } from '../../redux/actionCreator/userData'
 
 const mapStateToProps = (reduxState) => {
     const { auth: { isLoggedIn, userInfo } } = reduxState

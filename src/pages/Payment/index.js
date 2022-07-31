@@ -6,7 +6,7 @@ import Footer from "../../component/Footer/Footer";
 import { formater } from '../../Helper/formatNumber'
 
 import "./Payment.css"
-import { getProductDetail } from "../../utiliti/product";
+// import { getProductDetail } from "../../utiliti/product";
 
 // import img
 //import Hazelnut from "../../assets/img/hazelnut.png"
