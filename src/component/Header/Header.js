@@ -4,24 +4,32 @@ import { Link } from 'react-router-dom';
 import logo from "../../assets/icon/coffee 1.png";
 import chat from "../../assets/icon/chat (1) 1.png";
 import profile from "../../assets/img/image 39 (1).png";
+import { connect } from 'react-redux';
+import "./Header.css"
 //import { render } from '@testing-library/react';
 
-
+const mapStateToProps = (reduxState) => {
+    const { auth: { isSuccess }, userData: { data: { roles_id, pictures } } } = reduxState
+    return { isSuccess, roles_id, pictures }
+}
 class Header extends Component {
     constructor(props) {
         super(props)
+        const { isSuccess } = this.props
         this.state = {
-            isLoggedIn: localStorage.getItem('userinfo') ? true : false,
+            // isLoggedIn: localStorage.getItem('userinfo') ? true : false,
+            isLoggedIn: isSuccess ? true : false,
             isSearch: true,
             setSearchName: props,
-            role: localStorage.getItem('role') || null,
+            // auth: localStorage.getItem('auth') || null,
         }
     }
     componentDidMount() {
         document.title = "Home"
     }
     render() {
-        //console.log(this.state.role)
+        //console.log(this.state.auth)
+        const { roles_id, pictures } = this.props
         return (
             <header>
                 <nav className="navbar navbar-expand-lg bg-white" style={{ borderBottom: "0.5px solid rgba(159, 159, 159, 1)" }}>
@@ -31,21 +39,21 @@ class Header extends Component {
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse mr-auto navbar" id="navbarNav">
-                            {this.state.role !== "admin" ? 
+                            {roles_id !== "admin" ?
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li className="nav-item">
-                                        <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)"}} to="/">
+                                        <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/">
                                             Home
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link" aria-current="page"style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/product">
-                                                Product
+                                        <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/product">
+                                            Product
                                         </Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/payment">
-                                                Your Cart
+                                            Your Cart
                                         </Link>
                                     </li>
                                     <li className="nav-item">
@@ -54,29 +62,29 @@ class Header extends Component {
                                         </Link>
                                     </li>
                                 </ul>
-                            :
+                                :
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li className="nav-item">
-                                    <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/">
-                                        Home
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/product">
+                                    <li className="nav-item">
+                                        <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/">
+                                            Home
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/product">
                                             Product
                                         </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="#">
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="#">
                                             Order
                                         </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/dashboard">
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" aria-current="page" style={{ textDecoration: "none", color: "rgba(106, 64, 41, 1)" }} to="/dashboard">
                                             Dashboard
                                         </Link>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
                             }
                             {this.state.isLoggedIn ?
                                 <div className="right-nav">
@@ -94,8 +102,8 @@ class Header extends Component {
                                     </button>
                                     <span className="navbar-text">
                                         <Link to="/profile">
-                                            <img src={profile}
-                                                style={{ borderRadius: "100px", paddingLeft: "10%" }} alt="profile"/></Link></span>
+                                            <img src={pictures ? `${pictures}` : profile}
+                                                className="photo" alt="profile" /></Link></span>
                                 </div>
                                 :
                                 <div className="right-nav">
@@ -117,4 +125,4 @@ class Header extends Component {
     }
 
 }
-export default Header
+export default connect(mapStateToProps)(Header)

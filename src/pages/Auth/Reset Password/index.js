@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 
 import asaidImg from "../../../assets/img/robert-bye-95vx5QVl9x4-unsplash 2.png";
 import logo from "../../../assets/icon/coffee 1.png";
-import googleIcon from "../../../assets/icon/google-logo-png-suite-everything-you-need-know-about-google-newest-0 2.png";
+// import googleIcon from "../../../assets/icon/google-logo-png-suite-everything-you-need-know-about-google-newest-0 2.png";
 import fbIcon from "../../../assets/icon/Facebook.png";
 import twIcon from "../../../assets/icon/Twitter.png";
 import igIcon from "../../../assets/icon/Intagram.png";
 import OpenEye from "../../../assets/icon/open-eye.png";
 import ClosedEye from "../../../assets/icon/closed-eye.png";
 
-import "./Register.css";
+import "./ResetPassword.css";
 
 export default class Register extends Component {
     state = {
         email: "",
-        password: "",
-        phone: "",
+        newPassword: "",
+        confirmCode: "",
         //roles_id: "",
         isPasswordShown: false,
         isError: false,
@@ -25,12 +25,12 @@ export default class Register extends Component {
         isSuccess: false,
     };
     componentDidMount() {
-        document.title = "Register"
+        document.title = "Reset Password"
         
     }
     render() {
         // if (this.state.isSuccess === true) {
-        //     return <Navigate to="/Login" />
+        //     return <Navigate to="/resetpassword" />
         // }
         <></>
         return (
@@ -42,7 +42,7 @@ export default class Register extends Component {
                     <header className="side-title">
                         <img src={logo} alt="logo-icon" />
                         <h2 className="header-title-register">Stretford Cafe</h2>
-                        <h1 className="page-title-register">Sign Up</h1>
+                        {/* <h1 className="page-title-register">Sign Up</h1> */}
                     </header>
                     <section className="register">
                         <form className="register-form">
@@ -52,13 +52,13 @@ export default class Register extends Component {
                                     email: e.target.value,
                                 });
                             }} />
-                            <label htmlFOR="password">Password :</label>
+                            <label htmlFOR="password">New Password :</label>
                             <div className='signup-input-pass-container'>
-                                        <input type={this.state.isPasswordShown ? "email" : "password"} id="password" placeholder="Enter your password" className='signup-input-pass' 
+                                        <input type={this.state.isPasswordShown ? "email" : "password"} id="password" placeholder="Enter your new password" className='signup-input-pass' 
                                         style={{justifyContent: "space-between", marginLeft: "0%", marginTop: "1%"}}
                                             onChange={e => {
                                                 this.setState({
-                                                    password: e.target.value,
+                                                    newPassword: e.target.value,
                                                 })
                                             }}
                                         />
@@ -71,36 +71,11 @@ export default class Register extends Component {
                                             {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
                                         </div>
                                     </div>
-                            {/* <input type={`${this.state.isPasswordShown ? "email" : "password"}`} name="password" placeholder="Enter your password" onChange={(e) => {
-                                this.setState({
-                                    password: e.target.value,
-                                });
-                            }} />
-                            <div className="icon-pass-container"
-                                onClick={() => {
-                                    this.setState({
-                                        isPasswordShown: !this.state.isPasswordShown
-                                    })
-                                }}>
-                                {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
-                            </div> */}
-                            {/* <label>
-                                <input
-                                    type="checkbox"
-                                    value={this.state.isPasswordShown}
-                                    onChange={() => {
-                                        this.setState({
-                                            isPasswordShown: !this.state.isPasswordShown,
-                                        });
-                                    }}
-                                />
-                                Show Password
-                            </label> */}
-                            <label htmlFOR="phone">Phone Number :</label>
-                            <input type="email" name="phone" placeholder="Enter your phone number" 
+                            <label htmlFOR="phone">Confirm Code :</label>
+                            <input type="email" name="phone" placeholder="Enter confirmation code" 
                             onChange={(e) => {
                                 this.setState({
-                                    phone: e.target.value,
+                                    confirmCode: e.target.value,
                                 });
                             }} />
                             <input type="hidden" name="roles_id" value="2" onChange={(e) => {
@@ -109,10 +84,10 @@ export default class Register extends Component {
                                 });
                             }} />
                             <div className="register-button" onClick={() => {
-                                const { email, password, phone } = this.state;
-                                const body = { email, password, phone };
+                                const { email, newPassword, confirmCode } = this.state;
+                                const body = { email, newPassword, confirmCode };
                                 axios
-                                    .post(`${process.env.REACT_APP_API_HOST}/auth/new`, body)
+                                    .patch(`${process.env.REACT_APP_API_HOST}/users/edit-password`, body)
                                     .then((result) => {
                                         console.log(result);
                                         let x = document.getElementById("snackbar");
@@ -120,9 +95,6 @@ export default class Register extends Component {
                                         setTimeout(function () {
                                             x.className = x.className.replace("show", "");
                                         }, 3000);
-                                        // setTimeout(() => {
-                                        //     this.props.history.push("/login");
-                                        // }, 4000);
                                         this.setState({
                                             isSuccess: true,
                                             isError: false,
@@ -130,7 +102,7 @@ export default class Register extends Component {
                                         });
                                     })
                                     .catch((error) => {
-                                        // console.log(error)
+                                        console.log(error)
                                         let x = document.getElementById("toast");
                                         x.className = "show";
                                         setTimeout(function () {
@@ -141,19 +113,15 @@ export default class Register extends Component {
                                             errorMsg: error.response.data.err.msg,
                                         });
                                     });
-                            }}>Sign Up</div>
+                            }}>Save</div>
                         </form>
-                        <div className="google-button">
-                            <img className="google-icon"
-                                src={googleIcon}
-                                alt="google-icon" /> Sign Up with Google
-                        </div>
-                        <section className="already-account">
+                        <Link to="/login" className="login-here-button">Login Here</Link>
+                        {/* <section className="already-account">
                             <div className="underline"></div>
                             <p className="already-account-text">Already have an account?</p>
                             <div className="underline"></div>
-                        </section>
-                        <Link to="/login" className="login-here-button">Login Here</Link>
+                        </section> */}
+                        {/* <Link to="/login" className="login-here-button">Login Here</Link> */}
                     </section>
                     <footer>
                         <aside className="describe" aria-label="">
@@ -185,8 +153,8 @@ export default class Register extends Component {
                             </div>
                         </aside>
 
-                    <div id="snackbar">Sign up success, please login !</div>
-                    <div id="toast">{this.state.errorMsg ? this.state.errorMsg : "Register gagal !"}</div>
+                    <div id="snackbar">Password changed, please login !</div>
+                    <div id="toast">{this.state.errorMsg ? this.state.errorMsg : "Invalid confirmation code !"}</div>
                     </footer>
 
                 </div>

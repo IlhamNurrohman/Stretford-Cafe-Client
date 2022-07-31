@@ -6,15 +6,25 @@ import Header from "../../component/Header/Header";
 import Footer from "../../component/Footer/Footer";
 import EditIcon from "../../assets/icon/edit-icon.png";
 import Default from "../../assets/img/dummy-image.jpg";
+import { connect } from 'react-redux';
+import { getUserDataAction } from '../../redux/actionCreator/userData'
+import { logoutAction } from '../../redux/actionCreator/auth'
+import Loading from "../../component/loading";
 
 import "./Profile.css";
 import axios from "axios";
 
-export default class Profile extends Component {
+const mapStateToProps = (reduxState) => {
+    const { 
+        auth: { userInfo, isSuccess, isLoggedOut }, userData } = reduxState
+    return { userInfo, isSuccess, isLoggedOut, userData }
+}
+
+class Profile extends Component {
     constructor() {
         super();
         this.state = {
-            isLoggedIn: localStorage.getItem('userinfo') ? true : false,
+            // isLoggedIn: localStorage.getItem('userinfo') ? true : false,
             users: [],
             username: "",
             email: "",
@@ -30,6 +40,9 @@ export default class Profile extends Component {
             use_src: true,
             isShow: false,
             isEdit: false,
+            isLoggedOut: false,
+            errorMsg: "",
+            // isLoadingUser: false,
         };
         this.inputFile = React.createRef();
     }
@@ -73,8 +86,8 @@ export default class Profile extends Component {
             this.setState(users);
             const reader = new FileReader();
             reader.onload = () => {
+                // console.log(this.state.use_src);
                 this.setState({ image_src: reader.result, use_src: false, pictures: file }, () => {
-                    //console.log(this.state.image_src);
                 });
             };
             reader.readAsDataURL(file);
@@ -82,32 +95,46 @@ export default class Profile extends Component {
     };
     componentDidMount() {
         document.title = "Profile"
-        const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-        const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+        // const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+        // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+        const { token = null } = this.props.userInfo || {}
+        const { isLoading, data } = this.props.userData
         //console.log(config);
-        axios
-            .get(`${process.env.REACT_APP_API_HOST}/users/profile-detail`, config)
-            .then(result => {
-                //console.log(result.data.data[0])
-                this.setState({
-                    users: result.data.data[0],
-                    image_src: this.state.users.use_src ? this.state.users.use_src : Default
-                })
+        this.props.dispatch(getUserDataAction(token))
+        if (!isLoading) {
+            this.setState({
+                users: data,
+                email: data.email,
+                phone: data.phone,
+                username: data.username,
+                first_name: data.first_name,
+                last_name: data.last_name,
+                address: data.address,
+                date: data.date,
+                gender: data.gender
             })
-            .catch(error => {
-                console.log(error)
-            })
+        }
+        // .then(result => {
+        //     //console.log(result.data.data[0])
+        //     this.setState({
+        //         users: result.data.data[0],
+        //         image_src: this.state.users.use_src ? this.state.users.use_src : Default
+        //     })
+        // })
+        // .catch(error => {
+        //     console.log(error)
+        // })
 
     }
     componentDidUpdate() {
+        const { token } = this.props.userInfo || {}
         if (this.state.isUpdated) {
-            const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-            const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-            //console.log(config);
+            const config = { headers: { Authorization: `Bearer ${token}` } }
+            // console.log(config);
             axios
                 .get(`${process.env.REACT_APP_API_HOST}/users/profile-detail`, config)
                 .then(result => {
-                    console.log(result.data.data[0])
+                    // console.log(result.data.data[0])
                     this.setState({
                         users: result.data.data[0]
                     })
@@ -126,12 +153,14 @@ export default class Profile extends Component {
         this.setState({ isShow: !this.state.isShow });
     };
     render() {
-        if (this.state.isLoggedIn === false) {
-            return <Navigate to="/login" />
+        const { isLoggedOut } = this.props
+        const { isLoading } = this.props.userData
+        if (isLoggedOut === false) {
+            return <Navigate to="/" />
         }
-        //const profilepic =  !== null ? this.state.users.pictures : Default;
         return (
             <>
+                {isLoading && <Loading />}
                 <div>
                     <Header />
                     <div className="profile-row">
@@ -141,17 +170,12 @@ export default class Profile extends Component {
                                 <div className="row">
                                     <div className="col-md-4">
                                         <div className="container-fluid img-container">
-                                            <img src=
-                                            {this.state.image_src === null ? 
-                                            this.state.users.pictures ? `${this.state.users.pictures}`
-                                            : Default : this.state.image_src} className="img-profile" alt="img-profile" />
-                                            {/* <img src=
-                                            {this.state.file === null ?
-                                            this.state.profile.profile_picture ? `${this.state.profile.profile_picture}` 
-                                            : Profpic : this.state.file} alt="profile_photo" className="profile-picture" /> */}
+                                            <img src={!this.state.image_src ?
+                                                this.state.users.pictures ? `${this.state.users.pictures}`
+                                                    : Default : this.state.image_src} className="img-profile" alt="img-profile" />
                                         </div>
                                         <h4 className="username" style={{ marginLeft: "-28px" }}>{this.state.users.username ? this.state.users.username : "Display Name"}</h4>
-                                        <p className="email" style={{ marginLeft: "30px" }}>{this.state.users.email ? this.state.users.email : "Email"}</p>
+                                        <p className="email" style={{ marginLeft: "-8px" }}>{this.state.users.email ? this.state.users.email : "Email"}</p>
                                         {this.state.isError ? <p>{this.state.errorMsg}</p> : <></>}
                                         <div className="choose-photo">
                                             <input type="file" hidden name="image" ref={this.inputFile} onChange={this.fileChange} />
@@ -177,13 +201,13 @@ export default class Profile extends Component {
                                                     // const body = { email, phone, username, firstname, lastname, address, date, gender };
                                                     // event.preventDefault();
                                                     const body = this.setData();
-                                                    console.log(body);
-                                                    const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-                                                    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+                                                    // console.log(body);
+                                                    const { token } = this.props.userInfo
+                                                    const config = { headers: { Authorization: `Bearer ${token}`, "content-type": "multipart/form-data" } };
                                                     axios
                                                         .patch(`${process.env.REACT_APP_API_HOST}/users`, body, config)
                                                         .then(res => {
-                                                            console.log(res)
+                                                            // console.log(res)
                                                             this.setState({
                                                                 isUpdated: true
                                                             });
@@ -195,6 +219,15 @@ export default class Profile extends Component {
                                                         })
                                                         .catch(error => {
                                                             console.log(error)
+                                                            this.setState({
+                                                                isUpdated: false,
+                                                                errorMsg: error.response.data.error
+                                                            });
+                                                            var x = document.getElementById("snackbar-fail");
+                                                            x.className = "show";
+                                                            setTimeout(function () {
+                                                                x.className = x.className.replace("show", "");
+                                                            }, 5000);
                                                         })
                                                 }}>Save Change</button>
                                         </div>
@@ -346,24 +379,26 @@ export default class Profile extends Component {
                         </Modal.Body>
                         <Modal.Footer className="modal-footer">
                             <div className="modal-btn">
+                                <Link className="btn btn-danger" style={{ marginRight: "10px", textDecoration: "none", color: "white" }} to="/login"
+                                    onClick={() => {
+                                        this.props.dispatch(logoutAction())
+                                    }}
+                                >
+                                    Yes
+                                </Link>
                                 <button className="btn btn-warning" onClick={this.modalTrigger}>
                                     No
-                                </button>
-                                <button className="btn btn-danger" style={{ marginLeft: "10px" }}>
-                                    <Link style={{ textDecoration: "none", color: "white" }} to="/login"
-                                        onClick={() => {
-                                            localStorage.removeItem("userinfo")
-                                        }}>
-                                        Yes
-                                    </Link>
                                 </button>
                             </div>
                         </Modal.Footer>
                     </Modal>
                     <div id="snackbar">Berhasil update data</div>
+                    <div id="snackbar-fail">{this.state.errorMsg ? this.state.errorMsg : "Upload image fail !"}</div>
                 </div>
             </>
         );
 
     }
 }
+
+export default connect(mapStateToProps)(Profile)

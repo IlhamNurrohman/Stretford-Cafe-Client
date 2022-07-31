@@ -15,66 +15,76 @@ import Bank from "../../assets/icon/Vector (2).png"
 import Cod from "../../assets/icon/fast-delivery 3.png"
 //import CardPayment from "../../component/CardPayment/CardPayment";
 
+const mapStateToProps = (state) => {
+    const { cart, counter: { counter }, auth: { userInfo }, userData: { data: { address, id, phone } } } = state;
+    return {
+        cart, counter, id, address, phone, userInfo
+    };
+};
 export class Payment extends Component {
     constructor(props) {
         super(props);
         this.state = {
             product: [],
             users: [],
+            transactions: [],
             payment: "",
             isPost: false,
-            isLoggedIn: localStorage.getItem('userinfo') ? true : false,
+            // isLoggedIn: localStorage.getItem('userinfo') ? true : false,
         };
     }
-    productDetailPage = (id) => {
-        getProductDetail(id)
-            .then((res) => {
-                this.setState({
-                    product: res.data.data[0]
-                });
-            })
-            .catch((err) => {
-                console.log("ERROR GET PRODUCTS", err);
-            });
-    };
-    getInfoUser = () => {
-        const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-        const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
-        //console.log(config);
-        axios
-            .get(`${process.env.REACT_APP_API_HOST}/users/profile-detail`, config)
-            .then(result => {
-                //console.log(result.data.data[0])
-                this.setState({
-                    users: result.data.data[0]
-                })
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    };
+    // productDetailPage = (id) => {
+    //     getProductDetail(id)
+    //         .then((res) => {
+    //             this.setState({
+    //                 product: res.data.data[0]
+    //             });
+    //         })
+    //         .catch((err) => {
+    //             console.log("ERROR GET PRODUCTS", err);
+    //         });
+    // };
+    // getInfoUser = () => {
+    //     // const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+    //     // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+    //     //console.log(config);
+    //     const token = this.props.userInfo;
+    //     const config = { headers: { Authorization: `Bearer ${token}` } }
+    //     axios
+    //         .get(`${process.env.REACT_APP_API_HOST}/users/profile-detail`, config)
+    //         .then(result => {
+    //             //console.log(result.data.data[0])
+    //             this.setState({
+    //                 users: result.data.data[0]
+    //             })
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         })
+    // };
 
     handlePostTransaction = () => {
-        const { counter, cart: { delivery, productId } } = this.props
+        const { counter, cart: { delivery, productId }, id } = this.props
         const products_id = productId
         const sub_total = (this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0)
         const qty = counter
-        const users_id = this.state.users.id
+        const users_id = Number(id)
         const payment_methods_id = this.state.payment
         const delivery_methods_id = delivery
         const date = new Date(Date.now())
         const created_at = new Date(Date.now())
 
-        const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-        const config = { headers: { Authorization: `Bearer ${userInfo.token}` } }
+        const { token } = this.props.userInfo;
+        const config = { headers: { Authorization: `Bearer ${token}` } }
 
         const body = { date, sub_total, payment_methods_id, products_id, qty, users_id, delivery_methods_id, created_at }
-        console.log(users_id)
+        console.log(token)
         axios
             .post(`${process.env.REACT_APP_API_HOST}/transactions`, body, config)
             .then(result => {
                 console.log(result)
                 this.setState({
+                    transactions: result.data.data,
                     isPost: true
                 });
                 let x = document.getElementById("better");
@@ -93,7 +103,7 @@ export class Payment extends Component {
         axios
             .get(`${process.env.REACT_APP_API_HOST}/products/detail/${productId}`)
             .then(result => {
-                console.log(this.state.product)
+                // console.log(this.state.product)
                 this.setState({
                     product: result.data.data[0],
                 })
@@ -101,11 +111,11 @@ export class Payment extends Component {
             .catch(error => {
                 console.log(error)
             })
-        const { token } = this.state;
-        this.getInfoUser(token);
+        // const { token } = this.state;
+        // this.getInfoUser(token);
     }
     render() {
-        const { counter, cart: { size, delivery }, } = this.props
+        const { counter, cart: { size, delivery }, phone, address } = this.props
         return (
             <>
                 <Header />
@@ -170,7 +180,7 @@ export class Payment extends Component {
                                             <input
                                                 type="text"
                                                 className="address-payment p-2"
-                                                value={this.state.users.address}
+                                                value={address}
                                                 onChange={(event) => {
                                                     this.setState({
                                                         address: event.target.value,
@@ -184,7 +194,7 @@ export class Payment extends Component {
                                             <input
                                                 type="text"
                                                 className="address-payment p-2"
-                                                value={this.state.users.phone}
+                                                value={phone}
                                                 onChange={(event) => {
                                                     this.setState({
                                                         phone: event.target.value,
@@ -262,11 +272,6 @@ export class Payment extends Component {
         )
     }
 }
-const mapStateToProps = (state) => {
-    const { cart, counter: { counter }, id } = state;
-    return {
-        cart, counter, id
-    };
-};
+
 
 export default connect(mapStateToProps)(Payment);

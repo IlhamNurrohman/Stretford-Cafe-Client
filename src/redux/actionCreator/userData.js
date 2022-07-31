@@ -1,7 +1,7 @@
-import { GetUser } from "../../utiliti/auth";
-import { getUserDataString } from "./actionString";
+import { GetUser } from "../../utiliti/userData";
+import { getUserData } from "./actionString";
 
 export const getUserDataAction = (token) =>({
-    type: getUserDataString,
+    type: getUserData,
     payload: GetUser(token)
 })

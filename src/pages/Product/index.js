@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import withSearchParams from '../../Helper/withSearchParams'
 import withLocation from '../../Helper/withLocation'
 // import { Routes, Route, Link } from 'react-router-dom'
-//import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { formater } from '../../Helper/formatNumber'
 import moment from 'moment'
 
@@ -19,6 +19,11 @@ import "./Product.css"
 import editIcon from "../../assets/icon/edit-icon.png";
 
 // import ColdBrew from "../../assets/img/coldbrew.png"
+
+const mapStateToProps = (reduxState) => {
+  const { auth: { isSuccess, userInfo }, userData: { data: { roles_id } } } = reduxState
+  return { isSuccess, userInfo, roles_id }
+}
 
 class Product extends Component {
   constructor(props) {
@@ -123,6 +128,7 @@ class Product extends Component {
   render() {
     // const { searchParam } = this.props
     //console.log(this.state.totalPage)
+    const { roles_id } = this.props
     return (
       <div>
         <Header setSearchName={this.setSearchName.bind(this)} />
@@ -143,16 +149,16 @@ class Product extends Component {
                     <div className="col custom-card-text">
                       <p className="custom-card-info"><b>{promo.coupon_code}</b><br />Only{moment(promo.start_date).format('MMM Do YYYY')} <br />to {moment(promo.end_date).format('MMM Do YYYY')}</p>
                     </div>
-                    {this.state.role !== "admin" ? (
+                    {roles_id !== "admin" ? (
                       <></>
                     ) : (
-                      <button type="button" class="btn position-relative" style={{ border: "none", marginTop: "-20%", marginLeft: "-20%" }}>
+                      <div type="button" class="btn position-relative" style={{ border: "none", marginTop: "-20%", marginLeft: "-20%" }}>
                         <span class="position-absolute top-0 start-100 translate-middle-y p-2 border border-light rounded-circle" style={{ background: "rgba(106, 64, 41, 1)" }}>
                           <Link to={`/editpromo/${promo.id}`}>
                             <img src={editIcon} alt="edit" style={{ width: "20px", height: "20px", alignItems: "center" }} /></Link>
                           <span class="visually-hidden">Edit</span>
                         </span>
-                      </button>
+                      </div>
                     )}
                   </div>
                 ))}
@@ -191,7 +197,7 @@ class Product extends Component {
                 <p>3. Buy 1 get 1 only for new user</p>
                 <p>4. Should make member card to apply coupon</p>
               </div>
-              {this.state.role !== "admin" ? (
+              {roles_id !== "admin" ? (
                 <></>
               ) : (
                 <div className="coupon-button d-flex justify-content-around mt-5">
@@ -306,16 +312,16 @@ class Product extends Component {
                             <p className="card-text custom-product-price"
                               style={{ textAlign: "center", fontFamily: "Poppins", color: "rgba(106, 64, 41, 1)", }}> {formater.format(product.price)}</p>
                           </div>
-                          {this.state.role !== "admin" ? (
+                          {roles_id !== "admin" ? (
                             <></>
                           ) : (
-                            <button type="button" class="btn position-relative " style={{ border: "none", marginTop: "-20%", marginLeft: "-20%"}}>
+                            <div type="button" class="btn position-relative " style={{ border: "none", marginTop: "-20%", marginLeft: "-20%" }}>
                               <span class="position-absolute top-100 start-100 translate-middle p-2 border border-light rounded-circle" style={{ background: "rgba(106, 64, 41, 1)" }}>
                                 <Link to={`/editproduct/${product.id}`}>
                                   <img src={editIcon} alt="edit" style={{ width: "20px", height: "20px", alignItems: "center" }} /></Link>
                                 <span class="visually-hidden">Edit</span>
                               </span>
-                            </button>
+                            </div>
                           )}
                         </div>
                       </div>
@@ -349,7 +355,7 @@ class Product extends Component {
                   </div>
                 </div>
                 <div className="custom-notes">*the price has been cutted by discount appears</div>
-                {this.state.role !== "admin" ? (
+                {roles_id !== "admin" ? (
                   <></>
                 ) : (
                   <div className="coupon-button d-flex justify-content-around mt-5">
@@ -372,4 +378,4 @@ class Product extends Component {
 //   return { searchProduct }
 // }
 
-export default withLocation(withSearchParams(Product))
+export default connect(mapStateToProps)(withLocation(withSearchParams(Product)))

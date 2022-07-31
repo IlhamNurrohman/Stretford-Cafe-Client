@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
 
 import Header from "../../component/Header/Header";
 import Footer from "../../component/Footer/Footer";
@@ -20,9 +21,35 @@ import starIcon from "../../assets/icon/star.png";
 
 import "./Home.css";
 
-export default class Home extends Component {
+import { getUserDataAction } from '../../redux/actionCreator/userData'
+import withLocation from '../../Helper/withLocation'
+
+const mapStateToProps = (reduxState) => {
+    const { auth: { isLoggedIn, userInfo } } = reduxState
+    return { isLoggedIn, userInfo }
+}
+class Home extends Component {
+    constructor(){
+        super();
+        this.state = {
+            pageActive: "Home",
+            isShow: false
+        }
+    }
     componentDidMount(){
         document.title = "Home"
+        window.scrollTo(0, 0);
+        const { isLoggedIn, dispatch } = this.props
+        if (isLoggedIn) {
+            const { token = null } = this.props.userInfo || {}
+            dispatch(getUserDataAction(token))
+        }
+        const { state = null } = this.props.location;
+        if (state !== null && !state.isAuthenticated) {
+            this.setState({
+                isShow: true,
+            });
+        }
     }
     render() {
         return (
@@ -348,3 +375,5 @@ export default class Home extends Component {
         );
     }
 }
+
+export default connect(mapStateToProps)(withLocation(Home))

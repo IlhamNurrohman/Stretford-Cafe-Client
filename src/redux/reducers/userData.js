@@ -1,22 +1,24 @@
-import { FULFILLED, getUserDataString, PENDING, REJECTED } from "../actionCreator/actionString";
+import { FULFILLED, getUserData, PENDING, REJECTED } from "../actionCreator/actionString";
 
 const initialState = {
-    data: [],
+    data: false,
     isLoading: false,
     err: null,
     isSuccess: null,
     isLoggedIn: false,
 }
 
-export const getUserDataReducer = (prevState = initialState, action) => {
+const getUserDataReducer = (prevState = initialState, action) => {
     switch (action.type) {
-        case getUserDataString + PENDING:
-            return { ...prevState, isLoading: true, err: null }
-        case getUserDataString + FULFILLED:
+        case getUserData + PENDING:
+            return { ...prevState, isLoggedIn: true }
+        case getUserData + FULFILLED:
             return { ...prevState, data: action.payload.data.data[0], isLoading: false, isSuccess: true, isLoggedIn: true }
-        case getUserDataString + REJECTED:
-            return { ...prevState, isLoading: false, isSuccess: false, err: action.payload.data }
+        case getUserData + REJECTED:
+            return { ...prevState, isSuccess: false, err: action.payload.data }
         default:
             return prevState
     }
 }
+
+export default getUserDataReducer

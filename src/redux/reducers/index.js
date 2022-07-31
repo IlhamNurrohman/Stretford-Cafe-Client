@@ -1,16 +1,15 @@
 import { combineReducers } from "redux";
 
 import counterReducers from "./counter";
-// import addCartReducer from "./cart";
 import addCartReducer from "./cart";
-import searchProductReducer from "./searchProduct";
 import doAuthReducer from "./auth";
+import doDataReducer from "./userData";
 
 const reducers = combineReducers({
     counter: counterReducers,
     cart: addCartReducer,
-    searchProduct: searchProductReducer,
     auth: doAuthReducer,
+    userData: doDataReducer,
 });
 
 export default reducers

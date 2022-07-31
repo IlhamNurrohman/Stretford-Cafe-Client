@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export function PrivateNotLoggedIn({
   children, 
@@ -8,8 +9,9 @@ export function PrivateNotLoggedIn({
   isRouteReplaced = true, 
   extraData = null
 }) {
-  const {token = null} = JSON.parse(localStorage.getItem("userinfo")) || {}
-  if(!token){
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+  // const {token = null} = JSON.parse(localStorage.getItem("userinfo")) || {}
+  if(!isLoggedIn){
     return (
       <Navigate to={redirectedTo} replace={isRouteReplaced} state={extraData} />
     )
@@ -29,8 +31,8 @@ export function PrivateLoggedIn({
   isRouteReplaced = true, 
   extraData = null
 }) {
-  const {token = null} = JSON.parse(localStorage.getItem("userinfo")) || {}
-  if(token){
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+  if(isLoggedIn){
     return (
       <Navigate to={redirectedTo} replace={isRouteReplaced} state={extraData} />
     )

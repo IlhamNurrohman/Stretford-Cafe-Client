@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Link, Navigate } from 'react-router-dom';
 
 import asaidImg from "../../../assets/img/robert-bye-95vx5QVl9x4-unsplash 2.png";
@@ -14,6 +14,14 @@ import ClosedEye from "../../../assets/icon/closed-eye.png";
 import "./Login.css";
 import withLocation from '../../../Helper/withLocation';
 import { Modal } from "react-bootstrap";
+import { connect } from 'react-redux'
+import { loginAction } from '../../../redux/actionCreator/auth'
+import Loading from "../../../component/loading";
+
+const mapStateToProps = (reduxState) => {
+    const { auth: { userInfo, isSuccess, err, isLoading } } = reduxState
+    return { userInfo, isSuccess, err, isLoading }
+}
 
 class Login extends Component {
     constructor() {
@@ -29,6 +37,22 @@ class Login extends Component {
             isShow: false
         };
     };
+
+    // primeButtonHandler = () => {
+    //     // setLoading(true)
+    //     this.props.dispatch(getUsersAction(userInfo.token))
+    //     .then(result => {
+    //        console.log(result)
+    //     //    setLoading(false)
+    //     //    setShow(false)
+    //     //    router.push('/');
+    //     })
+    //     .catch(error => {
+    //        console.log(error)
+    //     //    setLoading(false)
+    //     })
+    //  };
+
     componentDidMount() {
         document.title = "Login"
         const { state = null } = this.props.location;
@@ -41,11 +65,15 @@ class Login extends Component {
     render() {
         // const userInfo = JSON.parse(localStorage.getItem("userinfo"));
         // console.log(userInfo.token)
-        if (this.state.isSuccess === true) {
+        const { isSuccess, isLoading } = this.props
+        if (isSuccess === true) {
             return <Navigate to="/" />
         }
-        <></>
+        
         return (
+            <>
+            {isLoading && <Loading />}
+
             <div className="container">
                 <div className="column-image">
                     <img src={asaidImg} className="side-image" alt="aside" />
@@ -53,8 +81,8 @@ class Login extends Component {
                 <div className="column-main">
                     <header className="side-title">
                         <img src={logo} alt="logo-icon" />
-                        <h2 className="header-title">Stretford Coffee</h2>
-                        <h1 className="page-title">Login</h1>
+                        <h2 className="header-title-login">Stretford Cafe</h2>
+                        <h1 className="page-title-login">Login</h1>
                     </header>
                     <section className="register">
                         <form className="register-form">
@@ -112,19 +140,20 @@ class Login extends Component {
                             <div className="register-button" onClick={() => {
                                 const { email, password } = this.state;
                                 const body = { email, password };
-                                axios
-                                    .post(`${process.env.REACT_APP_API_HOST}/auth`, body)
+                                this.props
+                                    .dispatch(loginAction(body))
+                                    // .post(`${process.env.REACT_APP_API_HOST}/auth`, body)
                                     .then((result) => {
-                                        //console.log(result.data);
-                                        localStorage.setItem("userinfo", JSON.stringify(result.data.data));
-                                        localStorage.setItem("role", result.data.data.auth);
+                                        console.log(result);
+                                        // localStorage.setItem("userinfo", JSON.stringify(result.data.data));
+                                        // localStorage.setItem("role", result.data.data.auth);
                                         this.setState({
                                             isSuccess: true
                                         })
                                     })
                                     .catch((error) => {
                                         console.log(error);
-                                        let x = document.getElementById("snackbar");
+                                        let x = document.getElementById("toast");
                                         x.className = "show";
                                         setTimeout(function () {
                                             x.className = x.className.replace("show", "");
@@ -177,7 +206,7 @@ class Login extends Component {
                                 <Link to="#">Terms of Service</Link>
                             </div>
                         </aside>
-                        <div id="snackbar">Password atau email salah</div>
+                        <div id="toast">{this.state.errorMsg ? this.state.errorMsg : "Failed login !"}</div>
                     </footer>
                     <Modal
                         show={this.state.isShow}
@@ -196,7 +225,8 @@ class Login extends Component {
                     </Modal>
                 </div>
             </div>
+            </>
         );
     }
 }
-export default withLocation(Login)
+export default connect(mapStateToProps)(withLocation(Login));

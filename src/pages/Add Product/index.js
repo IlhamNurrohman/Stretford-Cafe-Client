@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 import axios from "axios";
 import Footer from '../../component/Footer/Footer'
 import Header from '../../component/Header/Header'
 import Default from "../../assets/img/Screen Shot 2022-06-20 at 11.20.36.png";
 
 import "./AddProduct.css"
+
+const mapStateToProps = (reduxState) => {
+    const { auth: { isLoggedIn, userInfo } } = reduxState
+    return { isLoggedIn, userInfo }
+}
 
 class AddProduct extends Component {
     constructor() {
@@ -23,7 +29,9 @@ class AddProduct extends Component {
             price: "",
             created_at: new Date(Date.now()),
             isPost: false,
-            isLoggedIn: localStorage.getItem('userinfo') ? true : false,
+            // isLoggedIn: localStorage.getItem('userinfo') ? true : false,
+            errorMsg: "",
+            isError: false,
         }
         this.inputFile = React.createRef();
     }
@@ -286,8 +294,8 @@ class AddProduct extends Component {
 
                                     <div className="custom-apply-button"
                                         onClick={() => {
-                                            const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-                                            const config = { headers: { Authorization: `Bearer ${userInfo.token}`, "content-type": "multipart/form-data" } }
+                                            const { token } = this.props.userInfo;
+                                            const config = { headers: { Authorization: `Bearer ${token}`, "content-type": "multipart/form-data" } }
 
                                             const body = this.setDataProduct();
                                             axios
@@ -310,6 +318,10 @@ class AddProduct extends Component {
                                                     setTimeout(function () {
                                                         x.className = x.className.replace("show", "");
                                                     }, 5000);
+                                                    this.setState({
+                                                        isError: true,
+                                                        errorMsg: error.response.data.err,
+                                                    })
                                                 })
                                         }}>Save Product</div>
                                     <Link to="/product" className="custom-apply-button" style={{ background: "rgba(186, 186, 186, 0.35)", color: "rgba(79, 86, 101, 1)", marginTop: "-5%", textDecoration: "none" }}>Cancel</Link>
@@ -320,11 +332,11 @@ class AddProduct extends Component {
                 </div>
                 <Footer />
                 {/* TOAST */}
-                <div id="snackbar-success">Promo berhasil ditambahkan!</div>
-                <div id="snackbar-fail">Terdapat kesalahan.</div>
+                <div id="snackbar-success">Add product success !</div>
+                <div id="snackbar-fail">{this.state.errorMsg ? this.state.errorMsg : "Upload image fail !"}</div>
             </div>
         )
     }
 
 }
-export default AddProduct
+export default connect(mapStateToProps)(AddProduct)
